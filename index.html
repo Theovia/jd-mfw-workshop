@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Capacitaci&oacute;n IA para Ingenier&iacute;a MFW &mdash; John Deere Monterrey</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23077d42'/><text x='16' y='22' font-size='18' fill='white' text-anchor='middle' font-family='sans-serif' font-weight='bold'>IA</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -15,14 +16,14 @@
       --glass-highlight: rgba(255,255,255,0.8);
       --text-primary: #111118;
       --text-secondary: #52525b;
-      --text-muted: #8b8b99;
+      --text-muted: #71717a;
       --text-ghost: #c4c4cc;
-      --accent: #0a8f4f;
-      --accent-soft: #0b7d46;
-      --accent-glow: rgba(10,143,79,0.18);
-      --accent-bg: rgba(10,143,79,0.08);
-      --accent-border: rgba(10,143,79,0.22);
-      --tier2: #0284c7;
+      --accent: #077d42;
+      --accent-soft: #06703b;
+      --accent-glow: rgba(7,125,66,0.18);
+      --accent-bg: rgba(7,125,66,0.08);
+      --accent-border: rgba(7,125,66,0.22);
+      --tier2: #0270ab;
       --tier2-glow: rgba(2,132,199,0.15);
       --tier2-bg: rgba(2,132,199,0.06);
       --tier2-border: rgba(2,132,199,0.22);
@@ -48,7 +49,7 @@
     /* Grain */
     body::before {
       content: ''; position: fixed; inset: 0;
-      opacity: 0.04; pointer-events: none; z-index: 99;
+      opacity: 0.02; pointer-events: none; z-index: 99;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
     /* Grid */
@@ -56,8 +57,8 @@
       content: ''; position: fixed; inset: 0;
       pointer-events: none; z-index: -1;
       background-image:
-        linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
+        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
       background-size: 80px 80px;
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 4rem); }
@@ -77,7 +78,7 @@
     }
 
     .label {
-      font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
       text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent);
     }
 
@@ -222,6 +223,7 @@
       letter-spacing: 0.18em; color: var(--accent); margin-bottom: 1rem;
     }
     .exec-summary p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.75; }
+    .exec-summary p + p { margin-top: 0.65rem; }
     .exec-summary strong { color: var(--text-primary); font-weight: 600; }
 
     /* SECTIONS */
@@ -234,11 +236,13 @@
     }
 
     /* PAIN CARDS */
-    .pains-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .pains-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: stretch; }
     .pain-card {
       padding: 2rem; position: relative; overflow: hidden;
       transition: all 0.5s var(--ease-out-expo);
+      display: flex; flex-direction: column;
     }
+    .pain-card p { flex: 1; }
     .pain-card:hover { border-color: var(--red-border); background: var(--red-bg); transform: translateY(-4px); }
     .pain-card::before {
       content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
@@ -335,7 +339,7 @@
     .tier-features li::before { content: '\203A'; color: var(--accent); font-family: var(--font-mono); font-weight: 600; flex-shrink: 0; }
     .tier-card.t2 .tier-features li::before { color: var(--tier2); }
     .tier-cta {
-      display: block; text-align: center; padding: 1rem; margin-top: 2rem;
+      display: block; text-align: center; padding: 1rem; margin-top: auto; padding-top: 2rem;
       border-radius: 14px; font-family: var(--font-display); font-weight: 700;
       font-size: 0.88rem; text-decoration: none;
       transition: all 0.4s var(--ease-spring);
@@ -349,7 +353,18 @@
     .tier-card.t2 .tier-cta:hover { transform: translateY(-3px); box-shadow: 0 0 50px var(--tier2-glow); }
 
     /* ROI */
-    .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+    .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; position: relative; }
+    @media (min-width: 601px) {
+      .roi-grid { grid-template-columns: repeat(3, 1fr); }
+      .roi-card { position: relative; }
+      .roi-card:not(:last-child)::after {
+        content: '\2192'; position: absolute; right: -0.75rem; top: 50%;
+        transform: translate(50%, -50%); font-size: 1.2rem; color: var(--text-ghost); z-index: 1;
+      }
+      .roi-card:nth-child(1) .roi-value { font-size: 1.4rem; }
+      .roi-card:nth-child(2) .roi-value { font-size: 1.6rem; }
+      .roi-card:nth-child(3) .roi-value { font-size: 1.8rem; font-weight: 700; }
+    }
     .roi-card { padding: 2rem; text-align: center; transition: all 0.5s var(--ease-out-expo); }
     .roi-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
     .roi-value { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 600; color: var(--accent); line-height: 1; }
@@ -406,7 +421,7 @@
     .contact-info { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 3rem; }
     @media (max-width: 768px) { .contact-info { flex-direction: column; align-items: center; gap: 1.25rem; } }
     .contact-item { text-align: center; }
-    .contact-item .cl { font-family: var(--font-mono); font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .contact-item .cl { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); margin-bottom: 0.3rem; }
     .contact-item a {
       color: var(--text-primary); text-decoration: none; font-size: 0.88rem;
       transition: color 0.3s ease;
@@ -491,12 +506,10 @@
       <!-- EXECUTIVE SUMMARY -->
       <div class="exec-summary glass">
         <div class="exec-title">Resumen para la toma de decisi&oacute;n</div>
-        <p>
-          <strong>Contexto:</strong> En equipos de ingenier&iacute;a de manufactura, los procesos operativos &mdash; reconciliaci&oacute;n de datos, documentaci&oacute;n, cotizaciones &mdash; suelen absorber m&aacute;s tiempo del necesario. Son exactamente el tipo de tareas donde la inteligencia artificial genera retorno inmediato.<br>
-          <strong>Soluci&oacute;n:</strong> Workshop de 2 d&iacute;as (1 presencial en Monterrey + 1 remoto). D&iacute;a 1: framework de resoluci&oacute;n de problemas con IA. D&iacute;a 2: aplicaci&oacute;n directa con las herramientas y procesos del equipo.<br>
-          <strong>Inversi&oacute;n:</strong> $9,500 MXN + IVA por persona (10 participantes = $95,000 MXN + IVA).<br>
-          <strong>Resultado:</strong> El equipo adquiere un m&eacute;todo estructurado para identificar oportunidades de IA en sus flujos de trabajo y aplicarlas con las herramientas que ya tienen. Incluye medici&oacute;n de baseline para cuantificar impacto real.
-        </p>
+        <p><strong>Contexto:</strong> Un ingeniero que ahorra 3 horas a la semana en tareas repetitivas recupera ~150 horas al a&ntilde;o. Con 10 ingenieros, son 1,500 horas &mdash; el equivalente a casi un headcount completo. Los procesos operativos de manufactura (reconciliaci&oacute;n de datos, documentaci&oacute;n, cotizaciones) son exactamente el tipo de tareas donde la IA genera retorno inmediato.</p>
+        <p><strong>Soluci&oacute;n:</strong> Workshop de 2 d&iacute;as (1 presencial en Monterrey + 1 remoto). D&iacute;a 1: framework de resoluci&oacute;n de problemas con IA. D&iacute;a 2: aplicaci&oacute;n directa con las herramientas y procesos del equipo.</p>
+        <p><strong>Inversi&oacute;n:</strong> $9,500 MXN + IVA por persona (10 participantes = $95,000 MXN + IVA).</p>
+        <p><strong>Resultado:</strong> El equipo adquiere un m&eacute;todo estructurado para identificar oportunidades de IA en sus flujos de trabajo y aplicarlas con las herramientas que ya tienen. Incluye medici&oacute;n de baseline para cuantificar impacto real.</p>
       </div>
     </div>
   </section>
@@ -514,7 +527,7 @@
         <div class="pain-card glass reveal">
           <div class="pain-icon">!</div>
           <h3>Reconciliaci&oacute;n manual de datos</h3>
-          <p>Hojas de c&aacute;lculo paralelas que no se sincronizan con el ERP. Cada ciclo de pago requiere cruzar informaci&oacute;n a mano, generando discrepancias y reprocesos que se acumulan semana a semana.</p>
+          <p>Informaci&oacute;n dispersa entre hojas de c&aacute;lculo y el ERP que no se sincroniza sola. Cada vez que hay que cruzar datos, el equipo lo hace a mano &mdash; generando discrepancias y reprocesos que se acumulan.</p>
           <div class="pain-stat">Horas semanales en retrabajo</div>
         </div>
         <div class="pain-card glass reveal">
@@ -587,10 +600,12 @@
         <div class="ws-box glass">
           <h3>Para qui&eacute;n es</h3>
           <ul>
-            <li>Equipos de ingenier&iacute;a de manufactura</li>
-            <li>No requiere experiencia previa en IA</li>
-            <li>Perfiles t&eacute;cnicos con uso diario de Excel y ERP</li>
-            <li>Ideal para equipos de 8&ndash;15 personas</li>
+            <li>Equipos de ingenier&iacute;a en manufactura con 8&ndash;15 personas</li>
+            <li>Ingenieros que ya usan Excel, ERP y herramientas Microsoft a diario</li>
+            <li>No se requiere experiencia previa en IA ni en programaci&oacute;n</li>
+            <li>El contenido se adapta a los procesos y datos reales de cada equipo</li>
+            <li>L&iacute;deres que quieren datos antes de decidir una implementaci&oacute;n de IA</li>
+            <li>Equipos que ya tienen M365 y quieren sacarle m&aacute;s provecho</li>
           </ul>
         </div>
       </div>
@@ -598,10 +613,10 @@
       <div class="days-grid reveal">
         <div class="day-card glass">
           <div class="day-badge">D&iacute;a 1 &mdash; Presencial MTY</div>
-          <h4>Desarrollar el criterio para trabajar con IA</h4>
-          <p>Arrancamos con el contexto que importa: d&oacute;nde estamos hoy en inteligencia artificial, qu&eacute; cambi&oacute; en los &uacute;ltimos a&ntilde;os, y por qu&eacute; ahora s&iacute; impacta directamente al trabajo de ingenier&iacute;a. Desde ah&iacute;, el equipo aprende a identificar oportunidades reales y a comunicarse con la IA de forma efectiva.</p>
+          <h4>Qu&eacute; puede hacer la IA hoy &mdash; y qu&eacute; no</h4>
+          <p>El equipo necesita criterio antes de herramientas. D&iacute;a 1 construye ese criterio: qu&eacute; tipo de tareas resuelve bien la inteligencia artificial, d&oacute;nde falla, y c&oacute;mo identificar las oportunidades de mayor impacto en su trabajo diario. La segunda mitad del d&iacute;a es 100% pr&aacute;ctica con Copilot.</p>
           <ul class="day-topics">
-            <li>El panorama actual: d&oacute;nde estamos y hacia d&oacute;nde va la IA</li>
+            <li>Qu&eacute; puede hacer la IA hoy en manufactura (y qu&eacute; todav&iacute;a no)</li>
             <li>C&oacute;mo piensa un modelo de IA (intuici&oacute;n, no teor&iacute;a)</li>
             <li>Mapeo de procesos: cada ingeniero identifica d&oacute;nde la IA le pega m&aacute;s</li>
             <li>Prompt engineering aplicado: &ldquo;esto funciona mejor que esto&rdquo;</li>
@@ -658,13 +673,13 @@
           <div class="tier-badge">Fase 2</div>
           <div class="tier-name">Implementaci&oacute;n + Seguimiento</div>
           <div class="tier-desc">Acompa&ntilde;amiento continuo post-workshop para acelerar la adopci&oacute;n y maximizar resultados. Se define con base en lo aprendido en la Fase 1.</div>
-          <div class="tier-price" style="font-size:1.6rem;color:var(--text-muted);font-weight:500;">A definir</div>
-          <div class="tier-note">Se propone despu&eacute;s del workshop &middot; Sin compromiso</div>
+          <div class="tier-price" style="font-size:1.5rem;color:var(--tier2);font-weight:600;letter-spacing:0.02em;">A definir</div>
+          <div class="tier-note">Alcance y precio se definen con base en resultados del workshop</div>
           <ul class="tier-features">
             <li>Todo lo del workshop como base</li>
             <li>Sesiones de seguimiento semanales</li>
             <li>Templates avanzados basados en datos reales</li>
-            <li>Soporte dedicado de implementaci&oacute;n</li>
+            <li>Evaluaci&oacute;n de RAG: IA entrenada con los documentos del equipo</li>
             <li>M&eacute;tricas de adopci&oacute;n y ahorro de tiempo</li>
             <li>Escalable a otros equipos o departamentos</li>
           </ul>
@@ -686,18 +701,18 @@
       <div class="roi-grid stagger">
         <div class="roi-card glass reveal">
           <div class="roi-value">D&iacute;a 1</div>
-          <div class="roi-label">Cada ingeniero identifica oportunidades concretas de IA en sus procesos</div>
-          <div class="roi-math">Definici&oacute;n de oportunidades</div>
+          <div class="roi-label">Cada ingeniero tiene un mapa de sus procesos con las oportunidades de IA de mayor impacto identificadas</div>
+          <div class="roi-math">Diagn&oacute;stico + priorizaci&oacute;n</div>
         </div>
         <div class="roi-card glass reveal">
           <div class="roi-value">D&iacute;a 2</div>
-          <div class="roi-label">El equipo resuelve esos mismos procesos con inteligencia artificial</div>
-          <div class="roi-math">Implementaci&oacute;n pr&aacute;ctica</div>
+          <div class="roi-label">Cada ingeniero tiene templates y automatizaciones funcionando para sus procesos prioritarios</div>
+          <div class="roi-math">Herramientas listas para producci&oacute;n</div>
         </div>
         <div class="roi-card glass reveal">
           <div class="roi-value">Semana 1</div>
-          <div class="roi-label">Resultados medibles con los datos y herramientas del equipo</div>
-          <div class="roi-math">Impacto real &mdash; no estimados</div>
+          <div class="roi-label">Ahorro de tiempo medible vs. la l&iacute;nea base registrada en el workshop</div>
+          <div class="roi-math">ROI cuantificable &mdash; no estimados</div>
         </div>
       </div>
     </div>
@@ -721,20 +736,20 @@
         </div>
         <div>
           <div class="tech-category">
-            <div class="tech-category-label">Plataformas IA</div>
+            <div class="tech-category-label">Modelos &amp; Plataformas</div>
             <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
-              <span class="tech-tag">OpenAI / GPT-4</span>
+              <span class="tech-tag">OpenAI GPT-5</span>
+              <span class="tech-tag">Claude / Anthropic</span>
               <span class="tech-tag">Azure AI</span>
               <span class="tech-tag">Hugging Face</span>
-              <span class="tech-tag">Claude / Anthropic</span>
             </div>
           </div>
           <div class="tech-category">
-            <div class="tech-category-label">Ingenier&iacute;a IA</div>
+            <div class="tech-category-label">Ingenier&iacute;a de IA</div>
             <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+              <span class="tech-tag">RAG Pipelines</span>
               <span class="tech-tag">Fine-tuning</span>
-              <span class="tech-tag">RAG</span>
-              <span class="tech-tag">NLP</span>
+              <span class="tech-tag">NLP / PLN</span>
               <span class="tech-tag">Prompt Engineering</span>
               <span class="tech-tag">AI Agents</span>
             </div>
@@ -742,19 +757,19 @@
           <div class="tech-category">
             <div class="tech-category-label">Automatizaci&oacute;n &amp; Orquestaci&oacute;n</div>
             <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
-              <span class="tech-tag">n8n</span>
               <span class="tech-tag">LangGraph</span>
               <span class="tech-tag">CrewAI</span>
+              <span class="tech-tag">n8n</span>
               <span class="tech-tag">Power Automate</span>
             </div>
           </div>
           <div class="tech-category">
-            <div class="tech-category-label">Enterprise</div>
+            <div class="tech-category-label">Enterprise &amp; Datos</div>
             <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
               <span class="tech-tag">Microsoft Copilot</span>
-              <span class="tech-tag">SAP</span>
-              <span class="tech-tag">ERPs</span>
-              <span class="tech-tag">Data Analysis</span>
+              <span class="tech-tag">SAP / ERPs</span>
+              <span class="tech-tag">Data Engineering</span>
+              <span class="tech-tag">Integraci&oacute;n de sistemas</span>
             </div>
           </div>
         </div>
@@ -768,7 +783,7 @@
       <span class="label reveal">Siguiente paso</span>
       <h2 class="reveal">Agenda 30 minutos y<br><span style="color:var(--accent);">resolvemos tus dudas</span></h2>
       <p class="reveal">Una llamada corta para responder preguntas, revisar la propuesta, y definir si tiene sentido avanzar. Sin compromiso.</p>
-      <a href="https://wa.me/5213314397921?text=Hola%20Ra%C3%BAl%2C%20me%20interesa%20la%20propuesta%20del%20workshop%20AI%20para%20MFW" class="cta-primary reveal">Escribir por WhatsApp &#8594;</a>
+      <a href="https://wa.me/5213314397921?text=Hola%20Ra%C3%BAl%2C%20me%20interesa%20la%20propuesta%20del%20workshop%20de%20IA%20para%20manufactura" class="cta-primary reveal">Escribir por WhatsApp &#8594;</a>
       <div class="contact-info reveal">
         <div class="contact-item">
           <div class="cl">WhatsApp</div>
