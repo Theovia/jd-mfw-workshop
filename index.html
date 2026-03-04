@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Capacitaci&oacute;n IA para Ingenier&iacute;a MFW &mdash; John Deere Monterrey</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23077d42'/><text x='16' y='22' font-size='18' fill='white' text-anchor='middle' font-family='sans-serif' font-weight='bold'>IA</text></svg>">
+  <meta property="og:title" content="Capacitaci&oacute;n IA para Ingenier&iacute;a &mdash; John Deere MFW">
+  <meta property="og:description" content="Workshop de 2 d&iacute;as: inteligencia artificial aplicada a procesos de manufactura. Presencial en Monterrey + remoto.">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -37,7 +40,7 @@
       --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
     body {
       background: var(--bg-primary);
       color: var(--text-primary);
@@ -74,7 +77,7 @@
       .glass { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
     }
     @media (max-width: 768px) {
-      .glass { background: rgba(255,255,255,0.85); }
+      .glass { background: rgba(255,255,255,0.95); }
     }
 
     .label {
@@ -90,12 +93,14 @@
 
     /* NAV */
     nav {
+      position: sticky; top: 0; z-index: 100;
       padding: 1.15rem 0;
       background: rgba(244,244,245,0.88);
       border-bottom: 1px solid var(--glass-border);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
     }
     @media (min-width: 769px) {
-      nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+      nav { position: fixed; left: 0; right: 0; }
     }
     nav .container { display: flex; align-items: center; justify-content: space-between; }
     .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--accent); letter-spacing: -0.01em; }
@@ -110,10 +115,32 @@
     }
     .nav-links a:hover { color: var(--text-primary); }
     .nav-links a:hover::after { width: 100%; }
+    /* Hamburger */
+    .nav-toggle { display: none; }
+    .hamburger {
+      display: none; width: 28px; height: 20px; cursor: pointer;
+      flex-direction: column; justify-content: space-between;
+    }
+    .hamburger span {
+      display: block; height: 2px; width: 100%; background: var(--text-primary);
+      border-radius: 2px; transition: all 0.3s var(--ease-out-expo);
+    }
     @media (max-width: 768px) {
-      .nav-links { display: none; }
+      .hamburger { display: flex; }
       nav { padding: 0.85rem 0; }
-      nav .container { justify-content: center; }
+      .nav-links {
+        display: flex; flex-direction: column; gap: 0;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(244,244,245,0.97); border-bottom: 1px solid var(--glass-border);
+        max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease-out-expo);
+        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      }
+      .nav-links a { display: block; padding: 0.85rem clamp(1.5rem, 5vw, 4rem); font-size: 0.88rem; }
+      .nav-links a::after { display: none; }
+      .nav-toggle:checked ~ .container .nav-links { max-height: 300px; }
+      .nav-toggle:checked ~ .container .hamburger span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+      .nav-toggle:checked ~ .container .hamburger span:nth-child(2) { opacity: 0; }
+      .nav-toggle:checked ~ .container .hamburger span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
     }
 
     /* HERO */
@@ -313,7 +340,7 @@
     /* PRICING */
     .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; }
     @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
-    .tier-card { padding: 2.5rem; position: relative; transition: all 0.5s var(--ease-out-expo); display: flex; flex-direction: column; }
+    .tier-card { padding: 2.5rem; position: relative; transition: all 0.5s var(--ease-out-expo); display: flex; flex-direction: column; text-align: center; }
     .tier-card:hover { transform: translateY(-4px); }
     .tier-card.t2 { border-color: var(--tier2-border); }
     .tier-card.t2:hover { box-shadow: 0 8px 40px rgba(0,184,230,0.08); }
@@ -325,32 +352,67 @@
     .tier-card:not(.t2) .tier-badge { background: var(--accent-bg); border: 1px solid var(--accent-border); color: var(--accent); }
     .tier-card.t2 .tier-badge { background: var(--tier2); color: #fff; }
     .tier-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .tier-desc { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.5rem; line-height: 1.55; }
-    .tier-price { font-family: var(--font-mono); font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: -0.02em; }
+    .tier-desc { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.5rem; line-height: 1.55; text-align: left; }
+    .tier-price { font-family: var(--font-mono); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: -0.02em; white-space: nowrap; }
     .tier-card:not(.t2) .tier-price { color: var(--accent); }
     .tier-card.t2 .tier-price { color: var(--tier2); }
-    .tier-note { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.75rem; }
+    .tier-note { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.75rem; margin-top: 0.35rem; }
     .tier-features { list-style: none; flex: 1; }
+    .tier-features { text-align: left; }
     .tier-features li {
       padding: 0.55rem 0; font-size: 0.88rem; color: var(--text-secondary);
       border-bottom: 1px solid rgba(0,0,0,0.08);
       display: flex; align-items: flex-start; gap: 0.65rem;
     }
-    .tier-features li::before { content: '\203A'; color: var(--accent); font-family: var(--font-mono); font-weight: 600; flex-shrink: 0; }
+    .tier-features li::before { content: '\2713'; color: var(--accent); font-family: var(--font-mono); font-weight: 600; flex-shrink: 0; font-size: 0.82rem; }
     .tier-card.t2 .tier-features li::before { color: var(--tier2); }
+
+    /* Tier bonus section */
+    .tier-bonus {
+      margin-top: 1.5rem; padding: 1.25rem 1.35rem; border-radius: 14px;
+      background: var(--accent-bg); border: 1px solid var(--accent-border);
+      text-align: left;
+    }
+    .tier-card.t2 .tier-bonus { background: var(--tier2-bg); border-color: var(--tier2-border); }
+    .tier-bonus-label {
+      font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
+      margin-bottom: 0.85rem;
+    }
+    .tier-card.t2 .tier-bonus-label { color: var(--tier2); }
+    .tier-bonus-item { display: flex; gap: 0.75rem; align-items: flex-start; }
+    .tier-bonus-item + .tier-bonus-item { margin-top: 0.85rem; }
+    .tier-bonus-icon {
+      width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
+      background: rgba(7,125,66,0.12); border: 1px solid var(--accent-border); color: var(--accent);
+    }
+    .tier-card.t2 .tier-bonus-icon { background: rgba(2,112,171,0.12); border-color: var(--tier2-border); color: var(--tier2); }
+    .tier-bonus-text strong { color: var(--text-primary); display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.15rem; }
+    .tier-bonus-text span { color: var(--text-muted); font-size: 0.76rem; line-height: 1.5; }
     .tier-cta {
-      display: block; text-align: center; padding: 1rem; margin-top: auto; padding-top: 2rem;
-      border-radius: 14px; font-family: var(--font-display); font-weight: 700;
-      font-size: 0.88rem; text-decoration: none;
-      transition: all 0.4s var(--ease-spring);
+      display: inline-block; text-align: center; padding: 0.75rem 2rem;
+      border-radius: 10px; font-family: var(--font-display); font-weight: 600;
+      font-size: 0.82rem; text-decoration: none; letter-spacing: -0.01em;
+      transition: all 0.4s var(--ease-spring); margin-top: auto; padding-top: 0.75rem;
     }
-    .tier-card:not(.t2) .tier-cta { border: 1px solid var(--accent-border); color: var(--accent); }
-    .tier-card:not(.t2) .tier-cta:hover { background: var(--accent-bg); transform: translateY(-2px); }
+    .tier-features { margin-bottom: 1.5rem; }
+    .tier-card:not(.t2) .tier-cta {
+      background: var(--accent); color: #fff;
+    }
+    .tier-card:not(.t2) .tier-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 20px var(--accent-glow); }
     .tier-card.t2 .tier-cta {
-      background: linear-gradient(135deg, var(--tier2), #0369a1);
-      color: #fff; box-shadow: 0 0 30px var(--tier2-glow);
+      background: var(--tier2); color: #fff;
     }
-    .tier-card.t2 .tier-cta:hover { transform: translateY(-3px); box-shadow: 0 0 50px var(--tier2-glow); }
+    .tier-card.t2 .tier-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 20px var(--tier2-glow); }
+    .tier-price-custom {
+      font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;
+      color: var(--tier2); letter-spacing: -0.01em;
+      padding: 0.6rem 1.5rem; background: var(--tier2-bg);
+      border: 1px solid var(--tier2-border); border-radius: 12px;
+      display: inline-block; margin-bottom: 0.25rem;
+    }
 
     /* ROI */
     .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; position: relative; }
@@ -361,9 +423,7 @@
         content: '\2192'; position: absolute; right: -0.75rem; top: 50%;
         transform: translate(50%, -50%); font-size: 1.2rem; color: var(--text-ghost); z-index: 1;
       }
-      .roi-card:nth-child(1) .roi-value { font-size: 1.4rem; }
-      .roi-card:nth-child(2) .roi-value { font-size: 1.6rem; }
-      .roi-card:nth-child(3) .roi-value { font-size: 1.8rem; font-weight: 700; }
+      .roi-card:nth-child(3) { border-color: var(--accent-border); background: var(--accent-bg); }
     }
     .roi-card { padding: 2rem; text-align: center; transition: all 0.5s var(--ease-out-expo); }
     .roi-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
@@ -372,37 +432,41 @@
     .roi-math { color: var(--text-muted); font-size: 0.68rem; font-family: var(--font-mono); margin-top: 0.3rem; }
 
     /* ABOUT */
-    .about-content { padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-    @media (max-width: 768px) { .about-content { grid-template-columns: 1fr !important; } }
-    .tech-tag {
-      display: inline-block; padding: 0.3rem 0.7rem; border-radius: 8px;
-      font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500;
-      background: var(--accent-bg); border: 1px solid var(--accent-border);
-      color: var(--accent); transition: all 0.3s var(--ease-out-expo);
+    .about-header-card { padding: 2.5rem; margin-bottom: 1.5rem; }
+    .about-name {
+      font-family: var(--font-display); font-size: 1.6rem; font-weight: 800;
+      letter-spacing: -0.02em; margin-bottom: 0.3rem;
     }
-    .tech-tag:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
-    .tech-category { margin-bottom: 1.1rem; }
-    .tech-category:last-child { margin-bottom: 0; }
-    .tech-category-label {
-      font-family: var(--font-mono); font-size: 0.58rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.14em; color: var(--text-muted);
-      margin-bottom: 0.45rem;
+    .about-title {
+      font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
+      color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+      margin-bottom: 1.25rem;
     }
-    .about-content h3 { font-family: var(--font-display); font-size: 1.15rem; margin-bottom: 0.85rem; color: var(--accent); font-weight: 700; }
-    .about-content p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.75; margin-bottom: 0.85rem; }
-
-    /* QUOTE */
-    .quote-section { text-align: center; padding: clamp(4rem, 10vw, 6rem) 0; position: relative; }
-    .quote-section blockquote {
-      font-family: var(--font-display); font-size: clamp(1.25rem, 3vw, 1.9rem);
-      font-weight: 500; color: var(--text-secondary); max-width: 700px; margin: 0 auto;
-      line-height: 1.5; font-style: italic; position: relative;
-      padding: 0 2rem;
+    .about-bio { color: var(--text-secondary); font-size: 0.94rem; line-height: 1.75; max-width: 680px; }
+    .about-bio + .about-bio { margin-top: 0.65rem; }
+    .about-bio strong { color: var(--text-primary); font-weight: 600; }
+    .about-location {
+      margin-top: 1.25rem; font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--text-muted); letter-spacing: 0.02em;
     }
-    .quote-section blockquote::before {
-      content: '\201C'; position: absolute; top: -0.4em; left: -0.1em;
-      font-size: 5rem; color: var(--accent); opacity: 0.15;
-      font-family: Georgia, serif; line-height: 1;
+    .cap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 768px) { .cap-grid { grid-template-columns: 1fr; } }
+    .cap-card {
+      padding: 1.75rem; transition: all 0.5s var(--ease-out-expo);
+      border-left: 2px solid var(--accent-border);
+    }
+    .cap-card:hover { border-left-color: var(--accent); transform: translateY(-3px); }
+    .cap-card h4 {
+      font-family: var(--font-display); font-size: 0.95rem; font-weight: 700;
+      margin-bottom: 0.4rem; color: var(--text-primary);
+    }
+    .cap-card p {
+      color: var(--text-secondary); font-size: 0.82rem; line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+    .cap-stack {
+      font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted);
+      letter-spacing: 0.02em;
     }
 
     /* FINAL CTA */
@@ -438,9 +502,6 @@
     .stagger > .reveal:nth-child(3) { transition-delay: 0.2s; }
     .stagger > .reveal:nth-child(4) { transition-delay: 0.3s; }
 
-    /* Counter animation */
-    .counter { display: inline-block; }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
       .reveal { opacity: 1; transform: none; }
@@ -455,14 +516,18 @@
 <body>
 
   <nav>
+    <input type="checkbox" id="navToggle" class="nav-toggle" aria-hidden="true">
     <div class="container">
       <div class="nav-logo">IA + Ingenier&iacute;a MFW</div>
       <ul class="nav-links">
-        <li><a href="#contexto">Contexto</a></li>
-        <li><a href="#workshop">Workshop</a></li>
-        <li><a href="#inversion">Inversi&oacute;n</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#contexto" onclick="document.getElementById('navToggle').checked=false">Contexto</a></li>
+        <li><a href="#workshop" onclick="document.getElementById('navToggle').checked=false">Workshop</a></li>
+        <li><a href="#inversion" onclick="document.getElementById('navToggle').checked=false">Inversi&oacute;n</a></li>
+        <li><a href="#contacto" onclick="document.getElementById('navToggle').checked=false">Contacto</a></li>
       </ul>
+      <label for="navToggle" class="hamburger" aria-label="Men&uacute;">
+        <span></span><span></span><span></span>
+      </label>
     </div>
   </nav>
 
@@ -490,26 +555,27 @@
 
       <div class="hero-stats">
         <div>
-          <div class="hero-stat-value"><span class="counter" data-target="10">0</span></div>
-          <div class="hero-stat-label">Ingenieros</div>
-        </div>
-        <div>
           <div class="hero-stat-value">2 d&iacute;as</div>
-          <div class="hero-stat-label">Workshop h&iacute;brido</div>
+          <div class="hero-stat-label">1 presencial + 1 remoto</div>
         </div>
         <div>
-          <div class="hero-stat-value">20-40%</div>
-          <div class="hero-stat-label">Ahorro estimado en tareas repetitivas</div>
+          <div class="hero-stat-value">100%</div>
+          <div class="hero-stat-label">Pr&aacute;ctico &mdash; con datos y procesos reales</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">M365 E5</div>
+          <div class="hero-stat-label">Compatible con Copilot y herramientas enterprise</div>
         </div>
       </div>
 
       <!-- EXECUTIVE SUMMARY -->
       <div class="exec-summary glass">
         <div class="exec-title">Resumen para la toma de decisi&oacute;n</div>
-        <p><strong>Contexto:</strong> Un ingeniero que ahorra 3 horas a la semana en tareas repetitivas recupera ~150 horas al a&ntilde;o. Con 10 ingenieros, son 1,500 horas &mdash; el equivalente a casi un headcount completo. Los procesos operativos de manufactura (reconciliaci&oacute;n de datos, documentaci&oacute;n, cotizaciones) son exactamente el tipo de tareas donde la IA genera retorno inmediato.</p>
-        <p><strong>Soluci&oacute;n:</strong> Workshop de 2 d&iacute;as (1 presencial en Monterrey + 1 remoto). D&iacute;a 1: framework de resoluci&oacute;n de problemas con IA. D&iacute;a 2: aplicaci&oacute;n directa con las herramientas y procesos del equipo.</p>
-        <p><strong>Inversi&oacute;n:</strong> $9,500 MXN + IVA por persona (10 participantes = $95,000 MXN + IVA).</p>
-        <p><strong>Resultado:</strong> El equipo adquiere un m&eacute;todo estructurado para identificar oportunidades de IA en sus flujos de trabajo y aplicarlas con las herramientas que ya tienen. Incluye medici&oacute;n de baseline para cuantificar impacto real.</p>
+        <p><strong>Contexto:</strong> En ingenier&iacute;a de manufactura, los cuellos de botella m&aacute;s costosos no est&aacute;n en la l&iacute;nea &mdash; est&aacute;n en el escritorio: documentaci&oacute;n t&eacute;cnica compilada a mano, consulta de referencias en manuales extensos, y preparaci&oacute;n de datos para sistemas. Seg&uacute;n McKinsey, los equipos de ingenier&iacute;a dedican entre 30-40% de su tiempo a buscar informaci&oacute;n y documentar. Son exactamente el tipo de tareas donde la IA genera retorno inmediato.</p>
+        <p><strong>Soluci&oacute;n:</strong> Workshop de 2 d&iacute;as (1 presencial en Monterrey + 1 remoto). D&iacute;a 1: criterio para identificar d&oacute;nde la IA genera valor real + pr&aacute;ctica con Copilot en Excel y Word. D&iacute;a 2: aplicaci&oacute;n directa sobre los procesos del equipo &mdash; listas de materiales, documentaci&oacute;n operativa, preparaci&oacute;n de datos, cotizaciones. Antes del workshop, realizamos un diagn&oacute;stico breve para personalizar el contenido al 100%.</p>
+        <p><strong>Inversi&oacute;n:</strong> $12,500 MXN + IVA por persona. Payback estimado en menos de 1 mes.</p>
+        <p><strong>Seguridad:</strong> Todos los ejercicios usan herramientas enterprise aprobadas dentro del entorno Microsoft 365 existente. Ning&uacute;n dato sale de la organizaci&oacute;n.</p>
+        <p><strong>Resultado:</strong> Cada ingeniero sale con al menos 2 flujos de Copilot configurados para sus tareas prioritarias y una l&iacute;nea base medida para cuantificar el ahorro real desde la primera semana.</p>
       </div>
     </div>
   </section>
@@ -526,21 +592,21 @@
       <div class="pains-grid stagger">
         <div class="pain-card glass reveal">
           <div class="pain-icon">!</div>
-          <h3>Reconciliaci&oacute;n manual de datos</h3>
-          <p>Informaci&oacute;n dispersa entre hojas de c&aacute;lculo y el ERP que no se sincroniza sola. Cada vez que hay que cruzar datos, el equipo lo hace a mano &mdash; generando discrepancias y reprocesos que se acumulan.</p>
-          <div class="pain-stat">Horas semanales en retrabajo</div>
+          <h3>B&uacute;squeda manual en documentaci&oacute;n t&eacute;cnica</h3>
+          <p>Normas internas, procedimientos y especificaciones t&eacute;cnicas rara vez est&aacute;n pensados para b&uacute;squeda r&aacute;pida. Encontrar la referencia correcta es un proceso manual que se repite constantemente, y verificar que los datos aplicados sean correctos es igual de lento.</p>
+          <div class="pain-stat">Tarea repetitiva de alto impacto</div>
         </div>
         <div class="pain-card glass reveal">
           <div class="pain-icon">#</div>
-          <h3>Documentaci&oacute;n desde cero</h3>
-          <p>Armar &oacute;rdenes y reportes compilando datos de m&uacute;ltiples fuentes es un cuello de botella cl&aacute;sico. Sin validaci&oacute;n autom&aacute;tica, los errores se detectan tarde y generan ciclos adicionales de revisi&oacute;n.</p>
-          <div class="pain-stat">Altamente automatizable</div>
+          <h3>Documentaci&oacute;n compilada a mano</h3>
+          <p>Instrucciones de operaci&oacute;n, tablas de lista de materiales con dimensiones y pesos, rutas de producci&oacute;n en el ERP &mdash; todo se arma pieza por pieza desde m&uacute;ltiples fuentes. Un solo producto nuevo con decenas de componentes consume d&iacute;as de carga manual.</p>
+          <div class="pain-stat">D&iacute;as de trabajo por producto nuevo</div>
         </div>
         <div class="pain-card glass reveal">
           <div class="pain-icon">?</div>
-          <h3>Procesos sin est&aacute;ndar</h3>
-          <p>Cuando cada ingeniero maneja su propio formato para cotizaciones y reportes, se pierde comparabilidad, trazabilidad y velocidad. Estandarizar es uno de los quick wins con mayor retorno en manufactura.</p>
-          <div class="pain-stat">Quick win de alto impacto</div>
+          <h3>Cotizaciones sin formato est&aacute;ndar</h3>
+          <p>Cuando los formatos de cotizaciones y reportes no est&aacute;n estandarizados, comparar propuestas, rastrear m&aacute;rgenes de error y dar visibilidad al equipo se convierte en un ejercicio de interpretaci&oacute;n &mdash; no de an&aacute;lisis.</p>
+          <div class="pain-stat">Riesgo operativo por falta de trazabilidad</div>
         </div>
       </div>
     </div>
@@ -558,18 +624,18 @@
       <div class="why-grid stagger">
         <div class="why-card glass reveal">
           <div class="why-number">M365 E5</div>
-          <h3>Copilot ya est&aacute; habilitado</h3>
-          <p>La infraestructura existe &mdash; cada ingeniero tiene acceso a Copilot en Excel, Word y PowerPoint. Solo necesitan aprender a usarlo.</p>
+          <h3>Copilot probablemente ya est&aacute; disponible</h3>
+          <p>Si la organizaci&oacute;n cuenta con M365 E5, Copilot en Excel, Word, PowerPoint, Teams y Outlook ya est&aacute; incluido. El costo de la herramienta ya est&aacute; absorbido &mdash; lo &uacute;nico que falta es que el equipo aprenda a usarla en sus procesos reales.</p>
         </div>
         <div class="why-card glass reveal">
-          <div class="why-number">80%</div>
-          <h3>Del tiempo es operativo</h3>
-          <p>En la mayor&iacute;a de las plantas, los ingenieros dedican m&aacute;s tiempo a tareas repetitivas que a ingenier&iacute;a real. La IA libera ese tiempo para trabajo de mayor valor.</p>
+          <div class="why-number">0</div>
+          <h3>Barreras de aprobaci&oacute;n</h3>
+          <p>Empresas con la madurez de John Deere t&iacute;picamente ya cuentan con pol&iacute;tica de IA enterprise, acceso a nube corporativa y clasificaci&oacute;n de datos definida. No hay que construir gobernanza desde cero &mdash; hay que activar lo que ya existe.</p>
         </div>
         <div class="why-card glass reveal">
           <div class="why-number">&darr;</div>
-          <h3>Curva de aprendizaje corta</h3>
-          <p>No es un curso de programaci&oacute;n. Las herramientas ya est&aacute;n instaladas &mdash; el equipo puede aplicar lo aprendido al d&iacute;a siguiente del workshop.</p>
+          <h3>Cero programaci&oacute;n requerida</h3>
+          <p>Un equipo de ingenieros de manufactura no necesita aprender Python para usar IA. Las herramientas que ya tienen hacen el trabajo &mdash; solo necesitan el m&eacute;todo correcto.</p>
         </div>
       </div>
     </div>
@@ -589,23 +655,21 @@
         <div class="ws-box glass">
           <h3>Qu&eacute; van a aprender</h3>
           <ul>
-            <li>Entender el panorama actual de IA y por qu&eacute; ahora es diferente</li>
-            <li>Identificar d&oacute;nde la inteligencia artificial genera valor real en su trabajo</li>
-            <li>Prompt engineering: &ldquo;esto funciona mejor que esto&rdquo;</li>
-            <li>Evaluar cr&iacute;ticamente lo que la IA devuelve</li>
-            <li>Aplicaciones pr&aacute;cticas en Excel, Word, PowerPoint</li>
-            <li>Templates listos para sus procesos del d&iacute;a a d&iacute;a</li>
+            <li>Usar Copilot en Excel para analizar listas de materiales, tiempos y datos de producci&oacute;n sin f&oacute;rmulas complejas</li>
+            <li>Generar borradores de documentaci&oacute;n t&eacute;cnica (instrucciones de operaci&oacute;n, reportes) con Copilot en Word</li>
+            <li>Prompt engineering aplicado a manufactura: dise&ntilde;ar instrucciones que producen resultados consistentes</li>
+            <li>Estandarizar formatos de cotizaci&oacute;n y reportes del equipo usando templates con IA</li>
+            <li>Preparar datos para carga en ERP usando Copilot en Excel</li>
+            <li>Evaluar cr&iacute;ticamente lo que la IA devuelve &mdash; cu&aacute;ndo confiar y cu&aacute;ndo verificar</li>
           </ul>
         </div>
         <div class="ws-box glass">
           <h3>Para qui&eacute;n es</h3>
           <ul>
-            <li>Equipos de ingenier&iacute;a en manufactura con 8&ndash;15 personas</li>
-            <li>Ingenieros que ya usan Excel, ERP y herramientas Microsoft a diario</li>
-            <li>No se requiere experiencia previa en IA ni en programaci&oacute;n</li>
-            <li>El contenido se adapta a los procesos y datos reales de cada equipo</li>
-            <li>L&iacute;deres que quieren datos antes de decidir una implementaci&oacute;n de IA</li>
-            <li>Equipos que ya tienen M365 y quieren sacarle m&aacute;s provecho</li>
+            <li>Ingenieros de manufactura que trabajan con documentaci&oacute;n t&eacute;cnica, est&aacute;ndares y datos de producci&oacute;n a diario</li>
+            <li>Equipos que ya tienen M365 con Copilot habilitado y quieren usarlo en serio</li>
+            <li>No se requiere experiencia en programaci&oacute;n &mdash; el enfoque es 100% en las herramientas que ya usan</li>
+            <li>L&iacute;deres que necesitan datos concretos de ahorro antes de escalar una iniciativa de IA</li>
           </ul>
         </div>
       </div>
@@ -613,27 +677,28 @@
       <div class="days-grid reveal">
         <div class="day-card glass">
           <div class="day-badge">D&iacute;a 1 &mdash; Presencial MTY</div>
-          <h4>Qu&eacute; puede hacer la IA hoy &mdash; y qu&eacute; no</h4>
-          <p>El equipo necesita criterio antes de herramientas. D&iacute;a 1 construye ese criterio: qu&eacute; tipo de tareas resuelve bien la inteligencia artificial, d&oacute;nde falla, y c&oacute;mo identificar las oportunidades de mayor impacto en su trabajo diario. La segunda mitad del d&iacute;a es 100% pr&aacute;ctica con Copilot.</p>
+          <h4>Criterio primero, herramientas despu&eacute;s</h4>
+          <p>La ma&ntilde;ana construye el criterio: qu&eacute; tipo de tareas resuelve bien la IA, d&oacute;nde falla, y c&oacute;mo cada ingeniero identifica las oportunidades de mayor impacto en su flujo diario. La tarde es 100% pr&aacute;ctica con Copilot aplicado a datos y documentos reales de manufactura.</p>
           <ul class="day-topics">
-            <li>Qu&eacute; puede hacer la IA hoy en manufactura (y qu&eacute; todav&iacute;a no)</li>
-            <li>C&oacute;mo piensa un modelo de IA (intuici&oacute;n, no teor&iacute;a)</li>
-            <li>Mapeo de procesos: cada ingeniero identifica d&oacute;nde la IA le pega m&aacute;s</li>
-            <li>Prompt engineering aplicado: &ldquo;esto funciona mejor que esto&rdquo;</li>
-            <li>Evaluaci&oacute;n cr&iacute;tica: cu&aacute;ndo confiar en la IA y cu&aacute;ndo verificar</li>
-            <li>Copilot en acci&oacute;n: Excel, Word, PowerPoint con datos de manufactura</li>
+            <li>Qu&eacute; puede hacer la IA hoy en ingenier&iacute;a de manufactura (y d&oacute;nde todav&iacute;a no es confiable)</li>
+            <li>C&oacute;mo funciona un modelo de lenguaje &mdash; intuici&oacute;n pr&aacute;ctica, no teor&iacute;a</li>
+            <li>Mapeo individual: cada ingeniero identifica sus 3 tareas m&aacute;s repetitivas y las prioriza</li>
+            <li>Prompt engineering: instrucciones que producen resultados consistentes y auditables</li>
+            <li>Copilot en Excel: analizar tablas de datos de producci&oacute;n, tiempos, dimensiones, costos</li>
+            <li>Copilot en Word: generar borradores de documentaci&oacute;n t&eacute;cnica e instrucciones de operaci&oacute;n</li>
           </ul>
         </div>
         <div class="day-card glass">
           <div class="day-badge">D&iacute;a 2 &mdash; Remoto</div>
-          <h4>Resolver problemas reales del equipo con IA</h4>
-          <p>Con lo aprendido en el D&iacute;a 1, los participantes trabajan con sus propios procesos y datos. Construimos juntos soluciones acotadas para los dolores m&aacute;s grandes del equipo.</p>
+          <h4>Resolver los cuellos de botella reales del equipo</h4>
+          <p>Cada ingeniero aplica lo aprendido a sus procesos concretos. Trabajamos juntos sobre los cuellos de botella que identificaron en el D&iacute;a 1: documentaci&oacute;n que hoy se arma pieza por pieza, datos que se cargan manualmente al ERP, cotizaciones que no tienen un formato com&uacute;n.</p>
           <ul class="day-topics">
-            <li>Ejercicios con procesos reales de MFW</li>
-            <li>Templates personalizados para los procesos del equipo</li>
-            <li>Automatizaciones pr&aacute;cticas con Copilot</li>
-            <li>Cada ingeniero sale con herramientas listas para usar</li>
-            <li>Sesi&oacute;n de preguntas + plan de seguimiento</li>
+            <li>Templates de Copilot para an&aacute;lisis de listas de materiales y datos de producci&oacute;n</li>
+            <li>Preparaci&oacute;n y validaci&oacute;n de datos para carga en ERP con Copilot</li>
+            <li>Formato est&aacute;ndar de cotizaci&oacute;n con IA: estructura com&uacute;n, m&aacute;rgenes claros, trazabilidad</li>
+            <li>Generaci&oacute;n asistida de instrucciones de operaci&oacute;n y documentaci&oacute;n t&eacute;cnica</li>
+            <li>Cada ingeniero sale con al menos 2 flujos de Copilot listos para usar el lunes</li>
+            <li>Medici&oacute;n de l&iacute;nea base: registramos tiempos antes/despu&eacute;s para cuantificar el impacto real</li>
           </ul>
         </div>
       </div>
@@ -655,35 +720,61 @@
           <div class="tier-badge">Workshop</div>
           <div class="tier-name">Capacitaci&oacute;n IA Aplicada</div>
           <div class="tier-desc">1 d&iacute;a presencial en Monterrey + 1 d&iacute;a remoto. Tu equipo aprende a usar inteligencia artificial con las herramientas que ya tienen.</div>
-          <div class="tier-price">$9,500 <span style="font-size:0.38em;color:var(--text-muted);font-weight:500;">MXN + IVA / persona</span></div>
-          <div class="tier-note">10 participantes &middot; $95,000 MXN + IVA total</div>
+          <div class="tier-price">$12,500 <span style="font-size:0.4em;color:var(--text-muted);font-weight:500;">MXN+IVA/persona</span></div>
+          <div class="tier-note">Grupos de 8 a 15 personas &middot; Incluye material, templates y 30 d&iacute;as de soporte</div>
           <ul class="tier-features">
             <li>1 d&iacute;a presencial + 1 d&iacute;a remoto (8h cada uno)</li>
-            <li>Fundamentos de IA + prompt engineering</li>
-            <li>Copilot aplicado: Excel, Word, PowerPoint</li>
-            <li>Ejercicios con procesos reales del equipo</li>
-            <li>Templates listos para sus flujos operativos</li>
-            <li>Material de referencia para el equipo</li>
-            <li>30 d&iacute;as de soporte por email post-workshop</li>
+            <li>Diagn&oacute;stico previo de procesos y herramientas del equipo</li>
+            <li>Copilot aplicado: Excel, Word, PowerPoint con datos reales</li>
+            <li>Templates de an&aacute;lisis de BOM, cotizaciones y documentaci&oacute;n t&eacute;cnica</li>
+            <li>Preparaci&oacute;n de datos para carga en ERP con Copilot</li>
+            <li>Medici&oacute;n de l&iacute;nea base antes/despu&eacute;s</li>
+            <li>Todos los ejercicios dentro del entorno M365 enterprise &mdash; cero datos fuera de la organizaci&oacute;n</li>
           </ul>
+          <div class="tier-bonus">
+            <div class="tier-bonus-label">Material incluido</div>
+            <div class="tier-bonus-item">
+              <div class="tier-bonus-icon">AI</div>
+              <div class="tier-bonus-text">
+                <strong>AI Playbook para Manufactura</strong>
+                <span>Gu&iacute;a de referencia: framework para evaluar qu&eacute; tareas automatizar, criterios de ROI, y patterns de prompts para procesos industriales</span>
+              </div>
+            </div>
+            <div class="tier-bonus-item">
+              <div class="tier-bonus-icon">&lt;/&gt;</div>
+              <div class="tier-bonus-text">
+                <strong>Toolkit de Templates Copilot</strong>
+                <span>Todos los templates construidos durante el workshop, documentados y listos para replicar con el equipo</span>
+              </div>
+            </div>
+          </div>
           <a href="#contacto" class="tier-cta">Empezar con el workshop</a>
         </div>
         <!-- TIER 2 -->
         <div class="tier-card glass t2">
-          <div class="tier-badge">Fase 2</div>
-          <div class="tier-name">Implementaci&oacute;n + Seguimiento</div>
-          <div class="tier-desc">Acompa&ntilde;amiento continuo post-workshop para acelerar la adopci&oacute;n y maximizar resultados. Se define con base en lo aprendido en la Fase 1.</div>
-          <div class="tier-price" style="font-size:1.5rem;color:var(--tier2);font-weight:600;letter-spacing:0.02em;">A definir</div>
-          <div class="tier-note">Alcance y precio se definen con base en resultados del workshop</div>
+          <div class="tier-badge">Proyecto de implementaci&oacute;n</div>
+          <div class="tier-name">Knowledge Base Inteligente + Implementaci&oacute;n</div>
+          <div class="tier-desc">El proyecto ancla: una base de conocimiento privada entrenada con la documentaci&oacute;n t&eacute;cnica interna del equipo. En lugar de buscar manualmente en manuales extensos, los ingenieros hacen preguntas en lenguaje natural y obtienen respuestas instant&aacute;neas con la referencia exacta. Se despliega sobre infraestructura enterprise existente.</div>
+          <div class="tier-price-custom">Se cotiza por proyecto</div>
+          <div class="tier-note">Alcance y precio se definen con base en los resultados del workshop</div>
           <ul class="tier-features">
             <li>Todo lo del workshop como base</li>
-            <li>Sesiones de seguimiento semanales</li>
-            <li>Templates avanzados basados en datos reales</li>
-            <li>Evaluaci&oacute;n de RAG: IA entrenada con los documentos del equipo</li>
-            <li>M&eacute;tricas de adopci&oacute;n y ahorro de tiempo</li>
-            <li>Escalable a otros equipos o departamentos</li>
+            <li>Knowledge base privada entrenada con documentaci&oacute;n t&eacute;cnica y procedimientos internos</li>
+            <li>Consultas en lenguaje natural: &ldquo;&iquest;Cu&aacute;l es la especificaci&oacute;n t&eacute;cnica para este componente?&rdquo; &rarr; respuesta inmediata</li>
+            <li>Desplegado sobre infraestructura enterprise aprobada &mdash; datos nunca salen de la organizaci&oacute;n</li>
+            <li>Verificaci&oacute;n asistida: comparar datos t&eacute;cnicos contra documentaci&oacute;n de referencia autom&aacute;ticamente</li>
           </ul>
-          <a href="#contacto" class="tier-cta">Platicar sobre Fase 2</a>
+          <div class="tier-bonus">
+            <div class="tier-bonus-label">Resultado del proyecto</div>
+            <div class="tier-bonus-item">
+              <div class="tier-bonus-icon">KB</div>
+              <div class="tier-bonus-text">
+                <strong>Sistema desplegado y funcional</strong>
+                <span>M&eacute;tricas de adopci&oacute;n y ahorro medibles desde semana 1. Escalable a otros manuales, equipos y departamentos</span>
+              </div>
+            </div>
+          </div>
+          <a href="#contacto" class="tier-cta">Explorar este proyecto</a>
         </div>
       </div>
     </div>
@@ -700,19 +791,19 @@
       </div>
       <div class="roi-grid stagger">
         <div class="roi-card glass reveal">
-          <div class="roi-value">D&iacute;a 1</div>
-          <div class="roi-label">Cada ingeniero tiene un mapa de sus procesos con las oportunidades de IA de mayor impacto identificadas</div>
-          <div class="roi-math">Diagn&oacute;stico + priorizaci&oacute;n</div>
+          <div class="roi-value">2&ndash;4 hrs</div>
+          <div class="roi-label">Ahorro semanal estimado por ingeniero en consulta de est&aacute;ndares, compilaci&oacute;n de documentos y preparaci&oacute;n de datos</div>
+          <div class="roi-math">Estimado conservador en tareas repetitivas</div>
         </div>
         <div class="roi-card glass reveal">
-          <div class="roi-value">D&iacute;a 2</div>
-          <div class="roi-label">Cada ingeniero tiene templates y automatizaciones funcionando para sus procesos prioritarios</div>
-          <div class="roi-math">Herramientas listas para producci&oacute;n</div>
+          <div class="roi-value">1,000&ndash;2,000</div>
+          <div class="roi-label">Horas anuales de capacidad recuperada para el equipo &mdash; tiempo que hoy se gasta en buscar, copiar, formatear y cargar datos a mano</div>
+          <div class="roi-math">8&ndash;15 ingenieros &times; 2&ndash;4 hrs &times; 50 semanas</div>
         </div>
         <div class="roi-card glass reveal">
-          <div class="roi-value">Semana 1</div>
-          <div class="roi-label">Ahorro de tiempo medible vs. la l&iacute;nea base registrada en el workshop</div>
-          <div class="roi-math">ROI cuantificable &mdash; no estimados</div>
+          <div class="roi-value">&lt; 1 mes</div>
+          <div class="roi-label">Tiempo estimado para recuperar la inversi&oacute;n del workshop en horas-ingeniero ahorradas</div>
+          <div class="roi-math">Medimos con l&iacute;nea base real del D&iacute;a 2</div>
         </div>
       </div>
     </div>
@@ -724,54 +815,40 @@
   <section>
     <div class="container">
       <div class="section-header reveal">
-        <span class="label">Sobre el facilitador</span>
-        <h2>Experiencia aplicada, no teor&iacute;a</h2>
+        <span class="label">Qui&eacute;n lo imparte</span>
+        <h2>Tecnolog&iacute;a aplicada a<br>problemas reales</h2>
       </div>
-      <div class="about-content glass reveal">
-        <div>
-          <h3>Ra&uacute;l Zhou</h3>
-          <p>Consultor de tecnolog&iacute;a e inteligencia artificial especializado en equipos de ingenier&iacute;a y operaciones. Trabajo con plantas de manufactura para resolver cuellos de botella operativos &mdash; reconciliaci&oacute;n de datos, documentaci&oacute;n, estandarizaci&oacute;n de procesos &mdash; usando IA como herramienta, no como fin.</p>
-          <p>No doy cursos gen&eacute;ricos. Cada workshop se construye alrededor de los procesos, datos y herramientas reales del equipo.</p>
-          <p style="margin-top:1rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">Guadalajara, MX &middot; Disponible presencial en Monterrey</p>
+      <div class="about-header-card glass reveal">
+        <div class="about-name">Ra&uacute;l Zhou</div>
+        <div class="about-title">Ingeniero de IA &middot; Consultor de Tecnolog&iacute;a Aplicada</div>
+        <p class="about-bio">Trabajo con equipos de ingenier&iacute;a en manufactura que necesitan resultados reales con IA &mdash; no demos bonitos. Mi enfoque: diagnosticar d&oacute;nde est&aacute; el cuello de botella, dise&ntilde;ar la soluci&oacute;n m&aacute;s simple que lo resuelve, e implementarla sobre la infraestructura que ya tienen.</p>
+        <p class="about-bio"><strong>Cada workshop se construye sobre un diagn&oacute;stico real de los procesos del equipo</strong> &mdash; no sobre slides gen&eacute;ricos.</p>
+        <div class="about-location">Guadalajara, MX &middot; Disponible presencial en Monterrey</div>
+      </div>
+      <div class="section-header reveal" style="margin-top:3rem;">
+        <span class="label">Proyectos abordables</span>
+        <h2>MVPs que construyo con equipos<br>de ingenier&iacute;a</h2>
+      </div>
+      <div class="cap-grid stagger">
+        <div class="cap-card glass reveal">
+          <h4>Consulta inteligente de manuales t&eacute;cnicos</h4>
+          <p>En vez de buscar manualmente en documentaci&oacute;n t&eacute;cnica extensa, el equipo pregunta en lenguaje natural y obtiene la respuesta con la referencia exacta. Desplegado dentro de su infraestructura enterprise.</p>
+          <div class="cap-stack">RAG &middot; Azure AI &middot; Embeddings &middot; NLP/PLN</div>
         </div>
-        <div>
-          <div class="tech-category">
-            <div class="tech-category-label">Modelos &amp; Plataformas</div>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
-              <span class="tech-tag">OpenAI GPT-5</span>
-              <span class="tech-tag">Claude / Anthropic</span>
-              <span class="tech-tag">Azure AI</span>
-              <span class="tech-tag">Hugging Face</span>
-            </div>
-          </div>
-          <div class="tech-category">
-            <div class="tech-category-label">Ingenier&iacute;a de IA</div>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
-              <span class="tech-tag">RAG Pipelines</span>
-              <span class="tech-tag">Fine-tuning</span>
-              <span class="tech-tag">NLP / PLN</span>
-              <span class="tech-tag">Prompt Engineering</span>
-              <span class="tech-tag">AI Agents</span>
-            </div>
-          </div>
-          <div class="tech-category">
-            <div class="tech-category-label">Automatizaci&oacute;n &amp; Orquestaci&oacute;n</div>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
-              <span class="tech-tag">LangGraph</span>
-              <span class="tech-tag">CrewAI</span>
-              <span class="tech-tag">n8n</span>
-              <span class="tech-tag">Power Automate</span>
-            </div>
-          </div>
-          <div class="tech-category">
-            <div class="tech-category-label">Enterprise &amp; Datos</div>
-            <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
-              <span class="tech-tag">Microsoft Copilot</span>
-              <span class="tech-tag">SAP / ERPs</span>
-              <span class="tech-tag">Data Engineering</span>
-              <span class="tech-tag">Integraci&oacute;n de sistemas</span>
-            </div>
-          </div>
+        <div class="cap-card glass reveal">
+          <h4>An&aacute;lisis automatizado de listas de materiales</h4>
+          <p>Extraer dimensiones, pesos, cantidades y operaciones de un BOM completo en minutos en vez de horas. Datos listos para cargar al ERP o para cotizaci&oacute;n.</p>
+          <div class="cap-stack">OpenAI GPT-5 &middot; Copilot &middot; Data Engineering</div>
+        </div>
+        <div class="cap-card glass reveal">
+          <h4>Generaci&oacute;n asistida de documentaci&oacute;n t&eacute;cnica</h4>
+          <p>Borradores de instrucciones de operaci&oacute;n, reportes y hojas t&eacute;cnicas generados a partir de datos existentes. El ingeniero revisa y aprueba en vez de escribir desde cero.</p>
+          <div class="cap-stack">Claude &middot; Prompt Engineering &middot; Fine-tuning</div>
+        </div>
+        <div class="cap-card glass reveal">
+          <h4>Agentes que automatizan flujos repetitivos</h4>
+          <p>Sistemas que extraen datos del ERP, generan documentos, validan informaci&oacute;n contra est&aacute;ndares y notifican resultados &mdash; sin intervenci&oacute;n manual.</p>
+          <div class="cap-stack">AI Agents &middot; Power Automate &middot; SAP / ERPs</div>
         </div>
       </div>
     </div>
@@ -824,26 +901,6 @@
       hero.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
     }
 
-    // Counter animation
-    const counters = document.querySelectorAll('.counter');
-    const counterObs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = parseInt(el.dataset.target);
-        const dur = 1200;
-        const start = performance.now();
-        const animate = (now) => {
-          const progress = Math.min((now - start) / dur, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          el.textContent = Math.round(eased * target);
-          if (progress < 1) requestAnimationFrame(animate);
-        };
-        requestAnimationFrame(animate);
-        counterObs.unobserve(el);
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(c => counterObs.observe(c));
   </script>
 </body>
 </html>
