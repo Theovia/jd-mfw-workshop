@@ -8,10 +8,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #fafafa;
+      --bg-primary: #f4f4f5;
       --bg-elevated: #ffffff;
-      --glass-bg: rgba(255,255,255,0.7);
-      --glass-border: rgba(0,0,0,0.06);
+      --glass-bg: #ffffff;
+      --glass-border: rgba(0,0,0,0.1);
       --glass-highlight: rgba(255,255,255,0.8);
       --text-primary: #111118;
       --text-secondary: #52525b;
@@ -19,16 +19,16 @@
       --text-ghost: #c4c4cc;
       --accent: #0a8f4f;
       --accent-soft: #0b7d46;
-      --accent-glow: rgba(10,143,79,0.15);
-      --accent-bg: rgba(10,143,79,0.05);
-      --accent-border: rgba(10,143,79,0.15);
+      --accent-glow: rgba(10,143,79,0.18);
+      --accent-bg: rgba(10,143,79,0.08);
+      --accent-border: rgba(10,143,79,0.22);
       --tier2: #0284c7;
-      --tier2-glow: rgba(2,132,199,0.12);
-      --tier2-bg: rgba(2,132,199,0.04);
-      --tier2-border: rgba(2,132,199,0.15);
+      --tier2-glow: rgba(2,132,199,0.15);
+      --tier2-bg: rgba(2,132,199,0.06);
+      --tier2-border: rgba(2,132,199,0.22);
       --red: #dc2626;
-      --red-bg: rgba(220,38,38,0.04);
-      --red-border: rgba(220,38,38,0.12);
+      --red-bg: rgba(220,38,38,0.06);
+      --red-border: rgba(220,38,38,0.18);
       --font-display: 'Manrope', sans-serif;
       --font-body: 'Inter', system-ui, sans-serif;
       --font-mono: 'JetBrains Mono', 'Courier New', monospace;
@@ -48,7 +48,7 @@
     /* Grain */
     body::before {
       content: ''; position: fixed; inset: 0;
-      opacity: 0.025; pointer-events: none; z-index: 99;
+      opacity: 0.04; pointer-events: none; z-index: 99;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
     /* Grid */
@@ -56,8 +56,8 @@
       content: ''; position: fixed; inset: 0;
       pointer-events: none; z-index: -1;
       background-image:
-        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
+        linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
       background-size: 80px 80px;
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 4rem); }
@@ -67,7 +67,7 @@
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.06);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 24px rgba(0,0,0,0.08);
     }
     @media (min-width: 769px) {
       .glass { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
@@ -90,7 +90,7 @@
     /* NAV */
     nav {
       padding: 1.15rem 0;
-      background: rgba(250,250,250,0.85);
+      background: rgba(244,244,245,0.88);
       border-bottom: 1px solid var(--glass-border);
     }
     @media (min-width: 769px) {
@@ -109,7 +109,11 @@
     }
     .nav-links a:hover { color: var(--text-primary); }
     .nav-links a:hover::after { width: 100%; }
-    @media (max-width: 768px) { .nav-links { display: none; } }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      nav { padding: 0.85rem 0; }
+      nav .container { justify-content: center; }
+    }
 
     /* HERO */
     .hero {
@@ -125,13 +129,13 @@
     }
     .hero-glow-1 {
       top: -15%; left: -10%; width: 500px; height: 500px;
-      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-      opacity: 0.1; animation: drift 12s ease-in-out infinite;
+      background: radial-gradient(circle, rgba(10,143,79,0.35) 0%, transparent 70%);
+      opacity: 0.18; animation: drift 12s ease-in-out infinite;
     }
     .hero-glow-2 {
       bottom: 10%; right: -5%; width: 350px; height: 350px;
-      background: radial-gradient(circle, rgba(0,184,230,0.2) 0%, transparent 70%);
-      opacity: 0.06; animation: drift 15s ease-in-out infinite reverse;
+      background: radial-gradient(circle, rgba(2,132,199,0.3) 0%, transparent 70%);
+      opacity: 0.12; animation: drift 15s ease-in-out infinite reverse;
     }
     /* Mouse glow */
     .hero-mouse-glow {
@@ -160,8 +164,11 @@
       animation: fade-up 0.8s var(--ease-out-expo) 0.1s both;
     }
     .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--tier2) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(10,143,79,0.2);
+      text-underline-offset: 0.1em;
+      text-decoration-thickness: 0.08em;
     }
     .hero .subtitle {
       font-size: clamp(1.02rem, 2.5vw, 1.22rem); color: var(--text-secondary);
@@ -178,10 +185,10 @@
       color: #ffffff; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem;
       text-decoration: none; border-radius: 14px; letter-spacing: -0.01em;
       transition: all 0.4s var(--ease-spring);
-      box-shadow: 0 0 30px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 0 30px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.08);
       animation: fade-up 0.8s var(--ease-out-expo) 0.3s both;
     }
-    .cta-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 50px var(--accent-glow), 0 8px 24px rgba(0,0,0,0.4); }
+    .cta-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 50px var(--accent-glow), 0 8px 24px rgba(0,0,0,0.12); }
 
     /* Stats */
     .hero-stats {
@@ -194,19 +201,20 @@
       color: var(--accent); line-height: 1;
     }
     .hero-stat-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.35rem; letter-spacing: 0.01em; }
+    @media (max-width: 480px) { .hero-stats { flex-direction: column; gap: 1.5rem; } }
 
     @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
     /* EXEC SUMMARY */
     .exec-summary {
       padding: 2rem 2rem 2rem 2.25rem;
-      border-left: 2px solid var(--accent);
+      border-left: none;
       margin-top: 3.5rem;
       animation: fade-up 0.8s var(--ease-out-expo) 0.5s both;
       position: relative;
     }
     .exec-summary::before {
-      content: ''; position: absolute; top: 0; left: -1px; width: 2px; height: 100%;
+      content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%;
       background: linear-gradient(180deg, var(--accent), transparent);
     }
     .exec-summary .exec-title {
@@ -233,8 +241,8 @@
     }
     .pain-card:hover { border-color: var(--red-border); background: var(--red-bg); transform: translateY(-4px); }
     .pain-card::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%;
-      background: linear-gradient(180deg, var(--red), transparent);
+      content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+      background: linear-gradient(180deg, var(--red), transparent); border-radius: 3px 0 0 0;
     }
     .pain-icon {
       width: 40px; height: 40px; border-radius: 12px;
@@ -321,7 +329,7 @@
     .tier-features { list-style: none; flex: 1; }
     .tier-features li {
       padding: 0.55rem 0; font-size: 0.88rem; color: var(--text-secondary);
-      border-bottom: 1px solid rgba(0,0,0,0.04);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
       display: flex; align-items: flex-start; gap: 0.65rem;
     }
     .tier-features li::before { content: '\203A'; color: var(--accent); font-family: var(--font-mono); font-weight: 600; flex-shrink: 0; }
@@ -344,13 +352,13 @@
     .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
     .roi-card { padding: 2rem; text-align: center; transition: all 0.5s var(--ease-out-expo); }
     .roi-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
-    .roi-value { font-family: var(--font-mono); font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .roi-value { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 600; color: var(--accent); line-height: 1; }
     .roi-label { color: var(--text-secondary); font-size: 0.82rem; margin-top: 0.5rem; line-height: 1.5; }
     .roi-math { color: var(--text-muted); font-size: 0.68rem; font-family: var(--font-mono); margin-top: 0.3rem; }
 
     /* ABOUT */
-    .about-content { padding: 2.5rem; }
-    @media (max-width: 768px) { .about-content[style] { display:block !important; } }
+    .about-content { padding: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 768px) { .about-content { grid-template-columns: 1fr !important; } }
     .tech-tag {
       display: inline-block; padding: 0.3rem 0.7rem; border-radius: 8px;
       font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500;
@@ -379,9 +387,9 @@
     .final-cta { text-align: center; padding: clamp(5rem, 12vw, 9rem) 0; position: relative; }
     .final-cta::before {
       content: ''; position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%); width: 450px; height: 450px;
-      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-      opacity: 0.06; filter: blur(80px);
+      transform: translate(-50%, -50%); width: 550px; height: 550px;
+      background: radial-gradient(circle, rgba(10,143,79,0.25) 0%, transparent 70%);
+      opacity: 0.15; filter: blur(80px);
     }
     .final-cta h2 {
       font-family: var(--font-display); font-size: clamp(1.8rem, 4.5vw, 3.2rem);
@@ -399,7 +407,7 @@
     .contact-item a:hover { color: var(--accent); }
 
     footer { padding: 2rem 0; border-top: 1px solid var(--glass-border); text-align: center; }
-    footer p { font-size: 0.65rem; color: var(--text-ghost); font-family: var(--font-mono); letter-spacing: 0.05em; }
+    footer p { font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.05em; }
 
     /* REVEAL */
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
@@ -534,9 +542,9 @@
           <p>La infraestructura existe &mdash; cada ingeniero tiene acceso a Copilot en Excel, Word y PowerPoint. Solo necesitan aprender a usarlo.</p>
         </div>
         <div class="why-card glass reveal">
-          <div class="why-number">2026</div>
-          <h3>AI dej&oacute; de ser opcional</h3>
-          <p>Las empresas que no capacitan a sus equipos en AI est&aacute;n perdiendo ventaja competitiva cada trimestre que pasa.</p>
+          <div class="why-number">80%</div>
+          <h3>Del tiempo es operativo</h3>
+          <p>En la mayor&iacute;a de las plantas, los ingenieros dedican m&aacute;s tiempo a tareas repetitivas que a ingenier&iacute;a real. AI libera ese tiempo para trabajo de mayor valor.</p>
         </div>
         <div class="why-card glass reveal">
           <div class="why-number">&darr;</div>
@@ -571,11 +579,10 @@
         <div class="ws-box glass">
           <h3>Para qui&eacute;n es</h3>
           <ul>
-            <li>10 ingenieros del equipo MFW</li>
+            <li>Equipos de ingenier&iacute;a de manufactura</li>
             <li>No requiere experiencia previa en AI</li>
-            <li>70% Ingenier&iacute;a Industrial</li>
-            <li>20% Mecatr&oacute;nica, 10% Mec&aacute;nica</li>
-            <li>Herramientas: Copilot, Excel, SAP, CREO</li>
+            <li>Perfiles t&eacute;cnicos con uso diario de Excel y ERP</li>
+            <li>Ideal para equipos de 8&ndash;15 personas</li>
           </ul>
         </div>
       </div>
@@ -642,7 +649,7 @@
           <div class="tier-badge">Fase 2</div>
           <div class="tier-name">Implementaci&oacute;n + Seguimiento</div>
           <div class="tier-desc">Despu&eacute;s del workshop, acompa&ntilde;amiento continuo para que las herramientas se adopten de verdad. Se define bas&aacute;ndose en lo aprendido en la Fase 1.</div>
-          <div class="tier-price">A definir</div>
+          <div class="tier-price" style="font-size:1.6rem;color:var(--text-muted);font-weight:500;">A definir</div>
           <div class="tier-note">Se propone despu&eacute;s del workshop &middot; Sin compromiso</div>
           <ul class="tier-features">
             <li>Todo lo del workshop como base</li>
@@ -669,17 +676,17 @@
       </div>
       <div class="roi-grid stagger">
         <div class="roi-card glass reveal">
-          <div class="roi-value" style="font-size:1.8rem;">Baseline</div>
+          <div class="roi-value">Baseline</div>
           <div class="roi-label">Medimos cu&aacute;nto tiempo toman los procesos hoy</div>
           <div class="roi-math">D&iacute;a 1 del workshop</div>
         </div>
         <div class="roi-card glass reveal">
-          <div class="roi-value" style="font-size:1.8rem;">Mejora</div>
+          <div class="roi-value">Mejora</div>
           <div class="roi-label">El equipo resuelve los mismos procesos con AI</div>
           <div class="roi-math">D&iacute;a 2 del workshop</div>
         </div>
         <div class="roi-card glass reveal">
-          <div class="roi-value" style="font-size:1.8rem;">Datos reales</div>
+          <div class="roi-value">Datos reales</div>
           <div class="roi-label">El equipo ve la diferencia con sus propios n&uacute;meros</div>
           <div class="roi-math">No estimados &mdash; medidos</div>
         </div>
@@ -696,30 +703,24 @@
         <span class="label">Sobre el facilitador</span>
         <h2>Experiencia aplicada, no teor&iacute;a</h2>
       </div>
-      <div class="about-content glass reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;">
+      <div class="about-content glass reveal">
         <div>
           <h3>Ra&uacute;l Zhou</h3>
-          <p>Consultor de tecnolog&iacute;a e inteligencia artificial. Dise&ntilde;o e implemento soluciones de AI para equipos de ingenier&iacute;a y operaciones &mdash; desde la estrategia hasta la ejecuci&oacute;n t&eacute;cnica.</p>
+          <p>Consultor de tecnolog&iacute;a e inteligencia artificial especializado en equipos de ingenier&iacute;a y operaciones. Trabajo con plantas de manufactura para resolver cuellos de botella operativos &mdash; reconciliaci&oacute;n de datos, documentaci&oacute;n, estandarizaci&oacute;n de procesos &mdash; usando AI como herramienta, no como fin.</p>
           <p>No doy cursos gen&eacute;ricos. Cada workshop se construye alrededor de los procesos, datos y herramientas reales del equipo.</p>
           <p style="margin-top:1rem;font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">Guadalajara, MX &middot; Disponible presencial en Monterrey</p>
         </div>
         <div>
-          <h3 style="color:var(--text-primary);">Stack &amp; Expertise</h3>
+          <h3>Stack &amp; Expertise</h3>
           <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;">
-            <span class="tech-tag">OpenAI / GPT-4</span>
-            <span class="tech-tag">Claude / Anthropic</span>
             <span class="tech-tag">Microsoft Copilot</span>
             <span class="tech-tag">Azure AI</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">LangChain</span>
-            <span class="tech-tag">RAG Pipelines</span>
-            <span class="tech-tag">Prompt Engineering</span>
-            <span class="tech-tag">Next.js / React</span>
-            <span class="tech-tag">FastAPI</span>
-            <span class="tech-tag">n8n / Automaciones</span>
             <span class="tech-tag">SAP Integration</span>
             <span class="tech-tag">Power Automate</span>
+            <span class="tech-tag">Prompt Engineering</span>
             <span class="tech-tag">Data Analysis</span>
+            <span class="tech-tag">Automatizaciones</span>
+            <span class="tech-tag">OpenAI / GPT-4</span>
           </div>
         </div>
       </div>
@@ -730,8 +731,8 @@
   <section id="contacto" class="final-cta">
     <div class="container">
       <span class="label reveal">Siguiente paso</span>
-      <h2 class="reveal">30 minutos con el equipo<br>de <span style="color:var(--accent);">decisi&oacute;n</span></h2>
-      <p class="reveal">Agendamos una sesi&oacute;n corta para presentar la propuesta, responder preguntas, y definir juntos si hay fit. Sin compromiso.</p>
+      <h2 class="reveal">Agenda 30 minutos y<br><span style="color:var(--accent);">resolvemos tus dudas</span></h2>
+      <p class="reveal">Una llamada corta para responder preguntas, revisar la propuesta, y definir si tiene sentido avanzar. Sin compromiso.</p>
       <a href="https://wa.me/5213314397921?text=Hola%20Ra%C3%BAl%2C%20me%20interesa%20la%20propuesta%20del%20workshop%20AI%20para%20MFW" class="cta-primary reveal">Escribir por WhatsApp &#8594;</a>
       <div class="contact-info reveal">
         <div class="contact-item">
