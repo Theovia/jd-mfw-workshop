@@ -299,9 +299,9 @@
     }
 
     /* PRICING */
-    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; }
     @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
-    .tier-card { padding: 2.5rem; position: relative; transition: all 0.5s var(--ease-out-expo); }
+    .tier-card { padding: 2.5rem; position: relative; transition: all 0.5s var(--ease-out-expo); display: flex; flex-direction: column; }
     .tier-card:hover { transform: translateY(-4px); }
     .tier-card.t2 { border-color: var(--tier2-border); }
     .tier-card.t2:hover { box-shadow: 0 8px 40px rgba(0,184,230,0.08); }
@@ -318,7 +318,7 @@
     .tier-card:not(.t2) .tier-price { color: var(--accent); }
     .tier-card.t2 .tier-price { color: var(--tier2); }
     .tier-note { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.75rem; }
-    .tier-features { list-style: none; }
+    .tier-features { list-style: none; flex: 1; }
     .tier-features li {
       padding: 0.55rem 0; font-size: 0.88rem; color: var(--text-secondary);
       border-bottom: 1px solid rgba(0,0,0,0.04);
@@ -471,7 +471,7 @@
         <p>
           <strong>Contexto:</strong> En equipos de ingenier&iacute;a de manufactura, los procesos operativos &mdash; reconciliaci&oacute;n de datos, documentaci&oacute;n, cotizaciones &mdash; suelen absorber m&aacute;s tiempo del necesario. Son exactamente el tipo de tareas donde AI genera retorno inmediato.<br>
           <strong>Soluci&oacute;n:</strong> Workshop de 2 d&iacute;as (1 presencial en Monterrey + 1 remoto). D&iacute;a 1: framework de resoluci&oacute;n de problemas con AI. D&iacute;a 2: aplicaci&oacute;n directa con las herramientas y procesos del equipo.<br>
-          <strong>Inversi&oacute;n:</strong> $95,000 MXN + IVA &mdash; equipo completo de 10 ingenieros.<br>
+          <strong>Inversi&oacute;n:</strong> $9,500 MXN + IVA por persona (10 participantes = $95,000 MXN + IVA).<br>
           <strong>Resultado:</strong> El equipo adquiere un m&eacute;todo estructurado para identificar oportunidades de AI en sus flujos de trabajo y aplicarlas con las herramientas que ya tienen. Incluye medici&oacute;n de baseline para cuantificar impacto real.
         </p>
       </div>
@@ -616,8 +616,8 @@
           <div class="tier-badge">Workshop</div>
           <div class="tier-name">Capacitaci&oacute;n AI Aplicada</div>
           <div class="tier-desc">1 d&iacute;a presencial en Monterrey + 1 d&iacute;a remoto. Tu equipo aprende a usar AI con las herramientas que ya tienen.</div>
-          <div class="tier-price">$95,000 <span style="font-size:0.38em;color:var(--text-muted);font-weight:500;">MXN</span></div>
-          <div class="tier-note">+ IVA &middot; Equipo completo de 10 ingenieros</div>
+          <div class="tier-price">$9,500 <span style="font-size:0.38em;color:var(--text-muted);font-weight:500;">MXN + IVA / persona</span></div>
+          <div class="tier-note">10 participantes &middot; $95,000 MXN + IVA total</div>
           <ul class="tier-features">
             <li>1 d&iacute;a presencial + 1 d&iacute;a remoto (8h cada uno)</li>
             <li>Fundamentos de AI + prompt engineering</li>
