@@ -8,27 +8,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #050508;
-      --bg-elevated: #0b0b10;
-      --glass-bg: rgba(255,255,255,0.025);
-      --glass-border: rgba(255,255,255,0.06);
-      --glass-highlight: rgba(255,255,255,0.04);
-      --text-primary: #ededf0;
-      --text-secondary: #9d9daa;
-      --text-muted: #64647a;
-      --text-ghost: #35354a;
-      --accent: #00d474;
-      --accent-soft: #00b86a;
-      --accent-glow: rgba(0,212,116,0.3);
-      --accent-bg: rgba(0,212,116,0.06);
-      --accent-border: rgba(0,212,116,0.15);
-      --tier2: #00b8e6;
-      --tier2-glow: rgba(0,184,230,0.25);
-      --tier2-bg: rgba(0,184,230,0.06);
-      --tier2-border: rgba(0,184,230,0.15);
-      --red: #ff5555;
-      --red-bg: rgba(255,85,85,0.06);
-      --red-border: rgba(255,85,85,0.15);
+      --bg-primary: #fafafa;
+      --bg-elevated: #ffffff;
+      --glass-bg: rgba(255,255,255,0.7);
+      --glass-border: rgba(0,0,0,0.06);
+      --glass-highlight: rgba(255,255,255,0.8);
+      --text-primary: #111118;
+      --text-secondary: #52525b;
+      --text-muted: #8b8b99;
+      --text-ghost: #c4c4cc;
+      --accent: #0a8f4f;
+      --accent-soft: #0b7d46;
+      --accent-glow: rgba(10,143,79,0.15);
+      --accent-bg: rgba(10,143,79,0.05);
+      --accent-border: rgba(10,143,79,0.15);
+      --tier2: #0284c7;
+      --tier2-glow: rgba(2,132,199,0.12);
+      --tier2-bg: rgba(2,132,199,0.04);
+      --tier2-border: rgba(2,132,199,0.15);
+      --red: #dc2626;
+      --red-bg: rgba(220,38,38,0.04);
+      --red-border: rgba(220,38,38,0.12);
       --font-display: 'Manrope', sans-serif;
       --font-body: 'Inter', system-ui, sans-serif;
       --font-mono: 'JetBrains Mono', 'Courier New', monospace;
@@ -48,7 +48,7 @@
     /* Grain */
     body::before {
       content: ''; position: fixed; inset: 0;
-      opacity: 0.018; pointer-events: none; z-index: 99;
+      opacity: 0.025; pointer-events: none; z-index: 99;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
     /* Grid */
@@ -56,8 +56,8 @@
       content: ''; position: fixed; inset: 0;
       pointer-events: none; z-index: -1;
       background-image:
-        linear-gradient(rgba(255,255,255,0.008) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.008) 1px, transparent 1px);
+        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
       background-size: 80px 80px;
     }
     .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 4rem); }
@@ -67,13 +67,13 @@
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
-      box-shadow: inset 0 1px 0 var(--glass-highlight), 0 4px 24px rgba(0,0,0,0.2);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 24px rgba(0,0,0,0.06);
     }
     @media (min-width: 769px) {
       .glass { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
     }
     @media (max-width: 768px) {
-      .glass { background: rgba(14,14,20,0.94); }
+      .glass { background: rgba(255,255,255,0.85); }
     }
 
     .label {
@@ -90,7 +90,7 @@
     /* NAV */
     nav {
       padding: 1.15rem 0;
-      background: rgba(5,5,8,0.85);
+      background: rgba(250,250,250,0.85);
       border-bottom: 1px solid var(--glass-border);
     }
     @media (min-width: 769px) {
@@ -174,8 +174,8 @@
     .cta-primary {
       display: inline-flex; align-items: center; gap: 0.5rem;
       padding: 1rem 2rem;
-      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-      color: #071a0e; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem;
+      background: linear-gradient(135deg, var(--accent), #06753d);
+      color: #ffffff; font-family: var(--font-display); font-weight: 700; font-size: 0.88rem;
       text-decoration: none; border-radius: 14px; letter-spacing: -0.01em;
       transition: all 0.4s var(--ease-spring);
       box-shadow: 0 0 30px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.3);
@@ -311,7 +311,7 @@
       letter-spacing: 0.12em; margin-bottom: 1.25rem;
     }
     .tier-card:not(.t2) .tier-badge { background: var(--accent-bg); border: 1px solid var(--accent-border); color: var(--accent); }
-    .tier-card.t2 .tier-badge { background: var(--tier2); color: #000; }
+    .tier-card.t2 .tier-badge { background: var(--tier2); color: #fff; }
     .tier-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
     .tier-desc { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.5rem; line-height: 1.55; }
     .tier-price { font-family: var(--font-mono); font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: -0.02em; }
@@ -321,7 +321,7 @@
     .tier-features { list-style: none; }
     .tier-features li {
       padding: 0.55rem 0; font-size: 0.88rem; color: var(--text-secondary);
-      border-bottom: 1px solid rgba(255,255,255,0.025);
+      border-bottom: 1px solid rgba(0,0,0,0.04);
       display: flex; align-items: flex-start; gap: 0.65rem;
     }
     .tier-features li::before { content: '\203A'; color: var(--accent); font-family: var(--font-mono); font-weight: 600; flex-shrink: 0; }
@@ -335,8 +335,8 @@
     .tier-card:not(.t2) .tier-cta { border: 1px solid var(--accent-border); color: var(--accent); }
     .tier-card:not(.t2) .tier-cta:hover { background: var(--accent-bg); transform: translateY(-2px); }
     .tier-card.t2 .tier-cta {
-      background: linear-gradient(135deg, var(--tier2), #009dd4);
-      color: #000; box-shadow: 0 0 30px var(--tier2-glow);
+      background: linear-gradient(135deg, var(--tier2), #0369a1);
+      color: #fff; box-shadow: 0 0 30px var(--tier2-glow);
     }
     .tier-card.t2 .tier-cta:hover { transform: translateY(-3px); box-shadow: 0 0 50px var(--tier2-glow); }
 
