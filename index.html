@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capacitaci&oacute;n AI para Ingenier&iacute;a MFW — John Deere Monterrey</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #060609;
+      --glass-bg: rgba(255,255,255,0.03);
+      --glass-border: rgba(255,255,255,0.07);
+      --text-primary: #f0f0f2;
+      --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
+      --text-ghost: #3f3f46;
+      --accent: #00d474;
+      --accent-glow: rgba(0,212,116,0.3);
+      --accent-bg: rgba(0,212,116,0.08);
+      --accent-border: rgba(0,212,116,0.2);
+      --tier2: #00b8e6;
+      --tier2-glow: rgba(0,184,230,0.25);
+      --tier2-bg: rgba(0,184,230,0.08);
+      --tier2-border: rgba(0,184,230,0.2);
+      --red: #ff5555;
+      --red-bg: rgba(255,85,85,0.08);
+      --red-border: rgba(255,85,85,0.2);
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Grain */
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      opacity: 0.02; pointer-events: none; z-index: 99;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    /* Grid */
+    body::after {
+      content: ''; position: fixed; inset: 0;
+      pointer-events: none; z-index: -1;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3.5rem); }
+    .glass {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+    }
+    /* Mobile: kill backdrop-filter for performance */
+    @media (min-width: 769px) {
+      .glass { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    }
+    @media (max-width: 768px) {
+      .glass { background: rgba(17,17,22,0.92); }
+    }
+    .label {
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent);
+    }
+
+    /* NAV */
+    nav {
+      padding: 1rem 0;
+      background: rgba(6,6,9,0.9);
+      border-bottom: 1px solid var(--glass-border);
+    }
+    @media (min-width: 769px) {
+      nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--accent); }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.8rem; font-weight: 500; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--text-primary); }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* HERO */
+    .hero {
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: clip;
+      padding: clamp(4rem, 10vw, 8rem) 0 clamp(3rem, 8vw, 6rem);
+    }
+    @media (min-width: 769px) { .hero { min-height: 100vh; padding-top: 8rem; } }
+    .hero::before {
+      content: ''; position: absolute; top: -20%; left: -15%; width: 55%; height: 55%;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      opacity: 0.12; filter: blur(80px);
+      animation: drift 10s ease-in-out infinite;
+    }
+    @keyframes drift { 0%,100% { transform: translate(0,0); } 50% { transform: translate(15px,-15px); } }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.45rem 0.9rem; border-radius: 100px;
+      border: 1px solid var(--accent-border); background: var(--accent-bg);
+      margin-bottom: 1.75rem; animation: fade-up 0.7s ease-out;
+    }
+    .hero-badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hero-badge span { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.05em; }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6.5vw, 4.5rem); font-weight: 700;
+      line-height: 1.08; letter-spacing: -0.03em; max-width: 800px;
+      animation: fade-up 0.7s ease-out 0.1s both;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--accent), var(--tier2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero .subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem); color: var(--text-secondary);
+      max-width: 580px; margin: 1.25rem 0 2rem;
+      font-weight: 300; line-height: 1.65;
+      animation: fade-up 0.7s ease-out 0.2s both;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.9rem 1.75rem;
+      background: linear-gradient(135deg, var(--accent), #00c06a);
+      color: #0a1a10; font-family: var(--font-display); font-weight: 600; font-size: 0.9rem;
+      text-decoration: none; border-radius: 12px;
+      transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      box-shadow: 0 0 25px var(--accent-glow);
+      animation: fade-up 0.7s ease-out 0.3s both;
+    }
+    .hero-cta:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 0 45px var(--accent-glow); }
+
+    .hero-stats {
+      display: flex; gap: clamp(1.5rem, 4vw, 3rem); margin-top: 3rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--glass-border);
+      animation: fade-up 0.7s ease-out 0.4s both; flex-wrap: wrap;
+    }
+    .hero-stat-value { font-family: var(--font-mono); font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 600; color: var(--accent); }
+    .hero-stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+    @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* EXEC SUMMARY */
+    .exec-summary {
+      padding: 1.75rem;
+      border-left: 3px solid var(--accent);
+      margin-top: 3rem;
+      animation: fade-up 0.7s ease-out 0.5s both;
+    }
+    .exec-summary .exec-title {
+      font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--accent); margin-bottom: 0.75rem;
+    }
+    .exec-summary p {
+      color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7;
+    }
+    .exec-summary strong { color: var(--text-primary); }
+
+    /* SECTIONS */
+    section { padding: clamp(3rem, 8vw, 6rem) 0; position: relative; }
+    section + section { border-top: 1px solid rgba(255,255,255,0.03); }
+    .section-header { margin-bottom: 2.5rem; }
+    .section-header h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 4vw, 2.75rem); font-weight: 700;
+      letter-spacing: -0.02em; margin-top: 0.6rem;
+    }
+
+    /* PAIN CARDS */
+    .pains-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; }
+    .pain-card { padding: 1.75rem; position: relative; overflow: hidden; transition: all 0.3s ease; }
+    .pain-card:hover { border-color: var(--red-border); background: var(--red-bg); }
+    .pain-card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+      background: linear-gradient(180deg, var(--red), transparent);
+    }
+    .pain-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--red-bg); border: 1px solid var(--red-border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-mono); font-size: 1rem; color: var(--red);
+      margin-bottom: 1rem; font-weight: 700;
+    }
+    .pain-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .pain-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
+    .pain-stat {
+      display: inline-block; margin-top: 0.75rem; padding: 0.3rem 0.65rem;
+      background: var(--red-bg); border: 1px solid var(--red-border);
+      border-radius: 8px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--red);
+    }
+
+    /* WHY NOW */
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; }
+    .why-card { padding: 1.75rem; transition: all 0.3s ease; }
+    .why-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+    .why-number { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 0.75rem; }
+    .why-card h3 { font-family: var(--font-display); font-size: 1.05rem; margin-bottom: 0.4rem; }
+    .why-card p { color: var(--text-secondary); font-size: 0.9rem; }
+
+    /* WORKSHOP */
+    .workshop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+    @media (max-width: 768px) { .workshop-grid { grid-template-columns: 1fr; } }
+    .ws-box { padding: 1.75rem; }
+    .ws-box h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--accent); }
+    .ws-box li {
+      color: var(--text-secondary); font-size: 0.95rem; padding: 0.35rem 0;
+      list-style: none; padding-left: 1.25rem; position: relative;
+    }
+    .ws-box li::before {
+      content: '>'; position: absolute; left: 0; color: var(--accent);
+      font-family: var(--font-mono); font-weight: 600;
+    }
+
+    /* DAY CARDS */
+    .days-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 768px) { .days-grid { grid-template-columns: 1fr; } }
+    .day-card { padding: 2rem; position: relative; }
+    .day-badge {
+      display: inline-block; padding: 0.3rem 0.7rem; border-radius: 8px;
+      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
+      background: var(--accent-bg); border: 1px solid var(--accent-border); color: var(--accent);
+    }
+    .day-card h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; margin-bottom: 0.75rem; }
+    .day-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 0.75rem; }
+    .day-topics { list-style: none; }
+    .day-topics li {
+      color: var(--text-secondary); font-size: 0.9rem; padding: 0.3rem 0;
+      padding-left: 1.25rem; position: relative;
+    }
+    .day-topics li::before {
+      content: '~'; position: absolute; left: 0; color: var(--accent);
+      font-family: var(--font-mono); font-weight: 600;
+    }
+
+    /* PRICING */
+    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+    @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
+    .tier-card { padding: 2rem; position: relative; }
+    .tier-card.t2 { border-color: var(--tier2-border); }
+    .tier-badge {
+      display: inline-block; padding: 0.3rem 0.7rem; border-radius: 6px;
+      font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.1em; margin-bottom: 1rem;
+    }
+    .tier-card:not(.t2) .tier-badge { background: var(--accent-bg); border: 1px solid var(--accent-border); color: var(--accent); }
+    .tier-card.t2 .tier-badge { background: var(--tier2); color: #000; }
+    .tier-name { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .tier-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem; line-height: 1.5; }
+    .tier-price { font-family: var(--font-mono); font-size: clamp(2.2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 0.2rem; }
+    .tier-card:not(.t2) .tier-price { color: var(--accent); }
+    .tier-card.t2 .tier-price { color: var(--tier2); }
+    .tier-note { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .tier-features { list-style: none; }
+    .tier-features li {
+      padding: 0.5rem 0; font-size: 0.9rem; color: var(--text-secondary);
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      display: flex; align-items: flex-start; gap: 0.6rem;
+    }
+    .tier-features li::before { content: '~'; color: var(--accent); font-family: var(--font-mono); font-weight: 600; flex-shrink: 0; }
+    .tier-card.t2 .tier-features li::before { color: var(--tier2); }
+    .tier-cta {
+      display: block; text-align: center; padding: 0.9rem; margin-top: 1.5rem;
+      border-radius: 12px; font-family: var(--font-display); font-weight: 600;
+      font-size: 0.9rem; text-decoration: none; transition: all 0.3s ease;
+    }
+    .tier-card:not(.t2) .tier-cta { border: 1px solid var(--accent-border); color: var(--accent); }
+    .tier-card:not(.t2) .tier-cta:hover { background: var(--accent-bg); }
+    .tier-card.t2 .tier-cta { background: var(--tier2); color: #000; box-shadow: 0 0 25px var(--tier2-glow); }
+    .tier-card.t2 .tier-cta:hover { transform: translateY(-2px); box-shadow: 0 0 40px var(--tier2-glow); }
+
+    /* ROI */
+    .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.25rem; }
+    .roi-card { padding: 1.75rem; text-align: center; }
+    .roi-value { font-family: var(--font-mono); font-size: 2.2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+    .roi-label { color: var(--text-secondary); font-size: 0.85rem; margin-top: 0.4rem; }
+    .roi-math { color: var(--text-muted); font-size: 0.7rem; font-family: var(--font-mono); margin-top: 0.2rem; }
+
+    /* ABOUT */
+    .about-content { padding: 2rem; }
+    .about-content h3 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 0.75rem; color: var(--accent); }
+    .about-content p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 0.75rem; }
+
+    /* QUOTE */
+    .quote-section { text-align: center; padding: clamp(3rem, 8vw, 5rem) 0; }
+    .quote-section blockquote {
+      font-family: var(--font-display); font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 400; color: var(--text-secondary); max-width: 700px; margin: 0 auto;
+      line-height: 1.5; font-style: italic;
+    }
+
+    /* FINAL CTA */
+    .final-cta { text-align: center; padding: clamp(4rem, 10vw, 7rem) 0; position: relative; }
+    .final-cta::before {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); width: 350px; height: 350px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+      opacity: 0.08; filter: blur(60px);
+    }
+    .final-cta h2 { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+    .final-cta p { color: var(--text-secondary); font-size: 1rem; margin-bottom: 2rem; max-width: 550px; margin-left: auto; margin-right: auto; }
+    .contact-info { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-top: 2.5rem; }
+    @media (max-width: 768px) { .contact-info { flex-direction: column; align-items: center; gap: 1rem; } }
+    .contact-item { text-align: center; }
+    .contact-item .cl { font-family: var(--font-mono); font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 0.2rem; }
+    .contact-item a { color: var(--text-primary); text-decoration: none; font-size: 0.9rem; }
+    .contact-item a:hover { color: var(--accent); }
+
+    footer { padding: 1.5rem 0; border-top: 1px solid var(--glass-border); text-align: center; }
+    footer p { font-size: 0.7rem; color: var(--text-ghost); font-family: var(--font-mono); }
+
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .stagger > .reveal:nth-child(2) { transition-delay: 0.08s; }
+    .stagger > .reveal:nth-child(3) { transition-delay: 0.16s; }
+    .stagger > .reveal:nth-child(4) { transition-delay: 0.24s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media print {
+      body::before, body::after, nav { display: none; }
+      section { padding: 1.5rem 0; break-inside: avoid; }
+      .hero { min-height: auto; padding: 1.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <div class="nav-logo">AI + Ingenier&iacute;a MFW</div>
+      <ul class="nav-links">
+        <li><a href="#contexto">Contexto</a></li>
+        <li><a href="#workshop">Workshop</a></li>
+        <li><a href="#inversion">Inversi&oacute;n</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <div class="dot"></div>
+        <span>Propuesta de Capacitaci&oacute;n 2026</span>
+      </div>
+
+      <h1>AI Aplicada a<br><span class="highlight">Ingenier&iacute;a de Manufactura</span></h1>
+
+      <p class="subtitle">
+        Tu equipo tiene las herramientas. Lo que falta es el pensamiento.
+        Ense&ntilde;amos a tus ingenieros a pensar con AI para resolver problemas reales
+        &mdash; desde el d&iacute;a uno.
+      </p>
+
+      <a href="#inversion" class="hero-cta">Ver propuesta &#8594;</a>
+
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-value">10</div>
+          <div class="hero-stat-label">Ingenieros</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">2 d&iacute;as</div>
+          <div class="hero-stat-label">Workshop presencial</div>
+        </div>
+        <div>
+          <div class="hero-stat-value">20-40%</div>
+          <div class="hero-stat-label">Ahorro estimado en tareas repetitivas</div>
+        </div>
+      </div>
+
+      <!-- EXECUTIVE SUMMARY — for Javier's boss -->
+      <div class="exec-summary glass">
+        <div class="exec-title">Resumen para la toma de decisi&oacute;n</div>
+        <p>
+          <strong>Problema:</strong> El equipo MFW dedica m&aacute;s de la mitad de su semana a tareas repetitivas (pagos MPP, creaci&oacute;n de OMS, RFQs manuales) que herramientas de AI ya pueden acelerar.<br>
+          <strong>Soluci&oacute;n:</strong> Workshop presencial de 2 d&iacute;as en Monterrey &mdash; D&iacute;a 1: fundamentos de AI y prompting aplicado. D&iacute;a 2: ejercicios pr&aacute;cticos con las herramientas reales del equipo (Copilot, Excel, SAP).<br>
+          <strong>Inversi&oacute;n:</strong> $95,000 MXN + IVA por el equipo completo de 10 ingenieros.<br>
+          <strong>Resultado esperado:</strong> El equipo desarrolla la capacidad de identificar y resolver problemas con AI usando las herramientas que ya tienen (Copilot E5). Incluye medici&oacute;n de baseline para cuantificar el impacto real.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAINS ===== -->
+  <section id="contexto">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">El contexto</span>
+        <h2>Cada semana, el equipo absorbe costos que se acumulan</h2>
+      </div>
+      <div class="pains-grid stagger">
+        <div class="pain-card glass reveal">
+          <div class="pain-icon">!</div>
+          <h3>Procesamiento de Pagos (MPP)</h3>
+          <p>El equipo dedica una parte significativa de su semana a verificar datos entre Excel y SAP, conciliar cifras y corregir errores manualmente. Es el proceso m&aacute;s tedioso del &aacute;rea y le quita capacidad al equipo para trabajo de mayor valor.</p>
+          <div class="pain-stat">Proceso m&aacute;s tedioso del &aacute;rea</div>
+        </div>
+        <div class="pain-card glass reveal">
+          <div class="pain-icon">#</div>
+          <h3>Creaci&oacute;n de OMS</h3>
+          <p>Las &oacute;rdenes de manufactura requieren compilaci&oacute;n manual: extraer datos, formatear, revisar. Es un proceso altamente repetible y estructurado &mdash; exactamente el tipo de tarea donde AI genera el mayor retorno.</p>
+          <div class="pain-stat">Altamente automatizable</div>
+        </div>
+        <div class="pain-card glass reveal">
+          <div class="pain-icon">?</div>
+          <h3>RFQs Sin Est&aacute;ndar</h3>
+          <p>Cada ingeniero estructura sus cotizaciones de manera diferente. Compras recibe formatos inconsistentes, proveedores piden aclaraciones, y se pierden d&iacute;as en ciclos de ida y vuelta que un template con AI elimina.</p>
+          <div class="pain-stat">Ciclos de revisi&oacute;n innecesarios</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WHY NOW ===== -->
+  <section>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">La oportunidad</span>
+        <h2>El equipo ya tiene las herramientas. Falta el conocimiento.</h2>
+      </div>
+      <div class="why-grid stagger">
+        <div class="why-card glass reveal">
+          <div class="why-number">M365 E5</div>
+          <h3>Copilot ya est&aacute; habilitado</h3>
+          <p>La infraestructura existe &mdash; cada ingeniero tiene acceso a Copilot en Excel, Word y PowerPoint. Solo necesitan aprender a usarlo.</p>
+        </div>
+        <div class="why-card glass reveal">
+          <div class="why-number">2026</div>
+          <h3>AI dej&oacute; de ser opcional</h3>
+          <p>Las empresas que no capacitan a sus equipos en AI est&aacute;n perdiendo ventaja competitiva cada trimestre que pasa.</p>
+        </div>
+        <div class="why-card glass reveal">
+          <div class="why-number">&darr;</div>
+          <h3>Curva de aprendizaje corta</h3>
+          <p>No es un curso de programaci&oacute;n. Las herramientas ya est&aacute;n instaladas &mdash; el equipo puede aplicar lo aprendido al d&iacute;a siguiente del workshop.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WORKSHOP ===== -->
+  <section id="workshop">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">El workshop</span>
+        <h2>2 d&iacute;as presenciales en Monterrey</h2>
+      </div>
+
+      <div class="workshop-grid reveal">
+        <div class="ws-box glass">
+          <h3>Qu&eacute; van a aprender</h3>
+          <ul>
+            <li>Identificar d&oacute;nde AI genera valor real en su trabajo</li>
+            <li>Prompt engineering: &ldquo;esto funciona mejor que esto&rdquo;</li>
+            <li>Evaluar cr&iacute;ticamente lo que AI devuelve</li>
+            <li>Aplicaciones pr&aacute;cticas en Excel, Word, PowerPoint</li>
+            <li>Templates listos para sus procesos del d&iacute;a a d&iacute;a</li>
+          </ul>
+        </div>
+        <div class="ws-box glass">
+          <h3>Para qui&eacute;n es</h3>
+          <ul>
+            <li>10 ingenieros del equipo MFW</li>
+            <li>No requiere experiencia previa en AI</li>
+            <li>70% Ingenier&iacute;a Industrial</li>
+            <li>20% Mecatr&oacute;nica, 10% Mec&aacute;nica</li>
+            <li>Herramientas: Copilot, Excel, SAP, CREO</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="days-grid reveal">
+        <div class="day-card glass">
+          <div class="day-badge">D&iacute;a 1 &mdash; Pensamiento + Herramientas</div>
+          <h4>Desarrollar el criterio para trabajar con AI</h4>
+          <p>No es solo aprender a usar una herramienta &mdash; es cambiar la forma de abordar problemas. El equipo aprende a identificar d&oacute;nde AI genera valor real, c&oacute;mo comunicarse con ella, y cu&aacute;ndo NO confiar en lo que devuelve.</p>
+          <ul class="day-topics">
+            <li>C&oacute;mo piensa un modelo de AI (intuici&oacute;n, no teor&iacute;a)</li>
+            <li>Mapeo de procesos: cada ingeniero identifica d&oacute;nde AI le pega m&aacute;s</li>
+            <li>Prompt engineering aplicado: &ldquo;esto funciona mejor que esto&rdquo;</li>
+            <li>Evaluaci&oacute;n cr&iacute;tica: cu&aacute;ndo confiar en AI y cu&aacute;ndo verificar</li>
+            <li>Copilot en acci&oacute;n: Excel, Word, PowerPoint con datos de manufactura</li>
+          </ul>
+        </div>
+        <div class="day-card glass">
+          <div class="day-badge">D&iacute;a 2 &mdash; Aplicaci&oacute;n</div>
+          <h4>Resolver problemas reales del equipo con AI</h4>
+          <p>Con lo aprendido en el D&iacute;a 1, los participantes trabajan con sus propios procesos y datos. Construimos juntos soluciones acotadas para los dolores m&aacute;s grandes del equipo.</p>
+          <ul class="day-topics">
+            <li>Ejercicios con procesos reales de MFW</li>
+            <li>Templates personalizados para MPP, OMS, RFQ</li>
+            <li>Automatizaciones pr&aacute;cticas con Copilot</li>
+            <li>Cada ingeniero sale con herramientas listas para usar</li>
+            <li>Sesi&oacute;n de preguntas + plan de seguimiento</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE ===== -->
+  <section class="quote-section">
+    <div class="container reveal">
+      <blockquote>
+        &ldquo;La diferencia entre un equipo que usa AI y uno que no, ya no es tecnolog&iacute;a &mdash; es conocimiento. Las herramientas ya est&aacute;n ah&iacute;.&rdquo;
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
+  <section id="inversion">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Inversi&oacute;n</span>
+        <h2>Empezar simple, escalar con resultados</h2>
+      </div>
+      <div class="pricing-grid reveal">
+        <!-- TIER 1 -->
+        <div class="tier-card glass">
+          <div class="tier-badge">Workshop</div>
+          <div class="tier-name">Capacitaci&oacute;n AI Aplicada</div>
+          <div class="tier-desc">2 d&iacute;as presenciales en Monterrey. Tu equipo aprende a usar AI con las herramientas que ya tienen.</div>
+          <div class="tier-price">$95,000 <span style="font-size:0.4em;color:var(--text-muted);">MXN</span></div>
+          <div class="tier-note">+ IVA &middot; Equipo completo de 10 ingenieros</div>
+          <ul class="tier-features">
+            <li>2 d&iacute;as presenciales (8h + 6h)</li>
+            <li>Fundamentos de AI + prompt engineering</li>
+            <li>Copilot aplicado: Excel, Word, PowerPoint</li>
+            <li>Ejercicios con procesos reales MFW</li>
+            <li>Templates listos para MPP, OMS, RFQ</li>
+            <li>Material de referencia para el equipo</li>
+            <li>30 d&iacute;as de soporte por email post-workshop</li>
+          </ul>
+          <a href="#contacto" class="tier-cta">Empezar con el workshop</a>
+        </div>
+        <!-- TIER 2 -->
+        <div class="tier-card glass t2">
+          <div class="tier-badge">Fase 2</div>
+          <div class="tier-name">Implementaci&oacute;n + Seguimiento</div>
+          <div class="tier-desc">Despu&eacute;s del workshop, acompa&ntilde;amiento continuo para que las herramientas se adopten de verdad. Se define bas&aacute;ndose en lo aprendido en la Fase 1.</div>
+          <div class="tier-price">A definir</div>
+          <div class="tier-note">Se propone despu&eacute;s del workshop &middot; Sin compromiso</div>
+          <ul class="tier-features">
+            <li>Todo lo del workshop como base</li>
+            <li>Sesiones de seguimiento semanales</li>
+            <li>Templates avanzados basados en datos reales</li>
+            <li>Soporte dedicado de implementaci&oacute;n</li>
+            <li>M&eacute;tricas de adopci&oacute;n y ahorro de tiempo</li>
+            <li>Escalable a otros equipos o departamentos</li>
+          </ul>
+          <a href="#contacto" class="tier-cta">Platicar sobre Fase 2</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ROI ===== -->
+  <section>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Retorno de inversi&oacute;n</span>
+        <h2>Medimos el impacto juntos</h2>
+      </div>
+      <div class="roi-grid stagger">
+        <div class="roi-card glass reveal">
+          <div class="roi-value" style="font-size:1.8rem;">Baseline</div>
+          <div class="roi-label">Medimos cu&aacute;nto tiempo toman los procesos hoy</div>
+          <div class="roi-math">D&iacute;a 1 del workshop</div>
+        </div>
+        <div class="roi-card glass reveal">
+          <div class="roi-value" style="font-size:1.8rem;">Mejora</div>
+          <div class="roi-label">El equipo resuelve los mismos procesos con AI</div>
+          <div class="roi-math">D&iacute;a 2 del workshop</div>
+        </div>
+        <div class="roi-card glass reveal">
+          <div class="roi-value" style="font-size:1.8rem;">Datos reales</div>
+          <div class="roi-label">El equipo ve la diferencia con sus propios n&uacute;meros</div>
+          <div class="roi-math">No estimados &mdash; medidos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section>
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="label">Sobre el facilitador</span>
+        <h2>Experiencia aplicada, no teor&iacute;a</h2>
+      </div>
+      <div class="about-content glass reveal">
+        <h3>Ra&uacute;l Zhou</h3>
+        <p>Consultor de tecnolog&iacute;a e inteligencia artificial con experiencia en implementaci&oacute;n de soluciones de AI para equipos de trabajo. Especializado en capacitaci&oacute;n pr&aacute;ctica &mdash; no cursos gen&eacute;ricos, sino workshops dise&ntilde;ados alrededor de los procesos reales del equipo.</p>
+        <p>Basado en Guadalajara. Disponible para presencial en Monterrey.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FINAL CTA ===== -->
+  <section id="contacto" class="final-cta">
+    <div class="container">
+      <span class="label reveal">Siguiente paso</span>
+      <h2 class="reveal">30 minutos con el equipo<br>de <span style="color:var(--accent);">decisi&oacute;n</span></h2>
+      <p class="reveal">Agendamos una sesi&oacute;n corta para presentar la propuesta, responder preguntas, y definir juntos si hay fit. Sin compromiso. Kickoff posible en marzo.</p>
+      <a href="https://wa.me/5213314397921?text=Hola%20Ra%C3%BAl%2C%20me%20interesa%20la%20propuesta%20del%20workshop%20AI%20para%20MFW" class="hero-cta reveal">Escribir por WhatsApp &#8594;</a>
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="cl">WhatsApp</div>
+          <a href="https://wa.me/5213314397921">+52 33 1439 7921</a>
+        </div>
+        <div class="contact-item">
+          <div class="cl">Email</div>
+          <a href="mailto:raul.chio.leon@gmail.com">raul.chio.leon@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>Confidencial &middot; Preparado para John Deere MFW Monterrey &middot; Marzo 2026</p>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>
