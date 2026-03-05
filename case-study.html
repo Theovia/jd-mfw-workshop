@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caso de Estudio: Migraci&oacute;n ERP + Inteligencia Operativa / Eigen Atlas</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23077d42'/><text x='16' y='22' font-size='18' fill='white' text-anchor='middle' font-family='sans-serif' font-weight='bold'>IA</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF9F6;
+      --bg-card: #ffffff;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.15);
+      --text: #1a1a1a;
+      --text-2: #4a4a4a;
+      --text-3: #888;
+      --green: #077d42;
+      --green-light: rgba(7,125,66,0.07);
+      --serif: 'Source Serif 4', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: var(--sans); font-size: 16px;
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      padding: 0.9rem 0;
+      background: rgba(250,249,246,0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    }
+    .nav-inner {
+      max-width: 920px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--text); text-decoration: none; }
+    .nav-back {
+      font-size: 0.82rem; color: var(--text-2); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--green); }
+
+    /* LAYOUT */
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 4rem 0; }
+
+    /* HERO */
+    .cs-hero {
+      padding: 6rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .cs-hero-label {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 600;
+      color: var(--green); text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 0.75rem;
+    }
+    .cs-hero h1 {
+      font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700; line-height: 1.2; letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .cs-hero p {
+      font-size: 1.05rem; color: var(--text-2); max-width: 600px; line-height: 1.7;
+    }
+
+    /* PHASE LABEL */
+    .phase-label {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 600;
+      color: var(--green); text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+    .phase h2 {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .phase p {
+      color: var(--text-2); font-size: 0.95rem; margin-bottom: 0.75rem;
+      max-width: 600px; line-height: 1.7;
+    }
+    .phase + .phase {
+      border-top: 1px solid var(--border);
+    }
+
+    /* METRICS */
+    .case-metrics {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .case-metric {
+      display: flex; flex-direction: column;
+    }
+    .case-metric-number {
+      font-family: var(--mono); font-size: 1.3rem; font-weight: 600;
+      color: var(--text); line-height: 1.2;
+    }
+    .case-metric-label {
+      font-size: 0.78rem; color: var(--text-3); margin-top: 0.2rem;
+    }
+
+    /* NOTE */
+    .case-note {
+      font-size: 0.8rem; color: var(--text-3); font-style: italic;
+      margin-top: 0.5rem;
+    }
+
+    /* BACK LINK */
+    .back-section {
+      padding: 3rem 0; text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .back-link {
+      font-size: 0.92rem; font-weight: 600; color: var(--green);
+      text-decoration: none; border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .back-link:hover { border-color: var(--green); }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 0; text-align: center;
+      font-size: 0.72rem; color: var(--text-3);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+    @media print {
+      nav { display: none; }
+      section { padding: 1.5rem 0; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-brand">Eigen Atlas</a>
+      <a href="index.html" class="nav-back">&larr; Volver a la propuesta</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cs-hero">
+    <div class="wrap">
+      <div class="cs-hero-label">Caso de estudio / 2026</div>
+      <h1>Migraci&oacute;n ERP completa + capa de inteligencia operativa con IA</h1>
+      <p>Empresa de fabricaci&oacute;n y kitting con inventario en dos ubicaciones. El proyecto tuvo dos fases: migrar toda la operaci&oacute;n a un ERP nuevo, y construir una aplicaci&oacute;n de inteligencia operativa sobre &eacute;l.</p>
+    </div>
+  </section>
+
+  <!-- PHASE 1: ERP MIGRATION -->
+  <section class="phase">
+    <div class="wrap">
+      <div class="phase-label">Fase 1 / Migraci&oacute;n ERP</div>
+      <h2>Formalizar el modelo de negocio y migrar 5,688 productos</h2>
+
+      <p>El sistema anterior &mdash; una base de datos legacy m&aacute;s hojas de c&aacute;lculo manuales &mdash; no soportaba la complejidad real de la operaci&oacute;n: productos que llegan en bulto y se transforman en presentaciones de venta (armado, fraccionamiento, reempaque), trazabilidad de lotes con fechas de caducidad, y costos calculados a partir de ratios de transformaci&oacute;n.</p>
+
+      <p>El proyecto no fue solo migrar datos. Fue entender y formalizar el modelo de negocio completo, construir la infraestructura de validaci&oacute;n, y entregar un sistema operativo funcional desde d&iacute;a uno.</p>
+
+      <div class="case-metrics">
+        <div class="case-metric">
+          <span class="case-metric-number">5,688</span>
+          <span class="case-metric-label">productos migrados</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">3,004</span>
+          <span class="case-metric-label">listas de materiales</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">49</span>
+          <span class="case-metric-label">decisiones formalizadas</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">40+</span>
+          <span class="case-metric-label">scripts de transformaci&oacute;n</span>
+        </div>
+      </div>
+
+      <p><strong>Contrato de verdad de dominio.</strong> Antes de escribir c&oacute;digo, document&eacute; un contrato formal de 7 partes que define todas las reglas de negocio: c&oacute;mo se clasifican los productos, qu&eacute; transformaciones son v&aacute;lidas, qu&eacute; est&aacute; prohibido inventar (c&oacute;digos, precios, c&oacute;digos de barras), y qu&eacute; decisiones requieren aprobaci&oacute;n del due&ntilde;o. Las 49 decisiones del proyecto est&aacute;n numeradas, documentadas y trazables a una cl&aacute;usula del contrato.</p>
+
+      <p><strong>Modelo h&iacute;brido de manufactura.</strong> La operaci&oacute;n tiene 4 rutas de transformaci&oacute;n (compra directa, armado/kit, fraccionamiento y reempaque), cada una con reglas distintas de BOM, costeo y unidades de medida. Constru&iacute; la l&oacute;gica de clasificaci&oacute;n autom&aacute;tica basada en an&aacute;lisis de ratios para que el ERP generara las &oacute;rdenes de manufactura correctas sin intervenci&oacute;n manual.</p>
+
+      <p><strong>Pipeline de validaci&oacute;n de 5 niveles.</strong> Cada producto pasa por verificaci&oacute;n de c&oacute;digos &uacute;nicos, ratios positivos, precios no negativos, referencias cruzadas entre ubicaciones y normalizaci&oacute;n de formato. El 32% de los productos ten&iacute;a costos faltantes; constru&iacute; una estrategia de recuperaci&oacute;n escalonada (4 niveles) que resolvi&oacute; 1,800+ casos autom&aacute;ticamente. Solo 6 productos requirieron captura manual.</p>
+
+      <p><strong>Integraci&oacute;n operativa completa.</strong> Adem&aacute;s de la migraci&oacute;n, constru&iacute; un sistema de pre-tickets con 35 funciones edge que conectan una app m&oacute;vil con el ERP en tiempo real. La operaci&oacute;n procesa ~50 transferencias internas al d&iacute;a; sin este sistema el ERP ir&iacute;a 2-3 horas detr&aacute;s de la realidad. Once flujos de trabajo redise&ntilde;ados (compras, recepci&oacute;n, manufactura, transferencias, ventas minorista y mayoreo, mermas, etc.).</p>
+
+      <p><strong>Dos implementaciones paralelas.</strong> Mantuve una versi&oacute;n de producci&oacute;n en vivo (pragm&aacute;tica, funcionando desde la semana 2) y una versi&oacute;n formal con base de datos intermedia en SQLite (auditable, reproducible). Si algo fallaba en producci&oacute;n, pod&iacute;a reconstruir el sistema completo en menos de 4 horas desde los archivos fuente.</p>
+
+      <p><strong>Resultado:</strong> 10 de 10 flujos verificados end-to-end. Go-live en ~4 semanas. 268,928 transacciones hist&oacute;ricas analizadas para validar la estrategia de c&oacute;digos de barras. 100% de cobertura de barcode en 8,727 productos finales.</p>
+    </div>
+  </section>
+
+  <!-- PHASE 2: INTELLIGENCE LAYER -->
+  <section class="phase">
+    <div class="wrap">
+      <div class="phase-label">Fase 2 / Inteligencia operativa</div>
+      <h2>Una aplicaci&oacute;n completa sobre el ERP como capa de inteligencia</h2>
+
+      <p>Migrar datos a un ERP nuevo resuelve el problema de infraestructura. Pero la operaci&oacute;n del d&iacute;a a d&iacute;a &mdash; decisiones de compra, priorizaci&oacute;n de inventario, ofertas de proveedores, transferencias entre ubicaciones &mdash; necesita una capa de inteligencia que el ERP no tiene.</p>
+
+      <p>Constru&iacute; una aplicaci&oacute;n web completa que funciona como sistema nervioso de la operaci&oacute;n: conecta el ERP con inteligencia artificial, notificaciones en tiempo real y l&oacute;gica de negocio espec&iacute;fica para cada rol del equipo.</p>
+
+      <div class="case-metrics">
+        <div class="case-metric">
+          <span class="case-metric-number">12+</span>
+          <span class="case-metric-label">pantallas especializadas</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">21</span>
+          <span class="case-metric-label">funciones serverless</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">7</span>
+          <span class="case-metric-label">roles de usuario</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">13</span>
+          <span class="case-metric-label">tablas con seguridad por fila</span>
+        </div>
+      </div>
+
+      <p><strong>B&uacute;squeda inteligente.</strong> El equipo de mostrador necesita encontrar productos r&aacute;pido. Constru&iacute; un motor de b&uacute;squeda con coincidencia difusa, autocorrecci&oacute;n y m&aacute;s de 50 sin&oacute;nimos del dominio (un cliente pide &ldquo;paracetamol&rdquo; y el sistema encuentra la presentaci&oacute;n correcta aunque el nombre comercial sea distinto). Cero dependencia de que el usuario escriba el nombre exacto.</p>
+
+      <p><strong>Priorizaci&oacute;n de inventario por caducidad.</strong> Un panel dedicado (VendePrimero) clasifica todo el inventario por fecha de caducidad con sem&aacute;foro visual: rojo (&lt;30 d&iacute;as), naranja (&lt;60), amarillo (&lt;90). El sistema sugiere descuentos escalonados para mover producto antes de que expire. Lo que antes era una revisi&oacute;n manual de miles de productos ahora es una lista priorizada con acci&oacute;n sugerida.</p>
+
+      <p><strong>Motor de alternativas gen&eacute;ricas.</strong> Cuando un producto no est&aacute; disponible, la app sugiere autom&aacute;ticamente alternativas con el mismo principio activo, ordenadas por fecha de caducidad (FEFO). El equipo de mostrador no necesita memorizar el cat&aacute;logo completo.</p>
+
+      <p><strong>Bot de Telegram con IA para ofertas de proveedores.</strong> Los proveedores env&iacute;an ofertas por WhatsApp/Telegram como im&aacute;genes, PDFs, mensajes de texto. Constru&iacute; un bot que recibe esos mensajes y usa Gemini para parsear ofertas no estructuradas en JSON normalizado: producto, precio, descuento, vigencia. El equipo de compras recibe las ofertas ya procesadas, comparables y listas para decidir.</p>
+
+      <p><strong>Scoring de proveedores y pron&oacute;stico de demanda.</strong> Cada proveedor acumula un score de confiabilidad (0-100) basado en entregas, precios y cumplimiento. La app usa Gemini 2.5 Flash con 3 a&ntilde;os de historial de ventas para proyectar demanda y generar sugerencias de compra. No reemplaza el criterio del comprador; le da datos que antes no ten&iacute;a.</p>
+
+      <p><strong>Sistema de pre-tickets en tiempo real.</strong> Cualquier persona en mostrador puede generar un pre-ticket desde la app que se sincroniza instant&aacute;neamente con el punto de venta del ERP (v&iacute;a funciones edge que crean cotizaciones en el sistema). El cajero carga la cotizaci&oacute;n, cobra, y el inventario se actualiza. Sin este puente, hab&iacute;a una desconex&iacute;on de 2-3 horas entre lo que se vend&iacute;a y lo que el sistema reportaba.</p>
+
+      <p><strong>Arquitectura.</strong> React + TypeScript en el frontend, Supabase (PostgreSQL + Edge Functions en Deno) como backend, sincronizaci&oacute;n bidireccional con el ERP v&iacute;a API REST, notificaciones en tiempo real por WebSocket, cach&eacute; local con TTL de 10 minutos para funcionar sin conexi&oacute;n estable. Cada rol del equipo (mostrador, cajero, bodega, compras, due&ntilde;o, operaciones, contabilidad) ve solo la informaci&oacute;n relevante para su funci&oacute;n.</p>
+
+      <p class="case-note">Esta aplicaci&oacute;n no es un dashboard de reportes. Es infraestructura operativa que el equipo usa todos los d&iacute;as para tomar decisiones.</p>
+    </div>
+  </section>
+
+  <!-- BACK -->
+  <div class="back-section">
+    <div class="wrap">
+      <a href="index.html" class="back-link">&larr; Volver a la propuesta del workshop</a>
+      <p class="case-note" style="margin-top:1rem;">Empresa y datos protegidos por acuerdo de confidencialidad.</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      Eigen Atlas / Ra&uacute;l Ch&iacute;o Le&oacute;n / Marzo 2026
+    </div>
+  </footer>
+
+</body>
+</html>
