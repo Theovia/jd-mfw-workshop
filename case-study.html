@@ -9,134 +9,66 @@
   <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #FAF9F6;
-      --bg-card: #ffffff;
-      --border: rgba(0,0,0,0.08);
-      --border-strong: rgba(0,0,0,0.15);
-      --text: #1a1a1a;
-      --text-2: #4a4a4a;
-      --text-3: #888;
-      --green: #077d42;
-      --green-light: rgba(7,125,66,0.07);
+      --bg: #FAF9F6; --bg-card: #ffffff;
+      --border: rgba(0,0,0,0.08); --border-strong: rgba(0,0,0,0.15);
+      --text: #1a1a1a; --text-2: #4a4a4a; --text-3: #888;
+      --green: #077d42; --green-light: rgba(7,125,66,0.07);
       --serif: 'Source Serif 4', Georgia, serif;
       --sans: 'DM Sans', system-ui, sans-serif;
       --mono: 'JetBrains Mono', monospace;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text);
-      font-family: var(--sans); font-size: 16px;
-      line-height: 1.7; -webkit-font-smoothing: antialiased;
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+    body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
 
-    /* NAV */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      padding: 0.9rem 0;
-      background: rgba(250,249,246,0.92);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    }
-    .nav-inner {
-      max-width: 920px; margin: 0 auto; padding: 0 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    nav { position: sticky; top: 0; z-index: 100; padding: 0.9rem 0; background: rgba(250,249,246,0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .nav-inner { max-width: 920px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
     .nav-brand { font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--text); text-decoration: none; }
-    .nav-back {
-      font-size: 0.82rem; color: var(--text-2); text-decoration: none;
-      transition: color 0.2s;
-    }
+    .nav-back { font-size: 0.82rem; color: var(--text-2); text-decoration: none; transition: color 0.2s; }
     .nav-back:hover { color: var(--green); }
 
-    /* LAYOUT */
     .wrap { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
     section { padding: 4rem 0; }
 
     /* HERO */
-    .cs-hero {
-      padding: 6rem 0 3rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .cs-hero-label {
-      font-family: var(--mono); font-size: 0.72rem; font-weight: 600;
-      color: var(--green); text-transform: uppercase; letter-spacing: 0.06em;
-      margin-bottom: 0.75rem;
-    }
-    .cs-hero h1 {
-      font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem);
-      font-weight: 700; line-height: 1.2; letter-spacing: -0.02em;
-      margin-bottom: 1rem;
-    }
-    .cs-hero p {
-      font-size: 1.05rem; color: var(--text-2); max-width: 600px; line-height: 1.7;
-    }
+    .cs-hero { padding: 6rem 0 3rem; border-bottom: 1px solid var(--border); }
+    .cs-hero-label { font-family: var(--mono); font-size: 0.72rem; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem; }
+    .cs-hero h1 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 1rem; }
+    .cs-hero p { font-size: 1.05rem; color: var(--text-2); max-width: 600px; line-height: 1.7; }
 
-    /* PHASE LABEL */
-    .phase-label {
-      font-family: var(--mono); font-size: 0.72rem; font-weight: 600;
-      color: var(--green); text-transform: uppercase; letter-spacing: 0.06em;
-      margin-bottom: 0.5rem;
-    }
-    .phase h2 {
-      font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .phase p {
-      color: var(--text-2); font-size: 0.95rem; margin-bottom: 0.75rem;
-      max-width: 600px; line-height: 1.7;
-    }
-    .phase + .phase {
-      border-top: 1px solid var(--border);
-    }
+    /* TOC */
+    .cs-toc { padding: 2rem 0; border-bottom: 1px solid var(--border); }
+    .cs-toc-list { list-style: none; display: flex; gap: 2rem; flex-wrap: wrap; }
+    .cs-toc-list a { font-family: var(--mono); font-size: 0.78rem; color: var(--text-2); text-decoration: none; transition: color 0.2s; }
+    .cs-toc-list a:hover { color: var(--green); }
+    .cs-toc-list .toc-num { color: var(--green); margin-right: 0.3rem; }
 
-    /* METRICS */
-    .case-metrics {
-      display: flex; gap: 2.5rem; flex-wrap: wrap;
-      margin: 1.5rem 0;
-    }
-    .case-metric {
-      display: flex; flex-direction: column;
-    }
-    .case-metric-number {
-      font-family: var(--mono); font-size: 1.3rem; font-weight: 600;
-      color: var(--text); line-height: 1.2;
-    }
-    .case-metric-label {
-      font-size: 0.78rem; color: var(--text-3); margin-top: 0.2rem;
-    }
+    /* PHASES */
+    .phase-label { font-family: var(--mono); font-size: 0.72rem; font-weight: 600; color: var(--green); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .phase h2 { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; margin-bottom: 1rem; }
+    .phase p { color: var(--text-2); font-size: 0.95rem; margin-bottom: 0.75rem; max-width: 600px; line-height: 1.7; }
+    .phase + .phase { border-top: 1px solid var(--border); }
 
-    /* NOTE */
-    .case-note {
-      font-size: 0.8rem; color: var(--text-3); font-style: italic;
-      margin-top: 0.5rem;
-    }
+    .case-metrics { display: flex; gap: 2.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+    .case-metric { display: flex; flex-direction: column; }
+    .case-metric-number { font-family: var(--mono); font-size: 1.3rem; font-weight: 600; color: var(--text); line-height: 1.2; }
+    .case-metric-label { font-size: 0.78rem; color: var(--text-3); margin-top: 0.2rem; }
 
-    /* BACK LINK */
-    .back-section {
-      padding: 3rem 0; text-align: center;
-      border-top: 1px solid var(--border);
-    }
-    .back-link {
-      font-size: 0.92rem; font-weight: 600; color: var(--green);
-      text-decoration: none; border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-    }
+    .case-note { font-size: 0.8rem; color: var(--text-3); font-style: italic; margin-top: 0.5rem; }
+
+    /* DIAGRAMS */
+    .diagram { margin: 2rem 0; padding: 1.5rem; background: transparent; border: 1px solid var(--border); border-radius: 8px; overflow-x: auto; }
+    .diagram-label { font-family: var(--mono); font-size: 0.68rem; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+    .diagram .mermaid { display: flex; justify-content: center; }
+    .diagram .mermaid svg { max-width: 100%; height: auto; }
+
+    .back-section { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border); }
+    .back-link { font-size: 0.92rem; font-weight: 600; color: var(--green); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
     .back-link:hover { border-color: var(--green); }
+    footer { padding: 2rem 0; text-align: center; font-size: 0.72rem; color: var(--text-3); }
 
-    /* FOOTER */
-    footer {
-      padding: 2rem 0; text-align: center;
-      font-size: 0.72rem; color: var(--text-3);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
-    }
-    @media print {
-      nav { display: none; }
-      section { padding: 1.5rem 0; break-inside: avoid; }
-    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+    @media print { nav { display: none; } section { padding: 1.5rem 0; break-inside: avoid; } }
   </style>
 </head>
 <body>
@@ -152,20 +84,102 @@
   <section class="cs-hero">
     <div class="wrap">
       <div class="cs-hero-label">Caso de estudio / 2026</div>
-      <h1>Migraci&oacute;n ERP completa + capa de inteligencia operativa con IA</h1>
-      <p>Empresa de fabricaci&oacute;n y kitting con inventario en dos ubicaciones. El proyecto tuvo dos fases: migrar toda la operaci&oacute;n a un ERP nuevo, y construir una aplicaci&oacute;n de inteligencia operativa sobre &eacute;l.</p>
+      <h1>Migraci&oacute;n ERP + capa de inteligencia operativa con IA</h1>
+      <p>Empresa de fabricaci&oacute;n y kitting con inventario en dos ubicaciones (bodega y punto de venta). El sistema anterior &mdash; base de datos legacy m&aacute;s hojas de c&aacute;lculo &mdash; no soportaba la complejidad real de la operaci&oacute;n. El proyecto tuvo tres fases: formalizar el modelo de negocio, limpiar y migrar los datos, y construir una aplicaci&oacute;n de inteligencia operativa sobre el ERP.</p>
     </div>
   </section>
 
-  <!-- PHASE 1: ERP MIGRATION -->
-  <section class="phase">
+  <!-- TOC -->
+  <div class="cs-toc">
     <div class="wrap">
-      <div class="phase-label">Fase 1 / Migraci&oacute;n ERP</div>
-      <h2>Formalizar el modelo de negocio y migrar 5,688 productos</h2>
+      <ul class="cs-toc-list">
+        <li><a href="#fase1"><span class="toc-num">01</span> Modelo de negocio</a></li>
+        <li><a href="#fase1b"><span class="toc-num">02</span> Ingenier&iacute;a de datos</a></li>
+        <li><a href="#fase2"><span class="toc-num">03</span> Inteligencia operativa</a></li>
+      </ul>
+    </div>
+  </div>
 
-      <p>El sistema anterior &mdash; una base de datos legacy m&aacute;s hojas de c&aacute;lculo manuales &mdash; no soportaba la complejidad real de la operaci&oacute;n: productos que llegan en bulto y se transforman en presentaciones de venta (armado, fraccionamiento, reempaque), trazabilidad de lotes con fechas de caducidad, y costos calculados a partir de ratios de transformaci&oacute;n.</p>
+  <!-- PHASE 1: DOMAIN MODEL -->
+  <section id="fase1" class="phase">
+    <div class="wrap">
+      <div class="phase-label">Fase 1 / Formalizaci&oacute;n del modelo de negocio</div>
+      <h2>Documentar las reglas que solo exist&iacute;an en la cabeza del due&ntilde;o</h2>
 
-      <p>El proyecto no fue solo migrar datos. Fue entender y formalizar el modelo de negocio completo, construir la infraestructura de validaci&oacute;n, y entregar un sistema operativo funcional desde d&iacute;a uno.</p>
+      <div class="case-metrics">
+        <div class="case-metric">
+          <span class="case-metric-number">60+</span>
+          <span class="case-metric-label">decisiones documentadas</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">12</span>
+          <span class="case-metric-label">partes del contrato</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">3,000+</span>
+          <span class="case-metric-label">l&iacute;neas en el decision log</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">v1.0 &rarr; v3.2</span>
+          <span class="case-metric-label">versiones del contrato</span>
+        </div>
+      </div>
+
+      <p><strong>Contrato de verdad de dominio.</strong> Documento formal de 12 partes que codifica todas las reglas de negocio: clasificaci&oacute;n de productos, transformaciones v&aacute;lidas, invariantes de datos (nunca inventar c&oacute;digos, precios ni c&oacute;digos de barras), y decisiones que requieren aprobaci&oacute;n del due&ntilde;o. Cada regla validada contra transcripciones de entrevistas y 50 GB de grabaciones operativas analizadas con NotebookLM. Cuestionarios estructurados con 204 productos validados individualmente por el due&ntilde;o.</p>
+
+      <p><strong>Modelo h&iacute;brido de manufactura.</strong> 4 rutas de transformaci&oacute;n, cada una con reglas distintas de BOM, costeo y unidades de medida. Clasificaci&oacute;n autom&aacute;tica basada en an&aacute;lisis de ratios.</p>
+
+      <!-- DIAGRAM: 4 transformation routes -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 1 &mdash; Modelo de clasificaci&oacute;n de productos</div>
+        <pre class="mermaid">
+flowchart LR
+    A["Producto entrante<br>(proveedor)"] --> B{"Ratio<br>CM/CB"}
+    B -->|"CM = CB<br>(sin transformacion)"| C["DIRECTO<br>3,113 productos"]
+    B -->|"CM &gt; 1, CB = 1<br>(se divide)"| D["FRACCION<br>41 productos"]
+    B -->|"CM &lt; CB<br>(se arma)"| E["KIT / ARMADO<br>1,894 productos"]
+    B -->|"CM = CB<br>re-etiquetado"| F["REEMPAQUE<br>615 productos"]
+
+    style C fill:transparent,stroke:#077d42,color:#1a1a1a
+    style D fill:transparent,stroke:#e65100,color:#1a1a1a
+    style E fill:transparent,stroke:#0270ab,color:#1a1a1a
+    style F fill:transparent,stroke:#7b1fa2,color:#1a1a1a
+        </pre>
+      </div>
+
+      <p><strong>Reclasificaci&oacute;n por an&aacute;lisis.</strong> 616 productos clasificados como reempaque fueron reclasificados a compra directa al verificar que no ten&iacute;an transformaci&oacute;n f&iacute;sica real &mdash; un artefacto del sistema legacy. Esto elimin&oacute; 616 BOMs innecesarios y sus &oacute;rdenes de manufactura asociadas.</p>
+
+      <p><strong>Eliminaci&oacute;n de procesos redundantes.</strong> Un checkpoint f&iacute;sico entre armado y mostrador (la &ldquo;Aduana&rdquo;: computadora + esc&aacute;ner + impresora) fue eliminado al verificar que el ERP proporciona el mismo control inherentemente v&iacute;a &oacute;rdenes de manufactura y transferencias internas.</p>
+
+      <p><strong>Implementaci&oacute;n dual.</strong> Versi&oacute;n de producci&oacute;n en vivo desde la semana 2, y versi&oacute;n formal con base intermedia en SQLite. Arquitectura de 5 capas con playbook de recuperaci&oacute;n documentado.</p>
+
+      <!-- DIAGRAM: 5-layer architecture -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 2 &mdash; Arquitectura de 5 capas (recovery playbook)</div>
+        <pre class="mermaid">
+block-beta
+    columns 1
+    L5["Capa 5: App Inteligencia Operativa — solo lectura sobre Odoo"]
+    L4["Capa 4: Odoo v19 SaaS — regenerable desde Capa 3"]
+    L3["Capa 3: CSVs de exportacion — versionados en Git"]
+    L2["Capa 2: Pipeline ETL — reproducible en 5 minutos"]
+    L1["Capa 1: Archivos fuente inmutables — Excel PDB + grabaciones + cuestionarios"]
+
+    style L5 fill:transparent,stroke:#7b1fa2,color:#1a1a1a
+    style L4 fill:transparent,stroke:#077d42,color:#1a1a1a
+    style L3 fill:transparent,stroke:#0270ab,color:#1a1a1a
+    style L2 fill:transparent,stroke:#e65100,color:#1a1a1a
+    style L1 fill:transparent,stroke:#888,color:#1a1a1a
+        </pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 1B: DATA ENGINEERING -->
+  <section id="fase1b" class="phase">
+    <div class="wrap">
+      <div class="phase-label">Fase 1b / Ingenier&iacute;a de datos</div>
+      <h2>Limpieza, normalizaci&oacute;n y migraci&oacute;n de 5,688 productos</h2>
 
       <div class="case-metrics">
         <div class="case-metric">
@@ -177,51 +191,92 @@
           <span class="case-metric-label">listas de materiales</span>
         </div>
         <div class="case-metric">
-          <span class="case-metric-number">49</span>
-          <span class="case-metric-label">decisiones formalizadas</span>
+          <span class="case-metric-number">268,928</span>
+          <span class="case-metric-label">transacciones analizadas</span>
         </div>
         <div class="case-metric">
-          <span class="case-metric-number">40+</span>
-          <span class="case-metric-label">scripts de transformaci&oacute;n</span>
+          <span class="case-metric-number">55+</span>
+          <span class="case-metric-label">scripts Python (25K+ l&iacute;neas)</span>
         </div>
       </div>
 
-      <p><strong>Contrato de verdad de dominio.</strong> Antes de escribir c&oacute;digo, document&eacute; un contrato formal de 7 partes que define todas las reglas de negocio: c&oacute;mo se clasifican los productos, qu&eacute; transformaciones son v&aacute;lidas, qu&eacute; est&aacute; prohibido inventar (c&oacute;digos, precios, c&oacute;digos de barras), y qu&eacute; decisiones requieren aprobaci&oacute;n del due&ntilde;o. Las 49 decisiones del proyecto est&aacute;n numeradas, documentadas y trazables a una cl&aacute;usula del contrato.</p>
+      <p>Los datos del sistema legacy ten&iacute;an problemas en todas las dimensiones: nombres inconsistentes, costos faltantes en el 32% del cat&aacute;logo, c&oacute;digos de barras sin estrategia clara, clasificaciones incorrectas, y unidades de medida mezcladas. La migraci&oacute;n requiri&oacute; un pipeline de limpieza, normalizaci&oacute;n y validaci&oacute;n antes de poder importar un solo producto al ERP.</p>
 
-      <p><strong>Modelo h&iacute;brido de manufactura.</strong> La operaci&oacute;n tiene 4 rutas de transformaci&oacute;n (compra directa, armado/kit, fraccionamiento y reempaque), cada una con reglas distintas de BOM, costeo y unidades de medida. Constru&iacute; la l&oacute;gica de clasificaci&oacute;n autom&aacute;tica basada en an&aacute;lisis de ratios para que el ERP generara las &oacute;rdenes de manufactura correctas sin intervenci&oacute;n manual.</p>
+      <p><strong>Smart Title: normalizaci&oacute;n de nombres.</strong> Algoritmo de nombrado que evolucion&oacute; a trav&eacute;s de 5 versiones. Convierte nombres crudos del legacy en nombres estandarizados con title-case, preservaci&oacute;n de siglas (GSK, XR), unidades farmac&eacute;uticas normalizadas (mg, mL, mcg), sufijo de laboratorio con cobertura del 80%, y detecci&oacute;n de duplicados (evita &ldquo;FRESA FRESA&rdquo;, &ldquo;625 mL c/625&rdquo;). 8,700+ nombres procesados. Auditado por 5 agentes en paralelo.</p>
 
-      <p><strong>Pipeline de validaci&oacute;n de 5 niveles.</strong> Cada producto pasa por verificaci&oacute;n de c&oacute;digos &uacute;nicos, ratios positivos, precios no negativos, referencias cruzadas entre ubicaciones y normalizaci&oacute;n de formato. El 32% de los productos ten&iacute;a costos faltantes; constru&iacute; una estrategia de recuperaci&oacute;n escalonada (4 niveles) que resolvi&oacute; 1,800+ casos autom&aacute;ticamente. Solo 6 productos requirieron captura manual.</p>
+      <p><strong>Recuperaci&oacute;n de costos.</strong> Estrategia escalonada de 4 niveles para resolver el 32% de productos sin costo. 1,800+ casos resueltos autom&aacute;ticamente. 6 productos requirieron captura manual.</p>
 
-      <p><strong>Integraci&oacute;n operativa completa.</strong> Adem&aacute;s de la migraci&oacute;n, constru&iacute; un sistema de pre-tickets con 35 funciones edge que conectan una app m&oacute;vil con el ERP en tiempo real. La operaci&oacute;n procesa ~50 transferencias internas al d&iacute;a; sin este sistema el ERP ir&iacute;a 2-3 horas detr&aacute;s de la realidad. Once flujos de trabajo redise&ntilde;ados (compras, recepci&oacute;n, manufactura, transferencias, ventas minorista y mayoreo, mermas, etc.).</p>
+      <!-- DIAGRAM: Cost recovery -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 3 &mdash; Estrategia de recuperaci&oacute;n de costos (4 niveles)</div>
+        <pre class="mermaid">
+flowchart TD
+    A["Producto sin costo<br>(32% del catalogo)"] --> N1
+    N1["Nivel 1<br>Ratio inverso<br>CostoBOD = CostoMOST / Ratio"] -->|"resuelto"| OK["Costo asignado"]
+    N1 -->|"sin dato"| N2
+    N2["Nivel 2<br>Mismo principio activo<br>Costo unitario de referencia"] -->|"resuelto"| OK
+    N2 -->|"sin dato"| N3
+    N3["Nivel 3<br>Costo anterior<br>(si mayor a $0.01)"] -->|"resuelto"| OK
+    N3 -->|"sin dato"| N4
+    N4["Nivel 4<br>Captura manual"] --> OK
 
-      <p><strong>Dos implementaciones paralelas.</strong> Mantuve una versi&oacute;n de producci&oacute;n en vivo (pragm&aacute;tica, funcionando desde la semana 2) y una versi&oacute;n formal con base de datos intermedia en SQLite (auditable, reproducible). Si algo fallaba en producci&oacute;n, pod&iacute;a reconstruir el sistema completo en menos de 4 horas desde los archivos fuente.</p>
+    N1 ~~~ R1["1,500+ automaticos"]
+    N4 ~~~ R4["6 manuales"]
 
-      <p><strong>Resultado:</strong> 10 de 10 flujos verificados end-to-end. Go-live en ~4 semanas. 268,928 transacciones hist&oacute;ricas analizadas para validar la estrategia de c&oacute;digos de barras. 100% de cobertura de barcode en 8,727 productos finales.</p>
+    style OK fill:transparent,stroke:#077d42,color:#1a1a1a
+    style N4 fill:transparent,stroke:#e65100,color:#1a1a1a
+    style R1 fill:none,stroke:none,color:#077d42
+    style R4 fill:none,stroke:none,color:#e65100
+        </pre>
+      </div>
+
+      <p><strong>An&aacute;lisis de 268,928 transacciones.</strong> La estrategia de c&oacute;digos de barras se defini&oacute; emp&iacute;ricamente: el c&oacute;digo de mostrador cubre el 92.6% de las ventas en POS; el de bodega cubre el 2.6% restante (mayoreo). An&aacute;lisis segmentado confirm&oacute; la dominancia en todos los tipos de producto (KIT 97.8%, FRACCION 80.3%, DIRECTO 100%). Cobertura final: 100% en 8,718 productos.</p>
+
+      <p><strong>Pipeline ETL.</strong> Flujo reproducible: archivos fuente &rarr; SQLite intermedia &rarr; 4 CSVs de exportaci&oacute;n &rarr; importaci&oacute;n a Odoo. 5 agentes de verificaci&oacute;n independientes. 51 pruebas E2E automatizadas contra la instancia Odoo en vivo.</p>
+
+      <!-- DIAGRAM: ETL Pipeline (simplified) -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 4 &mdash; Pipeline ETL con verificaci&oacute;n multi-agente</div>
+        <pre class="mermaid">
+flowchart LR
+    SRC["Fuentes inmutables<br>Excel + grabaciones<br>+ cuestionarios"] --> ETL["Pipeline ETL<br>load &rarr; correct &rarr;<br>transform &rarr; export"]
+    ETL --> DB[("SQLite<br>intermedia")]
+    DB --> CSV["4 CSVs<br>products / boms<br>bom_lines / suppliers"]
+    CSV --> ODOO["Odoo v19<br>importacion"]
+    CSV --> VER["5 agentes<br>verificacion<br>52/52 checks"]
+    ODOO --> E2E["51 pruebas<br>E2E en vivo"]
+
+    style DB fill:transparent,stroke:#0270ab,color:#1a1a1a
+    style ODOO fill:transparent,stroke:#077d42,color:#1a1a1a
+    style VER fill:transparent,stroke:#e65100,color:#1a1a1a
+    style E2E fill:transparent,stroke:#077d42,color:#1a1a1a
+        </pre>
+      </div>
+
+      <p><strong>Resultado.</strong> Go-live en 4 semanas. 8,718 productos con 100% de cobertura de barcode. 11 flujos de trabajo redise&ntilde;ados con documentaci&oacute;n before/after. Modelo operativo documentado con los 9 roles del equipo. La instancia completa es regenerable desde archivos fuente en menos de 4 horas.</p>
     </div>
   </section>
 
-  <!-- PHASE 2: INTELLIGENCE LAYER -->
-  <section class="phase">
+  <!-- PHASE 2 -->
+  <section id="fase2" class="phase">
     <div class="wrap">
       <div class="phase-label">Fase 2 / Inteligencia operativa</div>
-      <h2>Una aplicaci&oacute;n completa sobre el ERP como capa de inteligencia</h2>
+      <h2>Aplicaci&oacute;n web como capa de inteligencia sobre el ERP</h2>
 
-      <p>Migrar datos a un ERP nuevo resuelve el problema de infraestructura. Pero la operaci&oacute;n del d&iacute;a a d&iacute;a &mdash; decisiones de compra, priorizaci&oacute;n de inventario, ofertas de proveedores, transferencias entre ubicaciones &mdash; necesita una capa de inteligencia que el ERP no tiene.</p>
-
-      <p>Constru&iacute; una aplicaci&oacute;n web completa que funciona como sistema nervioso de la operaci&oacute;n: conecta el ERP con inteligencia artificial, notificaciones en tiempo real y l&oacute;gica de negocio espec&iacute;fica para cada rol del equipo.</p>
+      <p>El ERP resuelve la infraestructura de datos. La operaci&oacute;n diaria &mdash; decisiones de compra, priorizaci&oacute;n de inventario, transferencias entre ubicaciones, comunicaci&oacute;n entre roles &mdash; requiere una capa adicional. Esta aplicaci&oacute;n es infraestructura operativa que el equipo usa todos los d&iacute;as, no un dashboard de reportes.</p>
 
       <div class="case-metrics">
         <div class="case-metric">
-          <span class="case-metric-number">12+</span>
+          <span class="case-metric-number">35</span>
+          <span class="case-metric-label">funciones edge en producci&oacute;n</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">18</span>
           <span class="case-metric-label">pantallas especializadas</span>
         </div>
         <div class="case-metric">
-          <span class="case-metric-number">21</span>
-          <span class="case-metric-label">funciones serverless</span>
-        </div>
-        <div class="case-metric">
-          <span class="case-metric-number">7</span>
-          <span class="case-metric-label">roles de usuario</span>
+          <span class="case-metric-number">9</span>
+          <span class="case-metric-label">roles con vista dedicada</span>
         </div>
         <div class="case-metric">
           <span class="case-metric-number">13</span>
@@ -229,21 +284,145 @@
         </div>
       </div>
 
-      <p><strong>B&uacute;squeda inteligente.</strong> El equipo de mostrador necesita encontrar productos r&aacute;pido. Constru&iacute; un motor de b&uacute;squeda con coincidencia difusa, autocorrecci&oacute;n y m&aacute;s de 50 sin&oacute;nimos del dominio (un cliente pide &ldquo;paracetamol&rdquo; y el sistema encuentra la presentaci&oacute;n correcta aunque el nombre comercial sea distinto). Cero dependencia de que el usuario escriba el nombre exacto.</p>
+      <p><strong>Acceso por rol.</strong> Solo el cajero interact&uacute;a directamente con Odoo. Los otros 8 roles operan a trav&eacute;s de interfaces especializadas. Autenticaci&oacute;n dual: email para gerencia y compras, PIN de 4 d&iacute;gitos para personal de mostrador.</p>
 
-      <p><strong>Priorizaci&oacute;n de inventario por caducidad.</strong> Un panel dedicado (VendePrimero) clasifica todo el inventario por fecha de caducidad con sem&aacute;foro visual: rojo (&lt;30 d&iacute;as), naranja (&lt;60), amarillo (&lt;90). El sistema sugiere descuentos escalonados para mover producto antes de que expire. Lo que antes era una revisi&oacute;n manual de miles de productos ahora es una lista priorizada con acci&oacute;n sugerida.</p>
+      <!-- DIAGRAM: Role map -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 5 &mdash; Mapa de roles y puntos de acceso</div>
+        <pre class="mermaid">
+flowchart TD
+    subgraph app ["App Inteligencia Operativa (React + Supabase)"]
+        R1["Gerencia<br>/gerente<br>12 widgets tiempo real"]
+        R2["Compras<br>/compras<br>ofertas + scoring"]
+        R3["Armado<br>/armado<br>plan demanda + MO"]
+        R4["Almacen<br>/bodega<br>solicitudes + transferencias"]
+        R5["Recepcion<br>/recepcion<br>cotejo + lotes"]
+        R6["Mayoreo<br>/mayoreo<br>ventas B2B"]
+        R7["Tesoreria<br>/tesoreria<br>conciliacion"]
+        R8["Bodega ext.<br>/adan<br>inventario remoto"]
+    end
 
-      <p><strong>Motor de alternativas gen&eacute;ricas.</strong> Cuando un producto no est&aacute; disponible, la app sugiere autom&aacute;ticamente alternativas con el mismo principio activo, ordenadas por fecha de caducidad (FEFO). El equipo de mostrador no necesita memorizar el cat&aacute;logo completo.</p>
+    subgraph pos ["Odoo POS (nativo)"]
+        R9["Cajero<br>cobro + facturacion"]
+    end
 
-      <p><strong>Bot de Telegram con IA para ofertas de proveedores.</strong> Los proveedores env&iacute;an ofertas por WhatsApp/Telegram como im&aacute;genes, PDFs, mensajes de texto. Constru&iacute; un bot que recibe esos mensajes y usa Gemini para parsear ofertas no estructuradas en JSON normalizado: producto, precio, descuento, vigencia. El equipo de compras recibe las ofertas ya procesadas, comparables y listas para decidir.</p>
+    subgraph ext ["Canales externos"]
+        TG["Bot Telegram<br>ofertas proveedores"]
+        WS["WebSocket<br>notificaciones push"]
+    end
 
-      <p><strong>Scoring de proveedores y pron&oacute;stico de demanda.</strong> Cada proveedor acumula un score de confiabilidad (0-100) basado en entregas, precios y cumplimiento. La app usa Gemini 2.5 Flash con 3 a&ntilde;os de historial de ventas para proyectar demanda y generar sugerencias de compra. No reemplaza el criterio del comprador; le da datos que antes no ten&iacute;a.</p>
+    R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 --> EF["35 Edge Functions<br>(Supabase/Deno)"]
+    R9 --> ODOO["Odoo v19"]
+    EF --> ODOO
+    TG --> EF
+    EF --> WS
 
-      <p><strong>Sistema de pre-tickets en tiempo real.</strong> Cualquier persona en mostrador puede generar un pre-ticket desde la app que se sincroniza instant&aacute;neamente con el punto de venta del ERP (v&iacute;a funciones edge que crean cotizaciones en el sistema). El cajero carga la cotizaci&oacute;n, cobra, y el inventario se actualiza. Sin este puente, hab&iacute;a una desconex&iacute;on de 2-3 horas entre lo que se vend&iacute;a y lo que el sistema reportaba.</p>
+    style app fill:transparent,stroke:#077d42,color:#1a1a1a
+    style pos fill:transparent,stroke:#077d42,color:#1a1a1a
+    style ext fill:transparent,stroke:#0270ab,color:#1a1a1a
+    style ODOO fill:transparent,stroke:#077d42,color:#1a1a1a
+    style EF fill:transparent,stroke:#e65100,color:#1a1a1a
+        </pre>
+      </div>
 
-      <p><strong>Arquitectura.</strong> React + TypeScript en el frontend, Supabase (PostgreSQL + Edge Functions en Deno) como backend, sincronizaci&oacute;n bidireccional con el ERP v&iacute;a API REST, notificaciones en tiempo real por WebSocket, cach&eacute; local con TTL de 10 minutos para funcionar sin conexi&oacute;n estable. Cada rol del equipo (mostrador, cajero, bodega, compras, due&ntilde;o, operaciones, contabilidad) ve solo la informaci&oacute;n relevante para su funci&oacute;n.</p>
+      <p><strong>B&uacute;squeda inteligente.</strong> Motor con coincidencia difusa, autocorrecci&oacute;n y 50+ sin&oacute;nimos farmacol&oacute;gicos. Sugiere alternativas gen&eacute;ricas con el mismo principio activo, ordenadas por FEFO.</p>
 
-      <p class="case-note">Esta aplicaci&oacute;n no es un dashboard de reportes. Es infraestructura operativa que el equipo usa todos los d&iacute;as para tomar decisiones.</p>
+      <p><strong>Priorizaci&oacute;n de inventario por caducidad.</strong> Sem&aacute;foro visual: rojo (&lt;30 d&iacute;as), naranja (&lt;60), amarillo (&lt;90). Descuentos escalonados sugeridos y candidatos para venta mayorista.</p>
+
+      <p><strong>Solicitudes digitales de bodega.</strong> ~50 transferencias/d&iacute;a. Al marcar &ldquo;Listo&rdquo;, transferencia autom&aacute;tica en Odoo. Inventario en tiempo real; antes hab&iacute;a desfase de 2-3 horas.</p>
+
+      <p><strong>Pipeline de ofertas de proveedores.</strong> Bot de Telegram que recibe ofertas en cualquier formato. Gemini 2.5 Flash parsea contenido no estructurado en JSON normalizado. Evaluaci&oacute;n autom&aacute;tica y notificaciones push en tiempo real.</p>
+
+      <!-- DIAGRAM: Supplier offer pipeline -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 6 &mdash; Pipeline de procesamiento de ofertas</div>
+        <pre class="mermaid">
+flowchart LR
+    subgraph input ["Entrada"]
+        P1["Proveedor<br>(imagen)"]
+        P2["Proveedor<br>(PDF)"]
+        P3["Proveedor<br>(texto)"]
+    end
+
+    TG["Bot<br>Telegram"] --> WH["telegram-webhook<br>(Edge Function)"]
+    P1 & P2 & P3 --> TG
+
+    WH --> IB[("ofertas_inbox<br>(Supabase)")]
+    IB --> AI["Gemini 2.5 Flash<br>Parseo a JSON"]
+    AI --> OF[("ofertas_recibidas<br>producto, precio,<br>descuento, vigencia")]
+
+    OF --> AN["analyze-offer<br>meses stock<br>velocidad venta"]
+    AN --> DEC{"Decision"}
+    DEC -->|"stock bajo +<br>buen precio"| BUY["COMPRAR"]
+    DEC -->|"stock alto o<br>precio alto"| NO["NO COMPRAR"]
+    DEC -->|"requiere<br>aprobacion"| ESC["ESCALAR"]
+
+    OF --> SC["Scoring<br>proveedor<br>(0-100)"]
+    OF --> NT["Notificacion<br>push<br>(WebSocket)"]
+
+    style AI fill:transparent,stroke:#0270ab,color:#1a1a1a
+    style BUY fill:transparent,stroke:#077d42,color:#1a1a1a
+    style NO fill:transparent,stroke:#c62828,color:#1a1a1a
+    style ESC fill:transparent,stroke:#e65100,color:#1a1a1a
+        </pre>
+      </div>
+
+      <p><strong>Plan de demanda y manufactura.</strong> C&aacute;lculo autom&aacute;tico basado en velocidad de venta y stock actual (Gemini 2.5 Flash + 3 a&ntilde;os de historial). Al aprobar, el sistema crea la orden de manufactura en Odoo, asigna lotes por FEFO, y mueve producto a mostrador autom&aacute;ticamente.</p>
+
+      <p><strong>Recepci&oacute;n de mercanc&iacute;a.</strong> Cotejo contra &oacute;rdenes de compra, captura de cantidades y fechas de caducidad (multi-lote por l&iacute;nea), backorder autom&aacute;tico si hay discrepancias.</p>
+
+      <p><strong>Sistema de pre-tickets.</strong> Pre-ticket en la app &rarr; cotizaci&oacute;n en Odoo v&iacute;a Edge Function &rarr; cajero cobra &rarr; inventario actualizado inmediatamente.</p>
+
+      <p><strong>Arquitectura.</strong> React + TypeScript, Supabase (PostgreSQL + 35 Edge Functions en Deno), sincronizaci&oacute;n bidireccional con Odoo v&iacute;a JSON-RPC, notificaciones por WebSocket, cach&eacute; local con TTL de 10 minutos. Odoo es la &uacute;nica fuente de verdad.</p>
+
+      <!-- DIAGRAM: System architecture -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 7 &mdash; Arquitectura del sistema</div>
+        <pre class="mermaid">
+flowchart TB
+    subgraph client ["Frontend (React + TypeScript)"]
+        UI["18 pantallas<br>rol-especificas"]
+        CACHE["Cache local<br>TTL 10 min"]
+        UI <--> CACHE
+    end
+
+    subgraph supa ["Backend (Supabase)"]
+        PG[("PostgreSQL<br>13 tablas + RLS")]
+        EF["35 Edge Functions<br>(Deno)"]
+        RT["Realtime<br>(WebSocket)"]
+        PG <--> EF
+        PG --> RT
+    end
+
+    subgraph odoo ["ERP (Odoo v19)"]
+        API["JSON-RPC API"]
+        POS["Punto de Venta"]
+        MFG["Manufactura"]
+        INV["Inventario"]
+        PUR["Compras"]
+    end
+
+    subgraph ai ["IA (Google)"]
+        GEM["Gemini 2.5 Flash"]
+    end
+
+    subgraph ext ["Externos"]
+        TEL["Telegram Bot API"]
+    end
+
+    UI <-->|"HTTPS"| EF
+    RT -->|"push"| UI
+    EF <-->|"JSON-RPC"| API
+    EF <-->|"REST"| GEM
+    TEL -->|"webhook"| EF
+
+    style client fill:transparent,stroke:#888,color:#1a1a1a
+    style supa fill:transparent,stroke:#e65100,color:#1a1a1a
+    style odoo fill:transparent,stroke:#077d42,color:#1a1a1a
+    style ai fill:transparent,stroke:#0270ab,color:#1a1a1a
+    style ext fill:transparent,stroke:#7b1fa2,color:#1a1a1a
+        </pre>
+      </div>
     </div>
   </section>
 
@@ -260,6 +439,21 @@
       Eigen Atlas / Ra&uacute;l Ch&iacute;o Le&oacute;n / Marzo 2026
     </div>
   </footer>
+
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'neutral',
+      fontFamily: 'DM Sans, system-ui, sans-serif',
+      flowchart: { curve: 'basis', padding: 16, nodeSpacing: 30, rankSpacing: 40 },
+      themeVariables: {
+        primaryColor: 'transparent', primaryTextColor: '#1a1a1a', primaryBorderColor: '#077d42',
+        lineColor: '#888', secondaryColor: 'transparent', tertiaryColor: 'transparent',
+        mainBkg: 'transparent', nodeBkg: 'transparent', clusterBkg: 'transparent', fontSize: '13px'
+      }
+    });
+  </script>
 
 </body>
 </html>
