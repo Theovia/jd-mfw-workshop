@@ -160,20 +160,6 @@
       color: var(--text-2); font-size: 1rem; margin-bottom: 0.75rem;
       max-width: 600px;
     }
-    .impact-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    @media (max-width: 600px) { .impact-grid { grid-template-columns: 1fr; } }
-    .impact-item {
-      padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px;
-      background: var(--bg);
-    }
-    .impact-num {
-      font-family: var(--mono); font-size: 1.3rem; font-weight: 600;
-      color: var(--green); margin-bottom: 0.25rem;
-    }
-    .impact-desc { font-size: 0.88rem; color: var(--text-2); line-height: 1.5; }
 
     /* PRICING */
     .pricing h2 {
@@ -239,6 +225,15 @@
       margin-bottom: 0.75rem;
     }
     .next p { color: var(--text-2); font-size: 0.95rem; margin-bottom: 0.75rem; max-width: 600px; }
+    .next-list {
+      list-style: none; margin: 1.25rem 0 1.5rem; max-width: 600px;
+    }
+    .next-list li {
+      font-size: 0.92rem; color: var(--text-2); padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border); line-height: 1.6;
+    }
+    .next-list li:last-child { border-bottom: none; }
+    .next-list strong { color: var(--text); }
 
     /* ABOUT */
     .about h2 {
@@ -362,6 +357,7 @@
           <li>Formato est&aacute;ndar de cotizaci&oacute;n: estructura com&uacute;n, m&aacute;rgenes claros, trazabilidad</li>
           <li>Iteraci&oacute;n sobre borradores de documentaci&oacute;n hasta tener versiones listas para revisi&oacute;n</li>
           <li>Medici&oacute;n de l&iacute;nea base: registramos tiempos antes y despu&eacute;s para cuantificar el impacto</li>
+          <li>Demo de cierre: qu&eacute; es posible con agentes de IA, Copilot Studio y automatizaci&oacute;n de flujos (visi&oacute;n de hacia d&oacute;nde va esto)</li>
         </ul>
       </div>
     </div>
@@ -371,17 +367,8 @@
   <section class="impact">
     <div class="wrap">
       <h2>C&oacute;mo medimos el impacto</h2>
-      <p>No prometemos un n&uacute;mero de horas ahorradas antes de conocer al equipo. Lo que s&iacute; hacemos es medir. El D&iacute;a 2 del workshop establece una l&iacute;nea base con tiempos reales, y a los 30 d&iacute;as revisamos los n&uacute;meros juntos.</p>
-      <div class="impact-grid">
-        <div class="impact-item">
-          <div class="impact-num">D&iacute;a 2</div>
-          <div class="impact-desc">Registramos cu&aacute;nto toma cada tarea antes y despu&eacute;s de aplicar Copilot. Esa es la l&iacute;nea base.</div>
-        </div>
-        <div class="impact-item">
-          <div class="impact-num">D&iacute;a 30</div>
-          <div class="impact-desc">Revisi&oacute;n de adopci&oacute;n con el equipo. Comparamos contra la l&iacute;nea base y documentamos el ahorro medido.</div>
-        </div>
-      </div>
+      <p>No prometemos un n&uacute;mero de horas ahorradas antes de conocer al equipo. Lo que s&iacute; hacemos es medir. El D&iacute;a 2 del workshop establece una l&iacute;nea base con tiempos reales del equipo.</p>
+      <p>Dentro de los 30 d&iacute;as de soporte incluidos, hacemos una llamada de seguimiento para revisar qu&eacute; se qued&oacute;, qu&eacute; no, y comparar contra la l&iacute;nea base. No es un proyecto de medici&oacute;n formal; es una revisi&oacute;n honesta de qu&eacute; funcion&oacute;.</p>
     </div>
   </section>
 
@@ -419,8 +406,14 @@
   <section class="next">
     <div class="wrap">
       <h2>Despu&eacute;s del workshop</h2>
-      <p>Si los resultados justifican escalar, el siguiente paso es una base de conocimiento interna: un sistema donde el equipo pregunta en lenguaje natural sobre documentaci&oacute;n t&eacute;cnica y obtiene respuestas con la referencia exacta. Desplegado sobre infraestructura enterprise aprobada.</p>
-      <p>El alcance y precio de ese proyecto se definen con base en lo que aprendemos durante el workshop. No es un requisito; es una opci&oacute;n que existe si tiene sentido.</p>
+      <p>Un equipo con AI Literacy sabe identificar oportunidades. Estos son ejemplos de proyectos que se pueden explorar una vez que el equipo tiene el criterio:</p>
+      <ul class="next-list">
+        <li><strong>Base de conocimiento interna.</strong> El equipo pregunta en lenguaje natural sobre manuales t&eacute;cnicos y obtiene respuestas con la referencia exacta. Cada ingeniero podr&iacute;a construir uno para sus propios documentos.</li>
+        <li><strong>An&aacute;lisis de listas de materiales en minutos.</strong> Extraer dimensiones, pesos, cantidades y operaciones de un BOM completo, con los datos listos para cargar al ERP.</li>
+        <li><strong>Automatizaci&oacute;n de flujos con agentes.</strong> Tareas repetitivas que hoy se hacen a mano (extraer datos, generar documentos, validar contra est&aacute;ndares) ejecutadas de inicio a fin sin intervenci&oacute;n manual.</li>
+        <li><strong>Generaci&oacute;n asistida de documentaci&oacute;n.</strong> Borradores de instrucciones de operaci&oacute;n y hojas t&eacute;cnicas generados a partir de datos existentes. El ingeniero revisa y aprueba.</li>
+      </ul>
+      <p>El alcance y precio de cualquier proyecto se definen con base en lo que aprendemos durante el workshop. No son un requisito; son opciones que existen si tienen sentido.</p>
     </div>
   </section>
 
