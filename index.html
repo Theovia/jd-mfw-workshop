@@ -3,777 +3,450 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capacitaci&oacute;n IA para Ingenier&iacute;a MFW &mdash; John Deere Monterrey</title>
+  <title>AI Literacy Workshop / Eigen Atlas</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23077d42'/><text x='16' y='22' font-size='18' fill='white' text-anchor='middle' font-family='sans-serif' font-weight='bold'>IA</text></svg>">
-  <meta property="og:title" content="Capacitaci&oacute;n IA para Ingenier&iacute;a &mdash; John Deere MFW">
-  <meta property="og:description" content="Workshop de 2 d&iacute;as: inteligencia artificial aplicada a procesos de manufactura. Presencial en Monterrey + remoto.">
-  <meta property="og:type" content="website">
+  <meta property="og:title" content="AI Literacy Workshop / Eigen Atlas">
+  <meta property="og:description" content="Workshop de 2 dias: inteligencia artificial aplicada a procesos de manufactura. Presencial en Monterrey + remoto.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-primary: #f4f4f5;
-      --bg-elevated: #ffffff;
-      --glass-bg: #ffffff;
-      --glass-border: rgba(0,0,0,0.1);
-      --glass-highlight: rgba(255,255,255,0.8);
-      --text-primary: #111118;
-      --text-secondary: #52525b;
-      --text-muted: #71717a;
-      --text-ghost: #c4c4cc;
-      --accent: #077d42;
-      --accent-soft: #06703b;
-      --accent-glow: rgba(7,125,66,0.18);
-      --accent-bg: rgba(7,125,66,0.08);
-      --accent-border: rgba(7,125,66,0.22);
-      --tier2: #0270ab;
-      --tier2-glow: rgba(2,132,199,0.15);
-      --tier2-bg: rgba(2,132,199,0.06);
-      --tier2-border: rgba(2,132,199,0.22);
-      --red: #dc2626;
-      --red-bg: rgba(220,38,38,0.06);
-      --red-border: rgba(220,38,38,0.18);
-      --font-display: 'Manrope', sans-serif;
-      --font-body: 'Inter', system-ui, sans-serif;
-      --font-mono: 'JetBrains Mono', 'Courier New', monospace;
-      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --bg: #FAF9F6;
+      --bg-card: #ffffff;
+      --border: rgba(0,0,0,0.08);
+      --border-strong: rgba(0,0,0,0.15);
+      --text: #1a1a1a;
+      --text-2: #4a4a4a;
+      --text-3: #888;
+      --green: #077d42;
+      --green-light: rgba(7,125,66,0.07);
+      --blue: #0270ab;
+      --serif: 'Source Serif 4', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
     body {
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      font-family: var(--font-body);
-      line-height: 1.65;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    /* Grain */
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      opacity: 0.02; pointer-events: none; z-index: 99;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-    /* Grid */
-    body::after {
-      content: ''; position: fixed; inset: 0;
-      pointer-events: none; z-index: -1;
-      background-image:
-        linear-gradient(rgba(0,0,0,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,0,0,0.018) 1px, transparent 1px);
-      background-size: 80px 80px;
-    }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 4rem); }
-
-    /* GLASS */
-    .glass {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 24px rgba(0,0,0,0.08);
-    }
-    @media (min-width: 769px) {
-      .glass { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-    }
-    @media (max-width: 768px) {
-      .glass { background: rgba(255,255,255,0.95); }
-    }
-
-    .label {
-      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.18em; color: var(--accent);
-    }
-
-    /* DIVIDER */
-    .divider {
-      height: 1px; border: none; margin: 0;
-      background: linear-gradient(90deg, transparent, var(--glass-border) 20%, var(--accent-border) 50%, var(--glass-border) 80%, transparent);
+      background: var(--bg); color: var(--text);
+      font-family: var(--sans); font-size: 16px;
+      line-height: 1.7; -webkit-font-smoothing: antialiased;
     }
 
     /* NAV */
     nav {
       position: sticky; top: 0; z-index: 100;
-      padding: 1.15rem 0;
-      background: rgba(244,244,245,0.88);
-      border-bottom: 1px solid var(--glass-border);
-      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      padding: 0.9rem 0;
+      background: rgba(250,249,246,0.92);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     }
-    @media (min-width: 769px) {
-      nav { position: fixed; left: 0; right: 0; }
+    .nav-inner {
+      max-width: 920px; margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    nav .container { display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--accent); letter-spacing: -0.01em; }
+    .nav-brand { font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--text); text-decoration: none; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      color: var(--text-muted); text-decoration: none; font-size: 0.78rem; font-weight: 500;
-      transition: color 0.4s var(--ease-out-expo); position: relative;
+      font-size: 0.82rem; color: var(--text-2); text-decoration: none;
+      transition: color 0.2s;
     }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
-      background: var(--accent); transition: width 0.4s var(--ease-out-expo);
+    .nav-links a:hover { color: var(--green); }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
     }
-    .nav-links a:hover { color: var(--text-primary); }
-    .nav-links a:hover::after { width: 100%; }
-    /* Hamburger */
-    .nav-toggle { display: none; }
-    .hamburger {
-      display: none; width: 28px; height: 20px; cursor: pointer;
-      flex-direction: column; justify-content: space-between;
-    }
-    .hamburger span {
-      display: block; height: 2px; width: 100%; background: var(--text-primary);
-      border-radius: 2px; transition: all 0.3s var(--ease-out-expo);
-    }
-    @media (max-width: 768px) {
-      .hamburger { display: flex; }
-      nav { padding: 0.85rem 0; }
-      .nav-links {
-        display: flex; flex-direction: column; gap: 0;
-        position: absolute; top: 100%; left: 0; right: 0;
-        background: rgba(244,244,245,0.97); border-bottom: 1px solid var(--glass-border);
-        max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease-out-expo);
-        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      }
-      .nav-links a { display: block; padding: 0.85rem clamp(1.5rem, 5vw, 4rem); font-size: 0.88rem; }
-      .nav-links a::after { display: none; }
-      .nav-toggle:checked ~ .container .nav-links { max-height: 300px; }
-      .nav-toggle:checked ~ .container .hamburger span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-      .nav-toggle:checked ~ .container .hamburger span:nth-child(2) { opacity: 0; }
-      .nav-toggle:checked ~ .container .hamburger span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
-    }
+
+    /* LAYOUT */
+    .wrap { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+    .wrap-wide { max-width: 920px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 5rem 0; }
 
     /* HERO */
     .hero {
-      position: relative; overflow: clip;
-      padding: clamp(5rem, 12vw, 9rem) 0 clamp(3rem, 8vw, 5rem);
-      text-align: center;
+      padding: 8rem 0 4rem;
+      border-bottom: 1px solid var(--border);
     }
-    @media (min-width: 769px) { .hero { min-height: 100vh; padding-top: 10rem; } }
-
-    /* Hero glow — larger, more vibrant */
-    .hero-glow {
-      position: absolute; border-radius: 50%; filter: blur(120px); pointer-events: none;
-    }
-    .hero-glow-1 {
-      top: -20%; left: 50%; transform: translateX(-60%);
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(7,125,66,0.4) 0%, transparent 65%);
-      opacity: 0.14; animation: drift 14s ease-in-out infinite;
-    }
-    .hero-glow-2 {
-      bottom: 0%; right: 10%; width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(2,132,199,0.35) 0%, transparent 65%);
-      opacity: 0.10; animation: drift 18s ease-in-out infinite reverse;
-    }
-    .hero-mouse-glow {
-      position: absolute; width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-      opacity: 0; filter: blur(80px); pointer-events: none;
-      transition: opacity 0.5s ease; transform: translate(-50%, -50%);
-    }
-    @keyframes drift { 0%,100% { transform: translate(0,0); } 50% { transform: translate(20px,-20px); } }
-
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.45rem 0.9rem; border-radius: 100px;
-      border: 1px solid var(--accent-border); background: var(--accent-bg);
-      margin-bottom: 2rem; animation: fade-up 0.8s var(--ease-out-expo);
-    }
-    .hero-badge .dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 var(--accent-glow); } 50% { opacity: 0.3; box-shadow: 0 0 0 6px transparent; } }
-    .hero-badge span { font-family: var(--font-mono); font-size: 0.62rem; color: var(--accent); letter-spacing: 0.06em; }
-
-    /* Editorial headline — mixed weights */
-    .hero-eyebrow {
-      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted);
-      margin-bottom: 1rem;
-      animation: fade-up 0.8s var(--ease-out-expo) 0.05s both;
+    .hero-label {
+      font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+      color: var(--text-3); letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
     }
     .hero h1 {
-      font-family: var(--font-display);
-      font-size: clamp(2.6rem, 6vw, 4.2rem); font-weight: 800;
-      line-height: 1.1; letter-spacing: -0.035em;
-      max-width: 750px; margin: 0 auto;
-      animation: fade-up 0.8s var(--ease-out-expo) 0.1s both;
+      font-family: var(--serif); font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+      font-weight: 700; line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--text); margin-bottom: 1rem;
     }
-    .hero h1 .thin {
-      font-weight: 300; color: var(--text-secondary);
+    .hero h1 em {
+      font-style: italic; color: var(--green);
     }
-    .hero h1 .highlight {
-      color: var(--accent);
-      position: relative;
+    .hero-sub {
+      font-size: 1.15rem; color: var(--text-2); max-width: 540px;
+      line-height: 1.6; margin-bottom: 2.5rem;
     }
-    .hero h1 .highlight::after {
-      content: '';
-      position: absolute; bottom: 0.05em; left: -0.02em; right: -0.02em; height: 0.12em;
-      background: rgba(7,125,66,0.18); border-radius: 2px;
+    .hero-cta {
+      display: inline-block; padding: 0.75rem 1.8rem;
+      background: var(--green); color: #fff; border-radius: 6px;
+      font-weight: 600; font-size: 0.9rem; text-decoration: none;
+      transition: opacity 0.2s;
     }
-    .hero .subtitle {
-      font-size: clamp(1.02rem, 2.2vw, 1.18rem); color: var(--text-secondary);
-      max-width: 540px; margin: 1.5rem auto 2.25rem;
-      font-weight: 400; line-height: 1.75;
-      animation: fade-up 0.8s var(--ease-out-expo) 0.2s both;
-    }
-
-    /* CTAs */
-    .hero-ctas {
-      display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center;
-      justify-content: center;
-      animation: fade-up 0.8s var(--ease-out-expo) 0.3s both;
-    }
-    .cta-primary {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.85rem 1.75rem;
-      background: linear-gradient(135deg, var(--accent), #06753d);
-      color: #ffffff; font-family: var(--font-display); font-weight: 700; font-size: 0.85rem;
-      text-decoration: none; border-radius: 12px; letter-spacing: -0.01em;
-      transition: all 0.4s var(--ease-spring);
-      box-shadow: 0 0 30px var(--accent-glow), 0 2px 8px rgba(0,0,0,0.08);
-    }
-    .cta-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 0 50px var(--accent-glow), 0 8px 24px rgba(0,0,0,0.12); }
-    .cta-secondary {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      padding: 0.85rem 1.75rem;
-      color: var(--text-secondary); font-family: var(--font-display); font-weight: 600; font-size: 0.85rem;
-      text-decoration: none; border-radius: 12px;
-      border: 1px solid var(--glass-border);
-      transition: all 0.4s var(--ease-spring);
-    }
-    .cta-secondary:hover { border-color: var(--accent-border); color: var(--accent); transform: translateY(-2px); }
-
-    /* Stats — horizontal glass strip */
-    .hero-stats-bar {
-      display: flex; justify-content: center; gap: 0;
-      margin-top: 3.5rem; animation: fade-up 0.8s var(--ease-out-expo) 0.4s both;
-      background: var(--glass-bg); border: 1px solid var(--glass-border);
-      border-radius: 16px; max-width: 680px; margin-left: auto; margin-right: auto;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 20px rgba(0,0,0,0.06);
-      overflow: hidden;
-    }
-    .hero-stat {
-      flex: 1; padding: 1.25rem 1.5rem; text-align: center;
-      position: relative;
-    }
-    .hero-stat:not(:last-child)::after {
-      content: ''; position: absolute; right: 0; top: 20%; height: 60%;
-      width: 1px; background: var(--glass-border);
-    }
-    .hero-stat-value {
-      font-family: var(--font-mono); font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 700;
-      color: var(--accent); line-height: 1;
-    }
-    .hero-stat-label {
-      font-size: 0.72rem; color: var(--text-muted); margin-top: 0.35rem;
-      line-height: 1.35; letter-spacing: 0.01em;
-    }
-    @media (max-width: 600px) {
-      .hero-stats-bar { flex-direction: column; max-width: 320px; }
-      .hero-stat { padding: 1rem 1.25rem; }
-      .hero-stat:not(:last-child)::after { right: 15%; left: 15%; top: auto; bottom: 0; width: auto; height: 1px; }
-    }
-
-    @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-cta:hover { opacity: 0.85; }
 
     /* EXEC SUMMARY */
-    .exec-summary {
-      padding: 2rem 2rem 2rem 2.25rem;
-      border-left: none;
-      margin-top: 3.5rem;
-      animation: fade-up 0.8s var(--ease-out-expo) 0.5s both;
-      position: relative;
+    .exec {
+      padding: 3rem 0 4rem;
+      border-bottom: 1px solid var(--border);
     }
-    .exec-summary::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 2px; height: 100%;
-      background: linear-gradient(180deg, var(--accent), transparent);
-    }
-    .exec-summary .exec-title {
-      font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase;
-      letter-spacing: 0.18em; color: var(--accent); margin-bottom: 1rem;
-    }
-    .exec-summary p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.75; }
-    .exec-summary p + p { margin-top: 0.65rem; }
-    .exec-summary strong { color: var(--text-primary); font-weight: 600; }
-
-    /* SECTIONS */
-    section { padding: clamp(4rem, 10vw, 8rem) 0; position: relative; }
-    .section-header { margin-bottom: 3rem; }
-    .section-header h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 700;
-      letter-spacing: -0.025em; margin-top: 0.65rem; line-height: 1.15;
-    }
-
-    /* PAIN CARDS */
-    .pains-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; align-items: stretch; }
-    .pain-card {
-      padding: 2rem; position: relative; overflow: hidden;
-      transition: all 0.5s var(--ease-out-expo);
-      display: flex; flex-direction: column;
-    }
-    .pain-card p { flex: 1; }
-    .pain-card:hover { border-color: var(--red-border); background: var(--red-bg); transform: translateY(-4px); }
-    .pain-card::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
-      background: linear-gradient(180deg, var(--red), transparent); border-radius: 3px 0 0 0;
-    }
-    .pain-icon {
-      width: 40px; height: 40px; border-radius: 12px;
-      background: var(--red-bg); border: 1px solid var(--red-border);
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-mono); font-size: 1rem; color: var(--red);
-      margin-bottom: 1.25rem; font-weight: 700;
-    }
-    .pain-card h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem; }
-    .pain-card p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; }
-    /* DAY CARDS */
-    .days-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    @media (max-width: 768px) { .days-grid { grid-template-columns: 1fr; } }
-    .day-card { padding: 2.25rem; position: relative; }
-    .day-badge {
-      display: inline-block; padding: 0.35rem 0.8rem; border-radius: 8px;
-      font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.25rem;
-      background: var(--accent-bg); border: 1px solid var(--accent-border); color: var(--accent);
-    }
-    .day-card h4 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.85rem; }
-    .day-card p { color: var(--text-secondary); font-size: 0.92rem; line-height: 1.65; margin-bottom: 1rem; }
-    .day-topics { list-style: none; }
-    .day-topics li {
-      color: var(--text-secondary); font-size: 0.88rem; padding: 0.35rem 0;
-      padding-left: 1.5rem; position: relative;
-    }
-    .day-topics li::before {
-      content: '\203A'; position: absolute; left: 0; color: var(--accent);
-      font-family: var(--font-mono); font-weight: 600; font-size: 1.1rem; line-height: 1.4;
-    }
-
-    /* PRICING */
-    .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: stretch; }
-    @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; } }
-    .tier-card { padding: 2.5rem; position: relative; transition: all 0.5s var(--ease-out-expo); display: flex; flex-direction: column; text-align: center; }
-    .tier-card:hover { transform: translateY(-4px); }
-    .tier-card.t2 { border-color: var(--tier2-border); }
-    .tier-card.t2:hover { box-shadow: 0 8px 40px rgba(0,184,230,0.08); }
-    .tier-badge {
-      display: inline-block; padding: 0.35rem 0.8rem; border-radius: 6px;
-      font-family: var(--font-mono); font-size: 0.6rem; font-weight: 600;
-      letter-spacing: 0.12em; margin-bottom: 1.25rem;
-    }
-    .tier-card:not(.t2) .tier-badge { background: var(--accent-bg); border: 1px solid var(--accent-border); color: var(--accent); }
-    .tier-card.t2 .tier-badge { background: var(--tier2); color: #fff; }
-    .tier-name { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .tier-desc { color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.5rem; line-height: 1.55; text-align: left; }
-    .tier-price { font-family: var(--font-mono); font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; margin-bottom: 0.25rem; letter-spacing: -0.02em; white-space: nowrap; }
-    .tier-card:not(.t2) .tier-price { color: var(--accent); }
-    .tier-card.t2 .tier-price { color: var(--tier2); }
-    .tier-note { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.75rem; margin-top: 0.35rem; }
-    .tier-features { list-style: none; flex: 1; }
-    .tier-features { text-align: left; }
-    .tier-features li {
-      padding: 0.55rem 0; font-size: 0.88rem; color: var(--text-secondary);
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      display: flex; align-items: flex-start; gap: 0.65rem;
-    }
-    .tier-features li::before { content: '\2713'; color: var(--accent); font-family: var(--font-mono); font-weight: 600; flex-shrink: 0; font-size: 0.82rem; }
-    .tier-card.t2 .tier-features li::before { color: var(--tier2); }
-
-    /* Tier bonus section */
-    .tier-bonus {
-      margin-top: 1.5rem; padding: 1.25rem 1.35rem; border-radius: 14px;
-      background: var(--accent-bg); border: 1px solid var(--accent-border);
-      text-align: left;
-    }
-    .tier-card.t2 .tier-bonus { background: var(--tier2-bg); border-color: var(--tier2-border); }
-    .tier-bonus-label {
-      font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent);
-      margin-bottom: 0.85rem;
-    }
-    .tier-card.t2 .tier-bonus-label { color: var(--tier2); }
-    .tier-bonus-item { display: flex; gap: 0.75rem; align-items: flex-start; }
-    .tier-bonus-item + .tier-bonus-item { margin-top: 0.85rem; }
-    .tier-bonus-icon {
-      width: 30px; height: 30px; border-radius: 8px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
-      background: rgba(7,125,66,0.12); border: 1px solid var(--accent-border); color: var(--accent);
-    }
-    .tier-card.t2 .tier-bonus-icon { background: rgba(2,112,171,0.12); border-color: var(--tier2-border); color: var(--tier2); }
-    .tier-bonus-text strong { color: var(--text-primary); display: block; font-size: 0.82rem; font-weight: 600; margin-bottom: 0.15rem; }
-    .tier-bonus-text span { color: var(--text-muted); font-size: 0.76rem; line-height: 1.5; }
-    .tier-cta-wrap { margin-top: auto; padding-top: 1.5rem; text-align: center; }
-    .tier-cta {
-      display: inline-block; padding: 0.7rem 2rem;
-      border-radius: 10px; font-family: var(--font-display); font-weight: 600;
-      font-size: 0.82rem; text-decoration: none; letter-spacing: -0.01em;
-      transition: all 0.4s var(--ease-spring);
-    }
-    .tier-features { margin-bottom: 1rem; }
-    .tier-card:not(.t2) .tier-cta {
-      background: var(--accent); color: #fff;
-    }
-    .tier-card:not(.t2) .tier-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 20px var(--accent-glow); }
-    .tier-card.t2 .tier-cta {
-      background: var(--tier2); color: #fff;
-    }
-    .tier-card.t2 .tier-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 20px var(--tier2-glow); }
-    .tier-price-custom {
-      font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;
-      color: var(--tier2); letter-spacing: -0.01em;
-      padding: 0.6rem 1.5rem; background: var(--tier2-bg);
-      border: 1px solid var(--tier2-border); border-radius: 12px;
-      display: inline-block; margin-bottom: 0.25rem;
-    }
-
-    /* ROI */
-    .roi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; position: relative; }
-    @media (min-width: 601px) {
-      .roi-grid { grid-template-columns: repeat(3, 1fr); }
-      .roi-card { position: relative; }
-      .roi-card:not(:last-child)::after {
-        content: '\2192'; position: absolute; right: -0.75rem; top: 50%;
-        transform: translate(50%, -50%); font-size: 1.2rem; color: var(--text-ghost); z-index: 1;
-      }
-      .roi-card:nth-child(3) { border-color: var(--accent-border); background: var(--accent-bg); }
-    }
-    .roi-card { padding: 2rem; text-align: center; transition: all 0.5s var(--ease-out-expo); }
-    .roi-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
-    .roi-value { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 600; color: var(--accent); line-height: 1; }
-    .roi-label { color: var(--text-secondary); font-size: 0.82rem; margin-top: 0.5rem; line-height: 1.5; }
-    .roi-math { color: var(--text-muted); font-size: 0.68rem; font-family: var(--font-mono); margin-top: 0.3rem; }
-
-    /* ABOUT */
-    .about-header-card { padding: 2.5rem; margin-bottom: 1.5rem; }
-    .about-name {
-      font-family: var(--font-display); font-size: 1.6rem; font-weight: 800;
-      letter-spacing: -0.02em; margin-bottom: 0.3rem;
-    }
-    .about-title {
-      font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600;
-      color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em;
+    .exec-label {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 500;
+      color: var(--green); text-transform: uppercase; letter-spacing: 0.08em;
       margin-bottom: 1.25rem;
     }
-    .about-bio { color: var(--text-secondary); font-size: 0.94rem; line-height: 1.75; max-width: 680px; }
-    .about-bio + .about-bio { margin-top: 0.65rem; }
-    .about-bio strong { color: var(--text-primary); font-weight: 600; }
-    .about-location {
-      margin-top: 1.25rem; font-family: var(--font-mono); font-size: 0.72rem;
-      color: var(--text-muted); letter-spacing: 0.02em;
+    .exec p {
+      font-size: 1rem; color: var(--text-2); margin-bottom: 0.8rem;
     }
-    /* FINAL CTA */
-    .final-cta { text-align: center; padding: clamp(5rem, 12vw, 9rem) 0; position: relative; }
-    .final-cta::before {
-      content: ''; position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%); width: 550px; height: 550px;
-      background: radial-gradient(circle, rgba(10,143,79,0.25) 0%, transparent 70%);
-      opacity: 0.15; filter: blur(80px);
-    }
-    .final-cta h2 {
-      font-family: var(--font-display); font-size: clamp(1.8rem, 4.5vw, 3.2rem);
-      font-weight: 700; letter-spacing: -0.025em; margin-bottom: 0.85rem; line-height: 1.15;
-    }
-    .final-cta p { color: var(--text-secondary); font-size: 1rem; margin-bottom: 2.5rem; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.65; }
-    .contact-info { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 3rem; }
-    @media (max-width: 768px) { .contact-info { flex-direction: column; align-items: center; gap: 1.25rem; } }
-    .contact-item { text-align: center; }
-    .contact-item .cl { font-family: var(--font-mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.18em; color: var(--text-muted); margin-bottom: 0.3rem; }
-    .contact-item a {
-      color: var(--text-primary); text-decoration: none; font-size: 0.88rem;
-      transition: color 0.3s ease;
-    }
-    .contact-item a:hover { color: var(--accent); }
+    .exec strong { color: var(--text); }
 
-    footer { padding: 2rem 0; border-top: 1px solid var(--glass-border); text-align: center; }
-    footer p { font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.05em; }
+    /* CONTEXT (pains) */
+    .context p {
+      font-size: 1.05rem; color: var(--text-2); line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .context .pullquote {
+      font-family: var(--serif); font-size: 1.3rem; font-style: italic;
+      color: var(--text); line-height: 1.5;
+      border-left: 3px solid var(--green); padding-left: 1.25rem;
+      margin: 2rem 0;
+    }
 
-    /* REVEAL */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .stagger > .reveal:nth-child(2) { transition-delay: 0.1s; }
-    .stagger > .reveal:nth-child(3) { transition-delay: 0.2s; }
-    .stagger > .reveal:nth-child(4) { transition-delay: 0.3s; }
+    /* WORKSHOP */
+    .day {
+      padding: 2.5rem 0;
+    }
+    .day + .day { border-top: 1px solid var(--border); }
+    .day-label {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 600;
+      color: var(--green); text-transform: uppercase; letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+    .day h3 {
+      font-family: var(--serif); font-size: 1.35rem; font-weight: 700;
+      margin-bottom: 0.75rem; line-height: 1.3;
+    }
+    .day > p {
+      color: var(--text-2); font-size: 0.95rem; margin-bottom: 1.25rem;
+      max-width: 600px;
+    }
+    .day-topics {
+      list-style: none; columns: 1;
+    }
+    .day-topics li {
+      font-size: 0.9rem; color: var(--text-2); padding: 0.4rem 0;
+      padding-left: 1.2rem; position: relative;
+    }
+    .day-topics li::before {
+      content: '\2022'; position: absolute; left: 0; color: var(--text-3);
+    }
+
+    /* IMPACT (reframed ROI) */
+    .impact {
+      background: var(--bg-card); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .impact h2 {
+      font-family: var(--serif); font-size: 1.6rem; font-weight: 700;
+      margin-bottom: 1.25rem;
+    }
+    .impact p {
+      color: var(--text-2); font-size: 1rem; margin-bottom: 0.75rem;
+      max-width: 600px;
+    }
+    .impact-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 600px) { .impact-grid { grid-template-columns: 1fr; } }
+    .impact-item {
+      padding: 1.5rem; border: 1px solid var(--border); border-radius: 8px;
+      background: var(--bg);
+    }
+    .impact-num {
+      font-family: var(--mono); font-size: 1.3rem; font-weight: 600;
+      color: var(--green); margin-bottom: 0.25rem;
+    }
+    .impact-desc { font-size: 0.88rem; color: var(--text-2); line-height: 1.5; }
+
+    /* PRICING */
+    .pricing h2 {
+      font-family: var(--serif); font-size: 1.6rem; font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .pricing > .wrap > p { color: var(--text-2); margin-bottom: 2rem; }
+    .price-card {
+      border: 1px solid var(--border-strong); border-radius: 10px;
+      overflow: hidden; background: var(--bg-card);
+      max-width: 580px;
+    }
+    .price-header {
+      padding: 2rem 2rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--green-light);
+    }
+    .price-header h3 {
+      font-family: var(--sans); font-size: 1.15rem; font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .price-header p { font-size: 0.88rem; color: var(--text-2); }
+    .price-body { padding: 2rem; }
+    .price-amount {
+      font-family: var(--mono); font-size: 1.4rem; font-weight: 600;
+      color: var(--green); margin-bottom: 0.15rem;
+    }
+    .price-unit { font-size: 0.82rem; color: var(--text-3); margin-bottom: 1.5rem; }
+    .price-list { list-style: none; margin-bottom: 1.5rem; }
+    .price-list li {
+      font-size: 0.88rem; color: var(--text-2); padding: 0.4rem 0;
+      padding-left: 1.2rem; position: relative;
+    }
+    .price-list li::before {
+      content: '\2022'; position: absolute; left: 0; color: var(--green);
+    }
+    .price-bonus {
+      padding: 1.25rem; background: var(--green-light);
+      border-radius: 8px; margin-bottom: 1.5rem;
+    }
+    .price-bonus-label {
+      font-family: var(--mono); font-size: 0.68rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--green);
+      margin-bottom: 0.6rem;
+    }
+    .price-bonus p { font-size: 0.85rem; color: var(--text-2); margin-bottom: 0.35rem; }
+    .price-bonus strong { color: var(--text); }
+    .price-cta {
+      display: inline-block; padding: 0.7rem 1.6rem;
+      background: var(--green); color: #fff; border-radius: 6px;
+      font-weight: 600; font-size: 0.88rem; text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .price-cta:hover { opacity: 0.85; }
+
+    /* NEXT (KB project teaser) */
+    .next {
+      background: var(--bg-card); border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .next h2 {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .next p { color: var(--text-2); font-size: 0.95rem; margin-bottom: 0.75rem; max-width: 600px; }
+
+    /* ABOUT */
+    .about h2 {
+      font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .about .about-title { font-size: 0.88rem; color: var(--text-3); margin-bottom: 1rem; }
+    .about p { color: var(--text-2); font-size: 0.95rem; margin-bottom: 0.75rem; max-width: 600px; }
+
+    /* CONTACT */
+    .contact {
+      background: var(--bg-card); border-top: 1px solid var(--border);
+    }
+    .contact h2 {
+      font-family: var(--serif); font-size: 1.6rem; font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .contact > .wrap > p { color: var(--text-2); margin-bottom: 2rem; }
+    .contact-links {
+      display: flex; gap: 2.5rem; flex-wrap: wrap;
+    }
+    .contact-links a {
+      font-size: 0.92rem; color: var(--text); text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.15rem;
+      transition: border-color 0.2s;
+    }
+    .contact-links a:hover { border-color: var(--green); color: var(--green); }
+    .contact-label {
+      font-family: var(--mono); font-size: 0.68rem; color: var(--text-3);
+      text-transform: uppercase; letter-spacing: 0.08em;
+      display: block; margin-bottom: 0.25rem;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 0; text-align: center;
+      font-size: 0.72rem; color: var(--text-3);
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-      .reveal { opacity: 1; transform: none; }
+      * { animation: none !important; transition: none !important; }
     }
     @media print {
-      body::before, body::after, nav, .hero-glow, .hero-mouse-glow { display: none; }
+      nav { display: none; }
       section { padding: 1.5rem 0; break-inside: avoid; }
-      .hero { min-height: auto; padding: 1.5rem 0; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <input type="checkbox" id="navToggle" class="nav-toggle" aria-hidden="true">
-    <div class="container">
-      <div class="nav-logo">Eigen Atlas</div>
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">Eigen Atlas</a>
       <ul class="nav-links">
-        <li><a href="#contexto" onclick="document.getElementById('navToggle').checked=false">Contexto</a></li>
-        <li><a href="#workshop" onclick="document.getElementById('navToggle').checked=false">Workshop</a></li>
-        <li><a href="#inversion" onclick="document.getElementById('navToggle').checked=false">Inversi&oacute;n</a></li>
-        <li><a href="#contacto" onclick="document.getElementById('navToggle').checked=false">Contacto</a></li>
+        <li><a href="#contexto">Contexto</a></li>
+        <li><a href="#workshop">Workshop</a></li>
+        <li><a href="#inversion">Inversi&oacute;n</a></li>
+        <li><a href="#contacto">Contacto</a></li>
       </ul>
-      <label for="navToggle" class="hamburger" aria-label="Men&uacute;">
-        <span></span><span></span><span></span>
-      </label>
     </div>
   </nav>
 
-  <!-- ===== HERO ===== -->
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero-glow hero-glow-1"></div>
-    <div class="hero-glow hero-glow-2"></div>
-    <div class="hero-mouse-glow" id="mouseGlow"></div>
-
-    <div class="container">
-      <div class="hero-badge">
-        <div class="dot"></div>
-        <span>Propuesta de Capacitaci&oacute;n 2026</span>
-      </div>
-
-      <div class="hero-eyebrow">Presencial en Monterrey + remoto &middot; 2026</div>
-
-      <h1><span class="thin">AI Literacy</span><br><span class="highlight">Workshop</span></h1>
-
-      <p class="subtitle">
-        Criterio t&eacute;cnico en IA para equipos de manufactura.
-      </p>
-
-      <div class="hero-ctas">
-        <a href="#inversion" class="cta-primary">Ver propuesta &#8594;</a>
-        <a href="#contacto" class="cta-secondary">Agendar llamada</a>
-      </div>
-
-      <div class="hero-stats-bar">
-        <div class="hero-stat">
-          <div class="hero-stat-value">2 d&iacute;as</div>
-          <div class="hero-stat-label">1 presencial + 1 remoto</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value">100%</div>
-          <div class="hero-stat-label">Pr&aacute;ctico con datos reales</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value">M365</div>
-          <div class="hero-stat-label">Compatible con Copilot</div>
-        </div>
-      </div>
-
-      <!-- EXECUTIVE SUMMARY -->
-      <div class="exec-summary glass">
-        <div class="exec-title">Resumen para la toma de decisi&oacute;n</div>
-        <p><strong>Contexto:</strong> En ingenier&iacute;a de manufactura, los cuellos de botella m&aacute;s costosos no est&aacute;n en la l&iacute;nea &mdash; est&aacute;n en el escritorio: documentaci&oacute;n t&eacute;cnica compilada a mano, consulta de referencias en manuales extensos, y preparaci&oacute;n de datos para sistemas. Seg&uacute;n McKinsey, los equipos de ingenier&iacute;a dedican entre 30-40% de su tiempo a buscar informaci&oacute;n y documentar. Son exactamente el tipo de tareas donde la IA genera retorno inmediato.</p>
-        <p><strong>Inversi&oacute;n:</strong> $12,500 MXN + IVA por persona. Payback estimado en menos de 1 mes.</p>
-        <p><strong>Seguridad:</strong> Todos los ejercicios usan herramientas enterprise aprobadas dentro del entorno Microsoft 365 existente. Ning&uacute;n dato sale de la organizaci&oacute;n.</p>
-        <p><strong>Resultado:</strong> Cada ingeniero sale con al menos 2 flujos de Copilot configurados para sus tareas prioritarias y una l&iacute;nea base medida para cuantificar el ahorro real desde la primera semana.</p>
-      </div>
+    <div class="wrap">
+      <div class="hero-label">Presencial en Monterrey + remoto / 2026</div>
+      <h1>AI Literacy<br><em>Workshop</em></h1>
+      <p class="hero-sub">Criterio t&eacute;cnico en IA para equipos de manufactura.</p>
+      <a href="#inversion" class="hero-cta">Ver propuesta</a>
     </div>
   </section>
 
-  <hr class="divider">
+  <!-- EXECUTIVE SUMMARY -->
+  <div class="exec">
+    <div class="wrap">
+      <div class="exec-label">Resumen ejecutivo</div>
+      <p><strong>Contexto.</strong> En ingenier&iacute;a de manufactura, los cuellos de botella m&aacute;s costosos no est&aacute;n en la l&iacute;nea. Est&aacute;n en el escritorio: documentaci&oacute;n t&eacute;cnica compilada a mano, consulta de referencias en manuales extensos, preparaci&oacute;n de datos para sistemas. Seg&uacute;n McKinsey, los equipos de ingenier&iacute;a dedican entre 30 y 40% de su tiempo a buscar informaci&oacute;n y documentar.</p>
+      <p><strong>Inversi&oacute;n.</strong> $12,500 MXN + IVA por persona. Grupos de 8 a 15.</p>
+      <p><strong>Seguridad.</strong> Todos los ejercicios usan herramientas enterprise aprobadas dentro del entorno Microsoft 365 existente. Ning&uacute;n dato sale de la organizaci&oacute;n.</p>
+      <p><strong>Resultado.</strong> El equipo sale con criterio para identificar d&oacute;nde la IA genera valor en su trabajo diario, y con una l&iacute;nea base medida para cuantificar el impacto.</p>
+    </div>
+  </div>
 
-  <!-- ===== PAINS ===== -->
-  <section id="contexto">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">El contexto</span>
-        <h2>Cada semana, el equipo absorbe<br>costos que se acumulan</h2>
-      </div>
-      <div class="pains-grid stagger">
-        <div class="pain-card glass reveal">
-          <div class="pain-icon">!</div>
-          <h3>B&uacute;squeda manual en documentaci&oacute;n t&eacute;cnica</h3>
-          <p>Normas internas, procedimientos y especificaciones t&eacute;cnicas rara vez est&aacute;n pensados para b&uacute;squeda r&aacute;pida. Encontrar la referencia correcta es un proceso manual que se repite constantemente.</p>
-        </div>
-        <div class="pain-card glass reveal">
-          <div class="pain-icon">#</div>
-          <h3>Documentaci&oacute;n compilada a mano</h3>
-          <p>Instrucciones de operaci&oacute;n, tablas de lista de materiales, rutas de producci&oacute;n en el ERP &mdash; todo se arma pieza por pieza desde m&uacute;ltiples fuentes. Un solo producto nuevo consume d&iacute;as de carga manual.</p>
-        </div>
-      </div>
+  <!-- CONTEXT -->
+  <section id="contexto" class="context">
+    <div class="wrap">
+      <p>Un equipo de ingenier&iacute;a de manufactura trabaja con documentaci&oacute;n t&eacute;cnica extensa, listas de materiales, rutas de producci&oacute;n, est&aacute;ndares internos. Gran parte de ese trabajo es consulta y compilaci&oacute;n: buscar la referencia correcta, armar tablas con datos de m&uacute;ltiples fuentes, preparar informaci&oacute;n para el ERP.</p>
+
+      <div class="pullquote">Los equipos de ingenier&iacute;a dedican entre 30 y 40% de su tiempo a buscar informaci&oacute;n y documentar.<br><span style="font-family:var(--mono);font-size:0.7rem;font-style:normal;color:var(--text-3);">McKinsey, 2024</span></div>
+
+      <p>Un solo producto nuevo con decenas de componentes puede consumir d&iacute;as de carga manual. No porque el trabajo sea complejo, sino porque las herramientas no se usan a su capacidad.</p>
+      <p>Este workshop ense&ntilde;a a los ingenieros a usar Copilot y M365 para resolver exactamente ese tipo de tareas.</p>
     </div>
   </section>
 
-  <hr class="divider">
-
-  <!-- ===== WORKSHOP ===== -->
+  <!-- WORKSHOP -->
   <section id="workshop">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">El workshop</span>
-        <h2>1 d&iacute;a presencial + 1 d&iacute;a remoto</h2>
+    <div class="wrap">
+      <div class="day">
+        <div class="day-label">D&iacute;a 1 / Presencial en Monterrey</div>
+        <h3>Criterio primero, herramientas despu&eacute;s</h3>
+        <p>La ma&ntilde;ana construye el criterio: qu&eacute; tipo de tareas resuelve bien la IA, d&oacute;nde falla, y c&oacute;mo cada ingeniero identifica las oportunidades de mayor impacto en su flujo diario. La tarde es pr&aacute;ctica con Copilot aplicado a datos y documentos de manufactura.</p>
+        <ul class="day-topics">
+          <li>Qu&eacute; puede hacer la IA hoy en ingenier&iacute;a de manufactura (y d&oacute;nde todav&iacute;a no es confiable)</li>
+          <li>C&oacute;mo funciona un modelo de lenguaje: intuici&oacute;n pr&aacute;ctica, no teor&iacute;a</li>
+          <li>Ejercicio pr&aacute;ctico: identificar las tareas del d&iacute;a a d&iacute;a donde la IA puede ayudar</li>
+          <li>Prompt engineering: instrucciones que producen resultados consistentes y auditables</li>
+          <li>Copilot en Excel: analizar tablas de datos de producci&oacute;n, tiempos, dimensiones, costos</li>
+          <li>Copilot en Word: generar borradores de documentaci&oacute;n t&eacute;cnica</li>
+        </ul>
       </div>
 
-      <div class="days-grid reveal">
-        <div class="day-card glass">
-          <div class="day-badge">D&iacute;a 1 &mdash; Presencial MTY</div>
-          <h4>Criterio primero, herramientas despu&eacute;s</h4>
-          <p>La ma&ntilde;ana construye el criterio: qu&eacute; tipo de tareas resuelve bien la IA, d&oacute;nde falla, y c&oacute;mo cada ingeniero identifica las oportunidades de mayor impacto en su flujo diario. La tarde es 100% pr&aacute;ctica con Copilot aplicado a datos y documentos reales de manufactura.</p>
-          <ul class="day-topics">
-            <li>Qu&eacute; puede hacer la IA hoy en ingenier&iacute;a de manufactura (y d&oacute;nde todav&iacute;a no es confiable)</li>
-            <li>C&oacute;mo funciona un modelo de lenguaje &mdash; intuici&oacute;n pr&aacute;ctica, no teor&iacute;a</li>
-            <li>Mapeo individual: cada ingeniero identifica sus 3 tareas m&aacute;s repetitivas y las prioriza</li>
-            <li>Prompt engineering: instrucciones que producen resultados consistentes y auditables</li>
-            <li>Copilot en Excel: analizar tablas de datos de producci&oacute;n, tiempos, dimensiones, costos</li>
-            <li>Copilot en Word: generar borradores de documentaci&oacute;n t&eacute;cnica e instrucciones de operaci&oacute;n</li>
-          </ul>
+      <div class="day">
+        <div class="day-label">D&iacute;a 2 / Remoto</div>
+        <h3>Aplicar lo aprendido a los procesos del equipo</h3>
+        <p>Cada ingeniero trabaja sobre sus procesos concretos. El objetivo es salir con flujos funcionales, no con teor&iacute;a.</p>
+        <ul class="day-topics">
+          <li>Templates de Copilot para an&aacute;lisis de listas de materiales</li>
+          <li>Preparaci&oacute;n y validaci&oacute;n de datos para carga en ERP</li>
+          <li>Formato est&aacute;ndar de cotizaci&oacute;n: estructura com&uacute;n, m&aacute;rgenes claros, trazabilidad</li>
+          <li>Iteraci&oacute;n sobre borradores de documentaci&oacute;n hasta tener versiones listas para revisi&oacute;n</li>
+          <li>Medici&oacute;n de l&iacute;nea base: registramos tiempos antes y despu&eacute;s para cuantificar el impacto</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT -->
+  <section class="impact">
+    <div class="wrap">
+      <h2>C&oacute;mo medimos el impacto</h2>
+      <p>No prometemos un n&uacute;mero de horas ahorradas antes de conocer al equipo. Lo que s&iacute; hacemos es medir. El D&iacute;a 2 del workshop establece una l&iacute;nea base con tiempos reales, y a los 30 d&iacute;as revisamos los n&uacute;meros juntos.</p>
+      <div class="impact-grid">
+        <div class="impact-item">
+          <div class="impact-num">D&iacute;a 2</div>
+          <div class="impact-desc">Registramos cu&aacute;nto toma cada tarea antes y despu&eacute;s de aplicar Copilot. Esa es la l&iacute;nea base.</div>
         </div>
-        <div class="day-card glass">
-          <div class="day-badge">D&iacute;a 2 &mdash; Remoto</div>
-          <h4>Resolver los cuellos de botella reales del equipo</h4>
-          <p>Cada ingeniero aplica lo aprendido a sus procesos concretos. Trabajamos juntos sobre los cuellos de botella que identificaron en el D&iacute;a 1: documentaci&oacute;n que hoy se arma pieza por pieza, datos que se cargan manualmente al ERP, cotizaciones que no tienen un formato com&uacute;n.</p>
-          <ul class="day-topics">
-            <li>Templates de Copilot para an&aacute;lisis de listas de materiales y datos de producci&oacute;n</li>
-            <li>Preparaci&oacute;n y validaci&oacute;n de datos para carga en ERP con Copilot</li>
-            <li>Formato est&aacute;ndar de cotizaci&oacute;n con IA: estructura com&uacute;n, m&aacute;rgenes claros, trazabilidad</li>
-            <li>Generaci&oacute;n asistida de instrucciones de operaci&oacute;n y documentaci&oacute;n t&eacute;cnica</li>
-            <li>Cada ingeniero sale con al menos 2 flujos de Copilot listos para usar el lunes</li>
-            <li>Medici&oacute;n de l&iacute;nea base: registramos tiempos antes/despu&eacute;s para cuantificar el impacto real</li>
-          </ul>
+        <div class="impact-item">
+          <div class="impact-num">D&iacute;a 30</div>
+          <div class="impact-desc">Revisi&oacute;n de adopci&oacute;n con el equipo. Comparamos contra la l&iacute;nea base y documentamos el ahorro medido.</div>
         </div>
       </div>
     </div>
   </section>
 
-  <hr class="divider">
-
-  <!-- ===== PRICING ===== -->
-  <section id="inversion">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">Inversi&oacute;n</span>
-        <h2>Empezar simple, escalar<br>con resultados</h2>
-      </div>
-      <div class="pricing-grid reveal">
-        <!-- TIER 1 -->
-        <div class="tier-card glass">
-          <div class="tier-badge">Workshop</div>
-          <div class="tier-name">Capacitaci&oacute;n IA Aplicada</div>
-          <div class="tier-desc">1 d&iacute;a presencial en Monterrey + 1 d&iacute;a remoto. Tu equipo aprende a usar inteligencia artificial con las herramientas que ya tienen.</div>
-          <div class="tier-price">$12,500 <span style="font-size:0.4em;color:var(--text-muted);font-weight:500;">MXN+IVA/persona</span></div>
-          <div class="tier-note">Incluye material y templates personalizados</div>
-          <ul class="tier-features">
+  <!-- PRICING -->
+  <section id="inversion" class="pricing">
+    <div class="wrap">
+      <h2>Inversi&oacute;n</h2>
+      <p>Un workshop, dos d&iacute;as, enfocado en los procesos de tu equipo.</p>
+      <div class="price-card">
+        <div class="price-header">
+          <h3>AI Literacy Workshop</h3>
+          <p>1 d&iacute;a presencial en Monterrey + 1 d&iacute;a remoto. Tu equipo aprende a usar IA con las herramientas que ya tienen.</p>
+        </div>
+        <div class="price-body">
+          <div class="price-amount">$12,500</div>
+          <div class="price-unit">MXN + IVA por persona. Grupos de 8 a 15.</div>
+          <ul class="price-list">
             <li>Diagn&oacute;stico previo de procesos y herramientas del equipo</li>
-            <li>Medici&oacute;n de l&iacute;nea base antes/despu&eacute;s para cuantificar ahorro real</li>
-            <li>Grupos de 8&ndash;15 personas &middot; 30 d&iacute;as de soporte post-workshop</li>
-            <li>100% dentro del entorno M365 enterprise &mdash; cero datos fuera de la organizaci&oacute;n</li>
+            <li>Medici&oacute;n de l&iacute;nea base antes y despu&eacute;s</li>
+            <li>30 d&iacute;as de soporte post-workshop</li>
+            <li>100% dentro del entorno M365 enterprise</li>
           </ul>
-          <div class="tier-bonus">
-            <div class="tier-bonus-label">Material incluido</div>
-            <div class="tier-bonus-item">
-              <div class="tier-bonus-icon">AI</div>
-              <div class="tier-bonus-text">
-                <strong>AI Playbook para Manufactura</strong>
-                <span>Gu&iacute;a de referencia: framework para evaluar qu&eacute; tareas automatizar, criterios de ROI, y patterns de prompts para procesos industriales</span>
-              </div>
-            </div>
-            <div class="tier-bonus-item">
-              <div class="tier-bonus-icon">&lt;/&gt;</div>
-              <div class="tier-bonus-text">
-                <strong>Toolkit de Templates Copilot</strong>
-                <span>Todos los templates construidos durante el workshop, documentados y listos para replicar con el equipo</span>
-              </div>
-            </div>
+          <div class="price-bonus">
+            <div class="price-bonus-label">Material incluido</div>
+            <p><strong>Gu&iacute;a pr&aacute;ctica de IA para manufactura.</strong> C&oacute;mo decidir qu&eacute; automatizar, c&oacute;mo medir el ahorro, y prompts listos para procesos industriales.</p>
+            <p><strong>Templates Copilot del workshop.</strong> Todos los templates construidos durante el workshop, documentados y listos para replicar.</p>
           </div>
-          <div class="tier-cta-wrap"><a href="#contacto" class="tier-cta">Empezar con el workshop</a></div>
-        </div>
-        <!-- TIER 2 -->
-        <div class="tier-card glass t2">
-          <div class="tier-badge">Proyecto de implementaci&oacute;n</div>
-          <div class="tier-name">Knowledge Base Inteligente + Implementaci&oacute;n</div>
-          <div class="tier-desc">El proyecto ancla: una base de conocimiento privada entrenada con la documentaci&oacute;n t&eacute;cnica interna del equipo. En lugar de buscar manualmente en manuales extensos, los ingenieros hacen preguntas en lenguaje natural y obtienen respuestas instant&aacute;neas con la referencia exacta. Se despliega sobre infraestructura enterprise existente.</div>
-          <div class="tier-price-custom">Se cotiza por proyecto</div>
-          <div class="tier-note">Alcance y precio se definen con base en los resultados del workshop</div>
-          <ul class="tier-features">
-            <li>Todo lo del workshop como base</li>
-            <li>Knowledge base privada entrenada con documentaci&oacute;n t&eacute;cnica y procedimientos internos</li>
-            <li>Consultas en lenguaje natural: &ldquo;&iquest;Cu&aacute;l es la especificaci&oacute;n t&eacute;cnica para este componente?&rdquo; &rarr; respuesta inmediata</li>
-            <li>Desplegado sobre infraestructura enterprise aprobada &mdash; datos nunca salen de la organizaci&oacute;n</li>
-            <li>Verificaci&oacute;n asistida: comparar datos t&eacute;cnicos contra documentaci&oacute;n de referencia autom&aacute;ticamente</li>
-          </ul>
-          <div class="tier-bonus">
-            <div class="tier-bonus-label">Resultado del proyecto</div>
-            <div class="tier-bonus-item">
-              <div class="tier-bonus-icon">KB</div>
-              <div class="tier-bonus-text">
-                <strong>Sistema desplegado y funcional</strong>
-                <span>M&eacute;tricas de adopci&oacute;n y ahorro medibles desde semana 1. Escalable a otros manuales, equipos y departamentos</span>
-              </div>
-            </div>
-          </div>
-          <div class="tier-cta-wrap"><a href="#contacto" class="tier-cta">Explorar este proyecto</a></div>
+          <a href="#contacto" class="price-cta">Empezar con el workshop</a>
         </div>
       </div>
     </div>
   </section>
 
-  <hr class="divider">
-
-  <!-- ===== ROI ===== -->
-  <section>
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">Retorno de inversi&oacute;n</span>
-        <h2>Medimos el impacto juntos</h2>
-      </div>
-      <div class="roi-grid stagger">
-        <div class="roi-card glass reveal">
-          <div class="roi-value">2&ndash;4 hrs</div>
-          <div class="roi-label">Ahorro semanal estimado por ingeniero en consulta de est&aacute;ndares, compilaci&oacute;n de documentos y preparaci&oacute;n de datos</div>
-          <div class="roi-math">Estimado conservador en tareas repetitivas</div>
-        </div>
-        <div class="roi-card glass reveal">
-          <div class="roi-value">1,000&ndash;2,000</div>
-          <div class="roi-label">Horas anuales de capacidad recuperada para el equipo &mdash; tiempo que hoy se gasta en buscar, copiar, formatear y cargar datos a mano</div>
-          <div class="roi-math">8&ndash;15 ingenieros &times; 2&ndash;4 hrs &times; 50 semanas</div>
-        </div>
-        <div class="roi-card glass reveal">
-          <div class="roi-value">&lt; 1 mes</div>
-          <div class="roi-label">Tiempo estimado para recuperar la inversi&oacute;n del workshop en horas-ingeniero ahorradas</div>
-          <div class="roi-math">Medimos con l&iacute;nea base real del D&iacute;a 2</div>
-        </div>
-      </div>
+  <!-- NEXT: KB PROJECT -->
+  <section class="next">
+    <div class="wrap">
+      <h2>Despu&eacute;s del workshop</h2>
+      <p>Si los resultados justifican escalar, el siguiente paso es una base de conocimiento interna: un sistema donde el equipo pregunta en lenguaje natural sobre documentaci&oacute;n t&eacute;cnica y obtiene respuestas con la referencia exacta. Desplegado sobre infraestructura enterprise aprobada.</p>
+      <p>El alcance y precio de ese proyecto se definen con base en lo que aprendemos durante el workshop. No es un requisito; es una opci&oacute;n que existe si tiene sentido.</p>
     </div>
   </section>
 
-  <hr class="divider">
-
-  <!-- ===== ABOUT ===== -->
-  <section>
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="label">Qui&eacute;n lo imparte</span>
-        <h2>Tecnolog&iacute;a aplicada a<br>problemas reales</h2>
-      </div>
-      <div class="about-header-card glass reveal">
-        <div class="about-name">Ra&uacute;l Zhou</div>
-        <div class="about-title">Ingeniero de IA &middot; Consultor de Tecnolog&iacute;a Aplicada</div>
-        <p class="about-bio">Implemento soluciones de inteligencia artificial para equipos de ingenier&iacute;a en manufactura. El enfoque es siempre el mismo: entender el proceso real del equipo, identificar d&oacute;nde se acumula el tiempo manual, y resolverlo con las herramientas que ya tienen disponibles.</p>
-        <p class="about-bio">Antes de cada workshop hago un diagn&oacute;stico de los procesos y herramientas del equipo para que el contenido sea 100% aplicable desde el d&iacute;a uno.</p>
-        <div class="about-location">Guadalajara, MX &middot; Disponible presencial en Monterrey</div>
-      </div>
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="wrap">
+      <h2>Ra&uacute;l Ch&iacute;o Le&oacute;n</h2>
+      <div class="about-title">Ingeniero de IA / Consultor de Tecnolog&iacute;a Aplicada</div>
+      <p>Implemento soluciones de inteligencia artificial para equipos de ingenier&iacute;a en manufactura. El enfoque es siempre el mismo: entender el proceso del equipo, identificar d&oacute;nde se acumula el tiempo manual, y resolverlo con las herramientas que ya tienen disponibles.</p>
+      <p>Antes de cada workshop hago un diagn&oacute;stico de los procesos y herramientas del equipo para que el contenido sea 100% aplicable.</p>
+      <p style="font-size:0.85rem;color:var(--text-3);margin-top:0.5rem;">Guadalajara, MX. Disponible presencial en Monterrey.</p>
     </div>
   </section>
 
-  <!-- ===== FINAL CTA ===== -->
-  <section id="contacto" class="final-cta">
-    <div class="container">
-      <span class="label reveal">Siguiente paso</span>
-      <h2 class="reveal">Agenda 30 minutos y<br><span style="color:var(--accent);">resolvemos tus dudas</span></h2>
-      <p class="reveal">Una llamada corta para responder preguntas, revisar la propuesta, y definir si tiene sentido avanzar. Sin compromiso.</p>
-      <a href="https://wa.me/5213314397921?text=Hola%20Ra%C3%BAl%2C%20me%20interesa%20la%20propuesta%20del%20workshop%20de%20IA%20para%20manufactura" class="cta-primary reveal">Escribir por WhatsApp &#8594;</a>
-      <div class="contact-info reveal">
-        <div class="contact-item">
-          <div class="cl">WhatsApp</div>
+  <!-- CONTACT -->
+  <section id="contacto" class="contact">
+    <div class="wrap">
+      <h2>Agenda 30 minutos</h2>
+      <p>Una llamada corta para responder preguntas, revisar la propuesta, y definir si tiene sentido avanzar.</p>
+      <div class="contact-links">
+        <div>
+          <span class="contact-label">WhatsApp</span>
           <a href="https://wa.me/5213314397921">+52 33 1439 7921</a>
         </div>
-        <div class="contact-item">
-          <div class="cl">Email</div>
+        <div>
+          <span class="contact-label">Email</span>
           <a href="mailto:raul.chio.leon@gmail.com">raul.chio.leon@gmail.com</a>
         </div>
       </div>
@@ -781,32 +454,10 @@
   </section>
 
   <footer>
-    <div class="container">
-      <p>Confidencial &middot; Preparado para John Deere MFW Monterrey &middot; Marzo 2026</p>
+    <div class="wrap">
+      Preparado para John Deere MFW Monterrey / Marzo 2026
     </div>
   </footer>
 
-  <script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    reveals.forEach(el => obs.observe(el));
-
-    // Mouse glow on hero
-    const hero = document.querySelector('.hero');
-    const glow = document.getElementById('mouseGlow');
-    if (hero && glow && window.innerWidth > 768) {
-      hero.addEventListener('mousemove', e => {
-        const rect = hero.getBoundingClientRect();
-        glow.style.left = (e.clientX - rect.left) + 'px';
-        glow.style.top = (e.clientY - rect.top) + 'px';
-        glow.style.opacity = '0.07';
-      });
-      hero.addEventListener('mouseleave', () => { glow.style.opacity = '0'; });
-    }
-
-  </script>
 </body>
 </html>
