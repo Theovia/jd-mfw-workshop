@@ -254,12 +254,36 @@
     }
     .case-study h2 {
       font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem; max-width: 600px;
     }
     .case-study p {
       color: var(--text-2); font-size: 0.95rem; margin-bottom: 0.75rem;
       max-width: 600px; line-height: 1.7;
     }
+    .cs-metrics {
+      display: flex; gap: 2rem; flex-wrap: nowrap; justify-content: space-between;
+      margin-bottom: 1.5rem; padding: 1.25rem 0;
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 768px) {
+      .cs-metrics { flex-wrap: wrap; }
+    }
+    .cs-metric {
+      display: flex; flex-direction: column;
+    }
+    .cs-metric-num {
+      font-family: var(--mono); font-size: 1.5rem; font-weight: 700;
+      color: var(--text); line-height: 1.2;
+    }
+    .cs-metric-label {
+      font-size: 0.75rem; color: var(--text-3); text-transform: uppercase;
+      letter-spacing: 0.04em; margin-top: 0.2rem;
+    }
+    .cs-impact {
+      background: var(--green-light, rgba(7,125,66,0.05)); border-left: 3px solid var(--green);
+      padding: 1rem 1.25rem; margin: 1.25rem 0; max-width: 600px;
+    }
+    .cs-impact strong { color: var(--text); }
     .case-study-link {
       display: inline-block; margin-top: 0.5rem;
       font-size: 0.92rem; font-weight: 600; color: var(--green);
@@ -335,7 +359,7 @@
     <div class="wrap">
       <div class="hero-label">Presencial en Monterrey + remoto / 2026</div>
       <h1>AI Literacy<br><em>Workshop</em></h1>
-      <p class="hero-sub">Criterio t&eacute;cnico en IA para empresas de manufactura.</p>
+      <p class="hero-sub">Criterio t&eacute;cnico en IA para equipos de ingenier&iacute;a en manufactura.</p>
       <a href="#inversion" class="hero-cta">Ver propuesta</a>
     </div>
   </section>
@@ -345,7 +369,7 @@
     <div class="wrap">
       <div class="exec-label">Resumen ejecutivo</div>
       <p><strong>Contexto.</strong> En ingenier&iacute;a de manufactura, los cuellos de botella m&aacute;s costosos no est&aacute;n en la l&iacute;nea. Est&aacute;n en el escritorio: documentaci&oacute;n t&eacute;cnica compilada a mano, consulta de referencias en manuales extensos, preparaci&oacute;n de datos para sistemas. Seg&uacute;n McKinsey, los equipos de ingenier&iacute;a dedican entre 30 y 40% de su tiempo a buscar informaci&oacute;n y documentar.</p>
-      <p><strong>Inversi&oacute;n.</strong> $13,500 MXN + IVA por persona. Grupos de 8 a 15.</p>
+      <p><strong>Inversi&oacute;n.</strong> $16,500 MXN + IVA por persona. Grupos de 8 a 15.</p>
       <p><strong>Seguridad.</strong> Todos los ejercicios usan herramientas enterprise aprobadas dentro del entorno Microsoft 365 existente. Ning&uacute;n dato sale de la organizaci&oacute;n.</p>
       <p><strong>Resultado.</strong> El equipo sale con criterio para identificar d&oacute;nde la IA genera valor en su trabajo diario, y con estimaciones iniciales de tiempo en tareas clave como punto de comparaci&oacute;n.</p>
     </div>
@@ -416,7 +440,7 @@
           <p>1 d&iacute;a presencial en Monterrey + 1 d&iacute;a remoto. Tu equipo empieza a usar IA con las herramientas que ya tienen.</p>
         </div>
         <div class="price-body">
-          <div class="price-amount">$13,500</div>
+          <div class="price-amount">$16,500</div>
           <div class="price-unit">MXN + IVA por persona. Grupos de 8 a 15.</div>
           <ul class="price-list">
             <li>Llamada previa para entender los procesos y prioridades del equipo</li>
@@ -465,8 +489,18 @@
   <section class="case-study">
     <div class="wrap">
       <div class="case-study-label">Proyecto reciente / 2026</div>
-      <h2>Sistema de inteligencia operativa en manufactura: 110K+ l&iacute;neas de c&oacute;digo, 46 edge functions y verificaci&oacute;n multi-agente &mdash; construido con inteligencia artificial de principio a fin</h2>
-      <p>Formalizaci&oacute;n de dominio (60+ decisiones, contrato versionado v1&rarr;v3.2), ingenier&iacute;a de datos (5,688 productos, 268K transacciones, pipeline de 6 estrategias de deducci&oacute;n de costos con 98.9% de cobertura autom&aacute;tica), y una aplicaci&oacute;n operativa de 24 pantallas con 9 roles dedicados, matching de productos de 5 prioridades, benchmarking de precios contra 9 competidores, y Balanced Scorecard con 15 KPIs. El humano aport&oacute; el conocimiento del negocio; la Inteligencia Artificial co-ingenier&oacute; el sistema completo.</p>
+      <h2>Sistema de inteligencia operativa en manufactura &mdash; orquestado con IA de principio a fin</h2>
+      <div class="cs-metrics">
+        <div class="cs-metric"><span class="cs-metric-num">8,700+</span><span class="cs-metric-label">SKUs migrados</span></div>
+        <div class="cs-metric"><span class="cs-metric-num">3,004</span><span class="cs-metric-label">Listas de materiales</span></div>
+        <div class="cs-metric"><span class="cs-metric-num">60+</span><span class="cs-metric-label">Decisiones documentadas</span></div>
+        <div class="cs-metric"><span class="cs-metric-num">24</span><span class="cs-metric-label">Pantallas operativas</span></div>
+        <div class="cs-metric"><span class="cs-metric-num">1</span><span class="cs-metric-label">Ingeniero</span></div>
+      </div>
+      <p>Formalizaci&oacute;n de dominio, ingenier&iacute;a de datos y verificaci&oacute;n multi-agente para reemplazar operaciones manuales entre hojas de c&aacute;lculo, macros y procesos de copiado &mdash; por flujos automatizados y conectados en tiempo real.</p>
+      <div class="cs-impact">
+        <p><strong>1,200 horas-hombre mensuales liberadas.</strong> Reducci&oacute;n de merma y optimizaci&oacute;n de ventas en medici&oacute;n &mdash; primeras estimaciones: <strong>impacto superior a $4M MXN anuales.</strong></p>
+      </div>
       <a href="case-study.html" class="case-study-link">Ver caso de estudio completo &rarr;</a>
     </div>
   </section>
