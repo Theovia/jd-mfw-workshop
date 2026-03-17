@@ -6,17 +6,17 @@
   <title>Caso de Estudio: Sistema de Inteligencia Operativa en Manufactura / Eigen Atlas</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23077d42'/><text x='16' y='22' font-size='18' fill='white' text-anchor='middle' font-family='sans-serif' font-weight='bold'>IA</text></svg>">
   <meta property="og:title" content="Caso de Estudio: Sistema de Inteligencia Operativa en Manufactura">
-  <meta property="og:description" content="8,700+ SKUs migrados, 3,004 BOMs, 46 edge functions, verificacion multi-agente. Orquestado con IA de principio a fin.">
+  <meta property="og:description" content="8,700+ SKUs migrados, 2,348 BOMs, 54 edge functions, verificaci&oacute;n multi-agente. Orquestado con IA de principio a fin.">
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://theovia.github.io/jd-mfw-workshop/case-study.html">
   <meta property="og:image" content="https://theovia.github.io/jd-mfw-workshop/og-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Caso de Estudio: Sistema de Inteligencia Operativa en Manufactura">
-  <meta name="twitter:description" content="8,700+ SKUs migrados, 3,004 BOMs, verificacion multi-agente. Orquestado con IA.">
+  <meta name="twitter:description" content="8,700+ SKUs migrados, 2,348 BOMs, 54 edge functions. Orquestado con IA.">
   <meta name="twitter:image" content="https://theovia.github.io/jd-mfw-workshop/og-card.png">
-  <meta name="description" content="Caso de estudio: dise&ntilde;o e implementaci&oacute;n de un sistema de inteligencia operativa en manufactura con IA. 8,700+ SKUs, 268K transacciones, verificaci&oacute;n multi-agente.">
+  <meta name="description" content="Caso de estudio: dise&ntilde;o e implementaci&oacute;n de un sistema de inteligencia operativa en manufactura con IA. 8,700+ SKUs, 2,348 BOMs, 54 edge functions, 268K transacciones.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #FAF9F6; --bg-card: #ffffff;
@@ -33,7 +33,7 @@
 
     nav { position: sticky; top: 0; z-index: 100; padding: 0.9rem 0; background: rgba(250,249,246,0.92); border-bottom: 1px solid var(--border); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
     .nav-inner { max-width: 920px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; }
-    .nav-brand { font-family: var(--sans); font-weight: 700; font-size: 0.95rem; color: var(--text); text-decoration: none; }
+    .nav-brand { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 1.25rem; font-style: italic; color: var(--text); text-decoration: none; letter-spacing: 0.02em; }
     .nav-back { font-size: 0.82rem; color: var(--text-2); text-decoration: none; transition: color 0.2s; }
     .nav-back:hover { color: var(--green); }
 
@@ -73,12 +73,38 @@
     .diagram .mermaid { display: flex; justify-content: center; }
     .diagram .mermaid svg { max-width: 100%; height: auto; }
 
+    /* Safety-critical callouts */
+    .callout-safety { margin: 2rem 0; padding: 1.25rem 1.5rem; border-left: 4px solid #c62828; background: rgba(198,40,40,0.04); border-radius: 0 8px 8px 0; animation: lasaPulse 3s ease-in-out infinite; }
+    .callout-safety-title { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: #c62828; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; }
+    .callout-safety p { font-size: 0.92rem; color: var(--text-2); max-width: 100%; line-height: 1.7; }
+
+    @keyframes lasaPulse { 0%, 100% { border-left-color: #c62828; } 50% { border-left-color: #ef5350; } }
+
+    /* Hero metrics counter-up animation */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .summary-item { animation: fadeInUp 0.6s ease-out both; }
+    .summary-item:nth-child(1) { animation-delay: 0.1s; }
+    .summary-item:nth-child(2) { animation-delay: 0.2s; }
+    .summary-item:nth-child(3) { animation-delay: 0.3s; }
+    .summary-item:nth-child(4) { animation-delay: 0.4s; }
+
+    /* Before-After comparison cards */
+    .before-after { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0; }
+    .ba-card { padding: 1rem 1.25rem; border-radius: 8px; border: 1px solid var(--border); font-size: 0.88rem; line-height: 1.6; transition: transform 0.2s ease; }
+    .ba-card:hover { transform: translateY(-2px); }
+    .ba-card.before { background: rgba(198,40,40,0.03); border-color: rgba(198,40,40,0.2); }
+    .ba-card.after { background: var(--green-light); border-color: rgba(7,125,66,0.2); }
+    .ba-card-label { font-family: var(--mono); font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+    .ba-card.before .ba-card-label { color: #c62828; }
+    .ba-card.after .ba-card-label { color: var(--green); }
+    @media (max-width: 600px) { .before-after { grid-template-columns: 1fr; } }
+
     .back-section { padding: 3rem 0; text-align: center; border-top: 1px solid var(--border); }
     .back-link { font-size: 0.92rem; font-weight: 600; color: var(--green); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
     .back-link:hover { border-color: var(--green); }
     footer { padding: 2rem 0; text-align: center; font-size: 0.72rem; color: var(--text-3); }
 
-    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+    @media (prefers-reduced-motion: reduce) { *, .callout-safety, .summary-item, .ba-card { animation: none !important; transition: none !important; } .summary-item { opacity: 1; } }
     @media print { nav { display: none; } section { padding: 1.5rem 0; break-inside: avoid; } }
   </style>
 </head>
@@ -96,7 +122,7 @@
     <div class="wrap">
       <div class="cs-hero-label">Caso de estudio / 2026</div>
       <h1>Dise&ntilde;o e implementaci&oacute;n de un sistema de inteligencia operativa en manufactura: formalizaci&oacute;n de dominio, ingenier&iacute;a de datos y verificaci&oacute;n multi-agente con inteligencia artificial</h1>
-      <p>Distribuidor de productos regulados con modelo h&iacute;brido de operaci&oacute;n: venta directa, kitting, reempaque y fraccionamiento. El sistema legacy (base de datos propietaria + hojas de c&aacute;lculo) no soportaba la complejidad real del negocio. Un solo l&iacute;der t&eacute;cnico dise&ntilde;&oacute; e implement&oacute; el reemplazo completo con inteligencia artificial &mdash; desde la formalizaci&oacute;n de 129 reglas de negocio que solo exist&iacute;an en la cabeza del director de operaciones, hasta un sistema de inteligencia operativa que los 9 roles de la empresa usan todos los d&iacute;as. Procesos que tomaban horas ahora se resuelven en segundos.</p>
+      <p>Distribuidor de productos regulados con modelo h&iacute;brido de operaci&oacute;n: venta directa, kitting, reempaque y fraccionamiento. El sistema legacy (base de datos propietaria + hojas de c&aacute;lculo) no soportaba la complejidad real del negocio. Un solo l&iacute;der t&eacute;cnico dise&ntilde;&oacute; e implement&oacute; el reemplazo completo con inteligencia artificial &mdash; desde la formalizaci&oacute;n de 131+ reglas de negocio que solo exist&iacute;an en la cabeza del director de operaciones, hasta un sistema de inteligencia operativa que los 9 roles de la empresa usan todos los d&iacute;as. Procesos que tomaban horas ahora se resuelven en segundos.</p>
 
       <div class="summary-bar">
         <div class="summary-item"><span class="summary-num">Horas &rarr; segundos</span><span class="summary-label">an&aacute;lisis de ofertas</span></div>
@@ -114,6 +140,7 @@
         <li><a href="#fase1"><span class="toc-num">01</span> Modelo de negocio</a></li>
         <li><a href="#fase1b"><span class="toc-num">02</span> Ingenier&iacute;a de datos</a></li>
         <li><a href="#fase2"><span class="toc-num">03</span> Inteligencia operativa</a></li>
+        <li><a href="#fase3"><span class="toc-num">04</span> Operaci&oacute;n diaria</a></li>
       </ul>
     </div>
   </div>
@@ -128,7 +155,7 @@
 
       <div class="case-metrics">
         <div class="case-metric">
-          <span class="case-metric-number">60+</span>
+          <span class="case-metric-number">131+</span>
           <span class="case-metric-label">decisiones documentadas</span>
         </div>
         <div class="case-metric">
@@ -136,8 +163,8 @@
           <span class="case-metric-label">partes del contrato</span>
         </div>
         <div class="case-metric">
-          <span class="case-metric-number">3,030</span>
-          <span class="case-metric-label">l&iacute;neas en el decision log</span>
+          <span class="case-metric-number">87</span>
+          <span class="case-metric-label">procesos legacy mapeados</span>
         </div>
         <div class="case-metric">
           <span class="case-metric-number">v1.0 &rarr; v3.2</span>
@@ -147,31 +174,46 @@
 
       <p><strong>Contrato de verdad de dominio.</strong> Documento formal de 12 partes (v3.2) que codifica la totalidad de las reglas de negocio: clasificaci&oacute;n de productos, rutas de transformaci&oacute;n v&aacute;lidas, invariantes de datos, y decisiones que requieren aprobaci&oacute;n del director. Cada regla validada contra entrevistas estructuradas, grabaciones operativas procesadas con herramientas de an&aacute;lisis de audio/texto asistidas por IA, y cuestionarios con 204 productos validados individualmente por el director de operaciones.</p>
 
-      <p><strong>Modelo h&iacute;brido de manufactura.</strong> 4 rutas de transformaci&oacute;n, cada una con reglas distintas de BOM, costeo y unidades de medida. Un quinto tipo &mdash; PASSTHROUGH (201 productos) &mdash; fue descubierto durante el an&aacute;lisis: BOMs 1:1 donde el empaque del proveedor es la unidad de venta sin transformaci&oacute;n f&iacute;sica. El sistema encadena autom&aacute;ticamente la orden de manufactura al confirmar la recepci&oacute;n.</p>
+      <p><strong>Modelo h&iacute;brido de manufactura.</strong> 3 rutas de transformaci&oacute;n, cada una con reglas distintas de BOM, costeo y unidades de medida. Un cuarto tipo &mdash; PASSTHROUGH (201 productos) &mdash; fue descubierto durante el an&aacute;lisis: BOMs 1:1 donde el empaque del proveedor es la unidad de venta sin transformaci&oacute;n f&iacute;sica. Una quinta ruta original (REEMPAQUE, 615 productos) fue eliminada por decisi&oacute;n D040 al verificar que el re-etiquetado no constituye transformaci&oacute;n f&iacute;sica &mdash; esos productos fueron reclasificados como DIRECTO. El sistema encadena autom&aacute;ticamente la orden de manufactura al confirmar la recepci&oacute;n.</p>
 
-      <!-- DIAGRAM: 4+1 transformation routes -->
+      <div class="before-after">
+        <div class="ba-card before">
+          <div class="ba-card-label">Antes (4 rutas + passthrough)</div>
+          DIRECTO 3,113 &middot; FRACCION 41 &middot; KIT 1,894 &middot; REEMPAQUE 615 &middot; PASSTHROUGH 201
+        </div>
+        <div class="ba-card after">
+          <div class="ba-card-label">Despu&eacute;s &mdash; D040 (3 rutas + passthrough)</div>
+          DIRECTO 3,728 &middot; FRACCION 41 &middot; KIT 1,894 &middot; PASSTHROUGH 201
+        </div>
+      </div>
+
+      <!-- DIAGRAM: 3+1 transformation routes -->
       <div class="diagram">
-        <div class="diagram-label">Fig. 1 &mdash; Modelo de clasificaci&oacute;n de productos (4 rutas + PASSTHROUGH)</div>
+        <div class="diagram-label">Fig. 1 &mdash; Modelo de clasificaci&oacute;n de productos (3 rutas + PASSTHROUGH)</div>
         <pre class="mermaid">
 flowchart LR
     A["Producto entrante<br>(proveedor)"] --> B{"Ratio<br>CM/CB"}
-    B -->|"CM = CB<br>(sin transformacion)"| C["DIRECTO<br>3,113"]
+    B -->|"CM = CB<br>(sin transformacion)"| C["DIRECTO<br>3,728"]
     B -->|"CM &gt; 1, CB = 1<br>(se divide)"| D["FRACCION<br>41"]
     B -->|"CM &lt; CB<br>(se arma)"| E["KIT / ARMADO<br>1,894"]
-    B -->|"CM = CB<br>re-etiquetado"| F["REEMPAQUE<br>615"]
     E -->|"BOM 1:1"| G["PASSTHROUGH<br>201"]
 
     style C fill:transparent,stroke:#077d42,color:#1a1a1a
     style D fill:transparent,stroke:#e65100,color:#1a1a1a
     style E fill:transparent,stroke:#0270ab,color:#1a1a1a
-    style F fill:transparent,stroke:#7b1fa2,color:#1a1a1a
     style G fill:transparent,stroke:#888,color:#1a1a1a
         </pre>
       </div>
 
       <p><strong>Validaci&oacute;n triangulada.</strong> Las reglas de negocio para 627 productos se validaron cruzando tres fuentes independientes: an&aacute;lisis cuantitativo (94.4% de coincidencia en patr&oacute;n de c&oacute;digos), hip&oacute;tesis generada por LLM, y validaci&oacute;n directa del director de operaciones con citas textuales &mdash; incluyendo un caso donde el experto corrigi&oacute; expl&iacute;citamente al modelo de inteligencia artificial.</p>
 
-      <p><strong>Auditor&iacute;a adversarial multi-agente.</strong> Cuatro agentes de IA ejecutados en paralelo (verificador, analista, abogado del diablo, &aacute;rbitro) descubrieron un defecto sem&aacute;ntico cr&iacute;tico: 431 listas de materiales con variantes m&uacute;ltiples estaban estructuradas como AND (todos los componentes requeridos simult&aacute;neamente) cuando la realidad operativa era OR (el operador elige seg&uacute;n disponibilidad). Sin esta correcci&oacute;n, toda orden de manufactura para kits multi-variante habr&iacute;a sido imposible de completar. 2,550 BOMs reestructurados a 3,028 BOMs alternativos.</p>
+      <!-- LASA safety finding -->
+      <div class="callout-safety">
+        <div class="callout-safety-title">Hallazgo cr&iacute;tico &mdash; Errores LASA (Look-Alike, Sound-Alike)</div>
+        <p>Durante la normalizaci&oacute;n del cat&aacute;logo, el pipeline detect&oacute; <strong>5 productos con error de unidad MG&rarr;MCG</strong> (Eutirox, Synthroid, Levotiroxina s&oacute;dica) &mdash; un error potencial de <strong>1000x en dosis</strong>. Tambi&eacute;n identific&oacute; Cloruro de Sodio registrado como 0.09% cuando la concentraci&oacute;n correcta es 0.9% &mdash; <strong>error de 10x en concentraci&oacute;n</strong>. Posteriormente, 165 correcciones manuales del director de operaciones fueron invalidadas al descubrir un bug en el script de validaci&oacute;n (D048) que hab&iacute;a aceptado cambios incorrectos. Las tres categor&iacute;as de error fueron corregidas y verificadas contra fuentes farmac&eacute;uticas oficiales.</p>
+      </div>
+
+      <p><strong>Auditor&iacute;a adversarial multi-agente.</strong> Cuatro agentes de IA ejecutados en paralelo (verifier, analyst, devil&rsquo;s advocate, arbiter) descubrieron un defecto sem&aacute;ntico cr&iacute;tico: 431 listas de materiales con variantes m&uacute;ltiples estaban estructuradas como AND (todos los componentes requeridos simult&aacute;neamente) cuando la realidad operativa era OR (el operador elige seg&uacute;n disponibilidad). Sin esta correcci&oacute;n, toda orden de manufactura para kits multi-variante habr&iacute;a sido imposible de completar. 2,550 BOMs reestructurados a 3,028 BOMs alternativos.</p>
 
       <p><strong>Ingenier&iacute;a inversa de l&oacute;gica de negocio.</strong> La f&oacute;rmula de velocidad de reorden estaba codificada en macros VBA dentro de hojas de c&aacute;lculo del sistema legacy. Se extrajo, formaliz&oacute; y valid&oacute; contra 3,302 filas de salida del macro original con 100% de coincidencia. El an&aacute;lisis revel&oacute; una estrategia anti-desabasto de ventana dual que un promedio m&oacute;vil simple subestimaba en la mayor&iacute;a del cat&aacute;logo.</p>
 
@@ -183,10 +225,10 @@ flowchart LR
         <pre class="mermaid">
 block-beta
     columns 1
-    L5["Capa 5: App Inteligencia Operativa (95K LOC)"]
+    L5["Capa 5: App Inteligencia Operativa (25 pantallas, 54 edge functions)"]
     L4["Capa 4: ERP SaaS — regenerable desde Capa 3"]
     L3["Capa 3: CSVs de exportacion — versionados en Git"]
-    L2["Capa 2: Pipeline ETL (18K LOC Python) — reproducible en 5 minutos"]
+    L2["Capa 2: Pipeline ETL — reproducible en 20 segundos"]
     L1["Capa 1: Archivos fuente inmutables"]
 
     style L5 fill:transparent,stroke:#7b1fa2,color:#1a1a1a
@@ -211,7 +253,7 @@ block-beta
           <span class="case-metric-label">productos migrados</span>
         </div>
         <div class="case-metric">
-          <span class="case-metric-number">3,004</span>
+          <span class="case-metric-number">2,348</span>
           <span class="case-metric-label">listas de materiales</span>
         </div>
         <div class="case-metric">
@@ -219,12 +261,12 @@ block-beta
           <span class="case-metric-label">transacciones analizadas</span>
         </div>
         <div class="case-metric">
-          <span class="case-metric-number">18K</span>
-          <span class="case-metric-label">l&iacute;neas Python</span>
+          <span class="case-metric-number">5,640</span>
+          <span class="case-metric-label">clientes migrados</span>
         </div>
       </div>
 
-      <p>Los datos del sistema legacy presentaban problemas en todas las dimensiones: nombres inconsistentes, costos faltantes en aproximadamente un tercio del cat&aacute;logo, c&oacute;digos de barras sin estrategia documentada, clasificaciones err&oacute;neas, decimales truncados, y nombres de fabricante con cientos de variantes de escritura. Todo el pipeline fue dise&ntilde;ado y desarrollado orquestando flujos ag&eacute;nticos como instrumento de ingenier&iacute;a.</p>
+      <p>Los datos del sistema legacy presentaban problemas en todas las dimensiones: nombres inconsistentes, costos faltantes en aproximadamente un tercio del cat&aacute;logo, c&oacute;digos de barras sin estrategia documentada, clasificaciones err&oacute;neas, decimales truncados, y nombres de fabricante con cientos de variantes de escritura. Todo el pipeline fue dise&ntilde;ado y desarrollado usando modelos de lenguaje como herramienta de an&aacute;lisis, generaci&oacute;n de c&oacute;digo y verificaci&oacute;n en cada etapa.</p>
 
       <p><strong>Pipeline de nomenclatura de dominio (12 capas).</strong> Algoritmo que evolucion&oacute; a trav&eacute;s de 5 versiones hasta converger. Aplica 12 transformaciones secuenciales: smart title-case con preservaci&oacute;n de siglas y acr&oacute;nimos, normalizaci&oacute;n de unidades de medida (con desambiguaci&oacute;n de contexto: &ldquo;31G&rdquo; es un calibre de aguja, no 31 gramos), deduplicaci&oacute;n de concentraciones compuestas, detecci&oacute;n de informaci&oacute;n redundante entre nombre y versi&oacute;n, limpieza de contadores de empaque legacy, y sufijo de fabricante (80% cobertura). 8,700+ nombres procesados. Auditado por 5 agentes de IA en paralelo.</p>
 
@@ -254,15 +296,37 @@ flowchart TD
         </pre>
       </div>
 
-      <p><strong>Normalizaci&oacute;n de fabricantes.</strong> Diccionario curado de 106 entradas que consolida cientos de variantes de nombre en formas can&oacute;nicas. Cinco categor&iacute;as de correcci&oacute;n: errores tipogr&aacute;ficos, separaci&oacute;n y puntuaci&oacute;n, acentos, may&uacute;sculas, y consolidaci&oacute;n corporativa. Cada entrada requiere conocimiento del sector para distinguir errores reales de graf&iacute;as intencionales de marca.</p>
+      <p><strong>Normalizaci&oacute;n de fabricantes.</strong> Diccionario curado de 113 reglas que consolida cientos de variantes de nombre en formas can&oacute;nicas. Cinco categor&iacute;as de correcci&oacute;n: errores tipogr&aacute;ficos, separaci&oacute;n y puntuaci&oacute;n, acentos, may&uacute;sculas, y consolidaci&oacute;n corporativa. Cada entrada requiere conocimiento del sector para distinguir errores reales de graf&iacute;as intencionales de marca.</p>
 
       <p><strong>Normalizaci&oacute;n GCD de ratios BOM.</strong> El ERP requiere cantidades enteras en &oacute;rdenes de manufactura. 204 ratios no enteros entre unidades de almac&eacute;n y unidades de venta fueron convertidos a pares enteros v&iacute;a GCD con escalado decimal. Incluy&oacute; detecci&oacute;n forense de un bug de truncamiento decimal en el sistema legacy que produc&iacute;a ratios falsos en productos afectados.</p>
 
       <p><strong>An&aacute;lisis emp&iacute;rico de 268,928 transacciones.</strong> La estrategia de c&oacute;digos de barras se defini&oacute; analizando 3 a&ntilde;os de ventas POS en vez de confiar en documentaci&oacute;n existente. El an&aacute;lisis descubri&oacute; un patr&oacute;n de venta mayorista que ning&uacute;n stakeholder hab&iacute;a articulado &mdash; miles de transacciones donde el equipo usaba c&oacute;digos de almac&eacute;n directamente en punto de venta. Cobertura final: 100% en 8,718 productos.</p>
 
+      <p><strong>Resoluci&oacute;n universal de c&oacute;digo de barras (3-pass fallback).</strong> Pipeline de resoluci&oacute;n en tres pasadas para c&oacute;digos de barras sin coincidencia directa. Pass 1: b&uacute;squeda por c&oacute;digo primario del producto. Pass 2: b&uacute;squeda por c&oacute;digo de empaque alternativo (presentaciones distintas del mismo producto). Pass 3: normalizaci&oacute;n num&eacute;rica con eliminaci&oacute;n de ceros iniciales. Este pipeline resolvi&oacute; 303 c&oacute;digos de barras que de otra forma habr&iacute;an requerido investigaci&oacute;n manual producto por producto.</p>
+
+      <!-- DIAGRAM: Universal Barcode Resolver -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 4 &mdash; Universal Barcode Resolver (3-pass fallback)</div>
+        <pre class="mermaid">
+flowchart LR
+    BC["Codigo de barras<br>escaneado"] --> P1["Pass 1<br>primary barcode"]
+    P1 -->|"match"| OK["Producto<br>identificado"]
+    P1 -->|"no match"| P2["Pass 2<br>empaque alternativo"]
+    P2 -->|"match"| OK
+    P2 -->|"no match"| P3["Pass 3<br>normalizado<br>(strip leading zeros)"]
+    P3 -->|"match"| OK
+    P3 -->|"no match"| MANUAL["Investigacion<br>manual"]
+
+    style OK fill:transparent,stroke:#077d42,color:#1a1a1a
+    style MANUAL fill:transparent,stroke:#e65100,color:#1a1a1a
+        </pre>
+      </div>
+
+      <p><strong>Migraci&oacute;n de clientes y programa de lealtad.</strong> 5,640 clientes migrados del sistema legacy a Odoo con 570K puntos de lealtad transferidos. Cada cliente recibi&oacute; una tarjeta f&iacute;sica escaneable vinculada a su cuenta. El proceso requiri&oacute; deduplicaci&oacute;n (m&uacute;ltiples registros por cliente en el sistema legacy), normalizaci&oacute;n de nombres, y reconciliaci&oacute;n de saldos de puntos contra registros hist&oacute;ricos de canje.</p>
+
       <!-- DIAGRAM: ETL Pipeline -->
       <div class="diagram">
-        <div class="diagram-label">Fig. 4 &mdash; Pipeline ETL con verificaci&oacute;n multi-agente</div>
+        <div class="diagram-label">Fig. 5 &mdash; Pipeline ETL con verificaci&oacute;n multi-agente</div>
         <pre class="mermaid">
 flowchart LR
     SRC["Fuentes inmutables<br>sistema legacy<br>+ entrevistas"] --> ETL["Pipeline ETL<br>load > correct ><br>deduce > transform<br>> export"]
@@ -287,34 +351,34 @@ flowchart LR
   <section id="fase2" class="phase">
     <div class="wrap">
       <div class="phase-label">Fase 2 / Inteligencia operativa</div>
-      <h2>Aplicaci&oacute;n de 95K l&iacute;neas de c&oacute;digo como capa de inteligencia sobre el ERP</h2>
+      <h2>Capa de inteligencia operativa sobre el ERP</h2>
 
       <p>El ERP resuelve la infraestructura de datos. Las decisiones diarias &mdash; qu&eacute; comprar, a qu&eacute; precio, cu&aacute;nto manufacturar, qu&eacute; transferir, qu&eacute; est&aacute; por caducar &mdash; requieren una capa de inteligencia artificial que conecte datos de m&uacute;ltiples fuentes y los presente al operador correcto en el momento correcto.</p>
 
       <div class="case-metrics">
         <div class="case-metric">
-          <span class="case-metric-number">46</span>
+          <span class="case-metric-number">54</span>
           <span class="case-metric-label">edge functions (Deno)</span>
         </div>
         <div class="case-metric">
-          <span class="case-metric-number">24</span>
+          <span class="case-metric-number">25</span>
           <span class="case-metric-label">pantallas especializadas</span>
         </div>
         <div class="case-metric">
-          <span class="case-metric-number">9</span>
-          <span class="case-metric-label">roles con vista dedicada</span>
+          <span class="case-metric-number">80</span>
+          <span class="case-metric-label">hooks custom</span>
         </div>
         <div class="case-metric">
-          <span class="case-metric-number">70</span>
-          <span class="case-metric-label">migraciones de base de datos</span>
+          <span class="case-metric-number">5,640</span>
+          <span class="case-metric-label">clientes con loyalty</span>
         </div>
       </div>
 
-      <p><strong>Arquitectura por persona.</strong> Cada pantalla est&aacute; construida para el flujo de trabajo espec&iacute;fico de su operador. Solo el cajero interact&uacute;a directamente con el ERP. Los otros 8 roles operan a trav&eacute;s de interfaces especializadas con autenticaci&oacute;n dual (email para gerencia, PIN de 4 d&iacute;gitos para personal de piso). 193 componentes React, 54 hooks custom.</p>
+      <p><strong>Arquitectura por persona.</strong> Cada pantalla est&aacute; construida para el flujo de trabajo espec&iacute;fico de su operador. Solo el cajero interact&uacute;a directamente con el ERP. Los otros 8 roles operan a trav&eacute;s de interfaces especializadas con autenticaci&oacute;n dual (email para gerencia, PIN de 4 d&iacute;gitos para personal de piso). ~260 componentes React, 80 hooks custom.</p>
 
       <!-- DIAGRAM: Role map -->
       <div class="diagram">
-        <div class="diagram-label">Fig. 5 &mdash; Arquitectura de roles y puntos de acceso</div>
+        <div class="diagram-label">Fig. 6 &mdash; Arquitectura de roles y puntos de acceso</div>
         <pre class="mermaid">
 flowchart TD
     subgraph app ["App Inteligencia Operativa (React + TypeScript + Supabase)"]
@@ -337,7 +401,7 @@ flowchart TD
         WS["WebSocket<br>notificaciones push"]
     end
 
-    R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 --> EF["46 Edge Functions<br>(Supabase/Deno)"]
+    R1 & R2 & R3 & R4 & R5 & R6 & R7 & R8 --> EF["54 Edge Functions<br>(Supabase/Deno)"]
     R9 --> ERP["ERP SaaS"]
     EF --> ERP
     MSG --> EF
@@ -351,11 +415,11 @@ flowchart TD
         </pre>
       </div>
 
-      <p><strong>Motor de an&aacute;lisis de ofertas de proveedores (1,300+ l&iacute;neas).</strong> Canal de mensajer&iacute;a que recibe ofertas en 11 formatos distintos (texto, im&aacute;genes, PDFs, tablas, mezcla de prosa y datos). Gemini 2.5 Flash parsea contenido no estructurado &mdash; incluyendo artefactos de OCR, timestamps y ruido conversacional &mdash; a JSON normalizado con nomenclatura del sector. Luego un motor de matching de 5 prioridades (P0: correcciones manuales, P1: compuesto activo extra&iacute;do por IA, P1.5: diccionario de 200+ marcas auto-enriquecido del cat&aacute;logo, P2: coincidencia directa, P3: fuzzy) cruza cada producto contra 8,700+ SKUs, calcula meses de stock, velocidad de venta, aplica l&oacute;gica de compra por tiers de velocidad, y genera recomendaciones de compra/no-compra/escalar por producto.</p>
+      <p><strong>Motor de an&aacute;lisis de ofertas de proveedores.</strong> Canal de mensajer&iacute;a que recibe ofertas en 11 formatos distintos (texto, im&aacute;genes, PDFs, tablas, mezcla de prosa y datos). Gemini 2.5 Flash parsea contenido no estructurado &mdash; incluyendo artefactos de OCR, timestamps y ruido conversacional &mdash; a JSON normalizado con nomenclatura del sector. Luego un motor de matching de 5 prioridades (P0: correcciones manuales, P1: compuesto activo extra&iacute;do por IA, P1.5: diccionario de 200+ marcas auto-enriquecido del cat&aacute;logo, P2: coincidencia directa, P3: fuzzy) cruza cada producto contra 8,700+ SKUs, calcula meses de stock, velocidad de venta, aplica l&oacute;gica de compra por tiers de velocidad, y genera recomendaciones de compra/no-compra/escalar por producto.</p>
 
       <!-- DIAGRAM: Supplier offer pipeline -->
       <div class="diagram">
-        <div class="diagram-label">Fig. 6 &mdash; Pipeline de procesamiento de ofertas con inteligencia artificial</div>
+        <div class="diagram-label">Fig. 7 &mdash; Pipeline de procesamiento de ofertas con inteligencia artificial</div>
         <pre class="mermaid">
 flowchart LR
     subgraph input ["Entrada (11 formatos)"]
@@ -399,11 +463,11 @@ flowchart LR
 
       <!-- DIAGRAM: System architecture -->
       <div class="diagram">
-        <div class="diagram-label">Fig. 7 &mdash; Arquitectura del sistema completo</div>
+        <div class="diagram-label">Fig. 8 &mdash; Arquitectura del sistema completo</div>
         <pre class="mermaid">
 flowchart TB
     subgraph client ["Frontend (React + TypeScript)"]
-        UI["24 pantallas<br>rol-especificas"]
+        UI["25 pantallas<br>rol-especificas"]
         CACHE["Cache local<br>TTL 10 min"]
         IDB["IndexedDB<br>offline-first"]
         UI <--> CACHE
@@ -411,8 +475,8 @@ flowchart TB
     end
 
     subgraph supa ["Backend (Supabase)"]
-        PG[("PostgreSQL<br>70 migraciones<br>RLS por fila")]
-        EF["46 Edge Functions<br>(Deno)"]
+        PG[("PostgreSQL<br>88+ migraciones<br>RLS por fila")]
+        EF["54 Edge Functions<br>(Deno)"]
         RT["Realtime<br>(WebSocket)"]
         PG <--> EF
         PG --> RT
@@ -446,6 +510,119 @@ flowchart TB
     style erp fill:transparent,stroke:#077d42,color:#1a1a1a
     style ai fill:transparent,stroke:#0270ab,color:#1a1a1a
     style ext fill:transparent,stroke:#7b1fa2,color:#1a1a1a
+        </pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHASE 3: DAILY OPERATIONS -->
+  <section id="fase3" class="phase">
+    <div class="wrap">
+      <div class="phase-label">Fase 3 / Operaci&oacute;n diaria</div>
+      <h2>El sistema que los 9 roles usan todos los d&iacute;as</h2>
+
+      <p>Las fases anteriores describen la ingenier&iacute;a de dominio y la plataforma. Esta fase documenta lo que sucede todos los d&iacute;as: punto de venta, gesti&oacute;n f&iacute;sica de la farmacia, control de caducidades, an&aacute;lisis de ventas, y el pipeline de sincronizaci&oacute;n que mantiene todo conectado.</p>
+
+      <div class="case-metrics">
+        <div class="case-metric">
+          <span class="case-metric-number">13</span>
+          <span class="case-metric-label">acciones POS</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">47</span>
+          <span class="case-metric-label">racks mapeados</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">58K+</span>
+          <span class="case-metric-label">registros de venta (3 a&ntilde;os)</span>
+        </div>
+        <div class="case-metric">
+          <span class="case-metric-number">5</span>
+          <span class="case-metric-label">jobs pg_cron</span>
+        </div>
+      </div>
+
+      <p><strong>Sistema POS completo (13 acciones).</strong> Punto de venta con soporte para cobro en efectivo, tarjeta y pago mixto; reembolsos parciales y totales; anulaci&oacute;n de ventas; redenci&oacute;n de puntos de lealtad; y retiros de caja. El cierre de caja incluye conteo por denominaci&oacute;n (13 tipos: 6 billetes + 7 monedas mexicanas) con c&aacute;lculo autom&aacute;tico de diferencias. Arquitectura offline-first con cola de sincronizaci&oacute;n &mdash; las ventas se registran localmente y sincronizan al recuperar conexi&oacute;n.</p>
+
+      <!-- DIAGRAM: POS session flow -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 9 &mdash; Flujo de sesi&oacute;n POS (apertura &rarr; venta &rarr; cierre)</div>
+        <pre class="mermaid">
+flowchart LR
+    OPEN["Apertura<br>fondo de caja"] --> SALE["Venta<br>cash / card / mixto<br>+ loyalty"]
+    SALE --> MORE{"Mas<br>ventas?"}
+    MORE -->|"si"| SALE
+    MORE -->|"cierre"| COUNT["Conteo<br>13 denominaciones<br>(6 billetes + 7 monedas)"]
+    COUNT --> DIFF["Diferencia<br>calculada vs<br>esperado"]
+    DIFF --> CLOSE["Sesion<br>cerrada"]
+
+    SALE -.->|"si aplica"| REF["Refund parcial<br>/ void"]
+    SALE -.->|"si aplica"| RET["Retiro<br>de caja"]
+
+    style OPEN fill:transparent,stroke:#077d42,color:#1a1a1a
+    style CLOSE fill:transparent,stroke:#077d42,color:#1a1a1a
+    style COUNT fill:transparent,stroke:#0270ab,color:#1a1a1a
+    style REF fill:transparent,stroke:#e65100,color:#1a1a1a
+    style RET fill:transparent,stroke:#e65100,color:#1a1a1a
+        </pre>
+      </div>
+
+      <p><strong>Mapa interactivo de la farmacia.</strong> Representaci&oacute;n digital de la farmacia: 2 pisos + bodega externa (c&oacute;digo 99T), con 47 racks y estantes letrados (A-Z). Heat map de caducidad por rack que colorea cada estante seg&uacute;n el riesgo de sus productos. B&uacute;squeda de producto resalta su ubicaci&oacute;n en el mapa. Soporte para reasignaci&oacute;n de productos entre racks con historial de movimientos.</p>
+
+      <p><strong>Gesti&oacute;n inteligente de caducidades.</strong> Sistema de predicci&oacute;n de riesgo que clasifica cada lote en 4 niveles (expired / critical / high / medium) combinando fecha de caducidad con velocidad de venta. Para cada producto en riesgo, sugiere una de 5 acciones: venta prioritaria, solicitud a compras para acelerar rotaci&oacute;n, oferta a mayoreo, registro de merma, o devoluci&oacute;n a proveedor. Incluye generaci&oacute;n de &oacute;rdenes de recolecci&oacute;n f&iacute;sica para verificar lotes en estante y creaci&oacute;n de banners promocionales con IA (Gemini) para productos que necesitan rotaci&oacute;n acelerada.</p>
+
+      <!-- DIAGRAM: Expiry risk pipeline -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 10 &mdash; Pipeline de riesgo de caducidad</div>
+        <pre class="mermaid">
+flowchart LR
+    LOTS["Lotes Odoo<br>(fecha caducidad)"] --> RISK["Motor de<br>riesgo"]
+    VEL["Velocidad<br>de venta"] --> RISK
+    RISK --> R1["Expired"]
+    RISK --> R2["Critical"]
+    RISK --> R3["High"]
+    RISK --> R4["Medium"]
+    R1 & R2 & R3 & R4 --> ACT{"Accion"}
+    ACT --> A1["Venta<br>prioritaria"]
+    ACT --> A2["Compras"]
+    ACT --> A3["Mayoreo"]
+    ACT --> A4["Merma"]
+    ACT --> A5["Devolucion"]
+
+    style RISK fill:transparent,stroke:#7b1fa2,color:#1a1a1a
+    style R1 fill:transparent,stroke:#c62828,color:#1a1a1a
+    style R2 fill:transparent,stroke:#e65100,color:#1a1a1a
+    style R3 fill:transparent,stroke:#e65100,color:#1a1a1a
+    style R4 fill:transparent,stroke:#888,color:#1a1a1a
+    style A1 fill:transparent,stroke:#077d42,color:#1a1a1a
+        </pre>
+      </div>
+
+      <p><strong>Analytics de ventas (3 a&ntilde;os hist&oacute;ricos).</strong> Panel con 58K+ registros de ventas (2023-2025) organizado en 5 vistas: tendencia year-over-year, top productos por volumen y margen, velocidad de venta en 5 tiers, productos dormidos, y comparativo entre per&iacute;odos. Clasificaci&oacute;n autom&aacute;tica de cada producto como activo, tapado (sin stock pero con demanda hist&oacute;rica) o muerto (sin ventas y sin demanda).</p>
+
+      <p><strong>Pipeline de sincronizaci&oacute;n continua.</strong> Cinco trabajos de pg_cron que mantienen sincronizados Odoo (ERP) y Supabase (capa de inteligencia): ventas cada 2 horas, stock cada 6 horas, listas de materiales diario, y precios diario. Comunicaci&oacute;n bidireccional v&iacute;a JSON-RPC &mdash; los datos fluyen de Odoo a Supabase para an&aacute;lisis, y las acciones del sistema de inteligencia (&oacute;rdenes de manufactura, transferencias) se ejecutan de vuelta en Odoo.</p>
+
+      <!-- DIAGRAM: Sync pipeline -->
+      <div class="diagram">
+        <div class="diagram-label">Fig. 11 &mdash; Pipeline de sincronizaci&oacute;n continua (Odoo &harr; Supabase)</div>
+        <pre class="mermaid">
+flowchart LR
+    subgraph odoo ["Odoo (ERP SaaS)"]
+        O1["Ventas POS"]
+        O2["Stock"]
+        O3["BOMs"]
+        O4["Precios"]
+    end
+
+    O1 -->|"c/2h"| SUPA
+    O2 -->|"c/6h"| SUPA
+    O3 -->|"diario"| SUPA
+    O4 -->|"diario"| SUPA
+
+    SUPA["Supabase<br>(inteligencia<br>operativa)"] -->|"JSON-RPC<br>ordenes MO<br>transferencias"| odoo
+
+    style odoo fill:transparent,stroke:#077d42,color:#1a1a1a
+    style SUPA fill:transparent,stroke:#e65100,color:#1a1a1a
         </pre>
       </div>
     </div>
